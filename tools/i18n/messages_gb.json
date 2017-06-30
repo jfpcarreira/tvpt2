@@ -1,0 +1,11 @@
+{
+	  "btn_new_client"	: "New client"
+	, "btn_new_user"	: "New user"
+
+  , "table_header_name" : "Name"
+  , "table_header_username" : "Username"
+  , "table_header_email" : "Email"
+  , "table_header_services" : "Services"
+  , "table_header_exp_date" : "Expiration date"
+  , "table_header_actions" : "Actions"
+}
