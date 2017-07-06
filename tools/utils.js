@@ -95,5 +95,21 @@ module.exports = {
         return {
             token: decoded
         };
+    },
+
+    getResponseStructure: function (isSuccess, msg) {
+        return {
+            success: isSuccess,
+            message: msg
+        };
+    },
+
+    getSuccessResponse: function (msg) {
+        return this.getResponseStructure(true, msg);
+    },
+
+    getInsuccessResponse: function (msg) {
+        return this.getResponseStructure(false, msg);
     }
+
 };
