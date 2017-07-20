@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ViewContainerRef } from '@angular/core';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Component({
   selector: 'app-login',
@@ -10,10 +12,12 @@ export class LoginComponent implements OnInit {
 
   form: FormGroup;
 
-
   constructor(
-    private formBuilder: FormBuilder
+      private toastr: ToastsManager
+    , private vcr: ViewContainerRef
+    , private formBuilder: FormBuilder
   ) {
+    this.toastr.setRootViewContainerRef(vcr);
     this.createForm(); // Create Angular 2 Form when component loads
   }
 
@@ -36,9 +40,8 @@ export class LoginComponent implements OnInit {
   }
 
   // Function to submit form
-  onRegisterSubmit() {
-    console.log('teste');
-
+  onSubmit() {
+    this.toastr.success('You are awesome!', 'Success!');
   }
 
   ngOnInit() {

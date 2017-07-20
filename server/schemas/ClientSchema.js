@@ -1,26 +1,23 @@
 // Dependencies
-var mongoose        = require('mongoose'),
-    random          = require("randomstring");
-
-// Local varables
-var emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-var phoneRegex = /^[\+1]{0,2}?\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+const mongoose    = require('mongoose');
+const random      = require("randomstring");
+const validators  = require('./Validators');
 
 // schema specification
 var ClientSchema = new mongoose.Schema({
-    name:               { type: String, trim: true, required: true },
-    username:           { type: String, trim: true, index: { unique: true } },
-    password:           { type: String, trim: true },
-    user_sogra:         { type: String, trim: true, required: true },
-    pass_sogra:         { type: String, trim: true, required: true },
-    email:              { type: String, trim: true, lowercase: true, required: true, match: emailRegex },
-    address:            { type: String, trim: true, required: true },
+      name              : { type: String, trim: true, required: true, validate: validators.nameValidator }
+    , user_tvpt         : { type: String, required: true, trim: true, unique: true, lowercase: true, validate: validators.usernameValidator }
+    , pass_tvpt         : { type: String, required: true, trim: true }
+    , user_sogra        : { type: String, required: true, trim: true, unique: true, lowercase: true, validate: validators.usernameValidator }
+    , pass_sogra        : { type: String, required: true, trim: true }
+    , email             : { type: String, required: true, trim: true, unique: true, lowercase: true, validate: validators.emailValidator }
+    , address           : { type: String, required: true, trim: true }
     //    address     			: [ AddressSchema ],
-    phone:              { type: String, trim: true, required: true, match: phoneRegex },
-    services:           [{ type : mongoose.Schema.Types.ObjectId, ref: 'Service' }],
-    registration_date:  { type: Date, default: Date.now, required: true },
-    expiration_date:    { type: Date, default: generateExpirationDate(), required: true },
-    is_active:          { type: Boolean, default: true }
+    , phone             : { type: String, required: true, trim: true, validate: validators.phoneValidator }
+    , services          : [{ type : mongoose.Schema.Types.ObjectId, ref: 'Service' }]
+    , registration_date : { type: Date, default: Date.now }
+    , expiration_date   : { type: Date, default: generateExpirationDate() }
+    , is_active         : { type: Boolean, default: true }
 },
 // Options
 {
@@ -33,8 +30,8 @@ function generateExpirationDate() {
 
 // Befora saving we define a random user and password
 ClientSchema.pre('save', function (next) {
-    this.username = random.generate(10);
-    this.password = random.generate(10);
+    this.user_tvpt = random.generate(10);
+    this.pass_tvpt = random.generate(10);
     next();
 });
 

@@ -8,7 +8,20 @@
 </div>
 
 <!-- Registration Form -->
-<form [formGroup]="form" (submit)="onRegisterSubmit()">
+<form [formGroup]="form" (submit)="onSubmit()">
+
+  <!-- Name Input -->
+  <div class="form-group">
+    <label for="name">Name</label>
+    <div [ngClass]="{'has-error': (form.controls.name.errors && form.controls.name.dirty), 'has-success': !form.controls.name.errors}">
+      <input type="text" name="name" class="form-control" autocomplete="off" placeholder="*Name" formControlName="name" />
+      <!-- Validation -->
+      <ul class="help-block">
+        <li *ngIf="form.controls.name.errors?.required && form.controls.name.dirty">This field is required</li>
+        <li *ngIf="form.controls.name.errors?.minlength && form.controls.name.dirty">Minimum characters: 5</li>
+      </ul>
+    </div>
+  </div>
 
   <!-- Username Input -->
   <div class="form-group">

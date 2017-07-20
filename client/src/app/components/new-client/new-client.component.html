@@ -1,0 +1,66 @@
+<div class="row">
+
+  <form [formGroup]="form" (submit)="onSubmit()" novalidate>
+
+    <!-- Name -->
+    <div class="form-group has-success has-feedback">
+      <label class="control-label" for="nameId">Name</label>
+      <input formControlName="name" type="text" id="nameId" class="form-control" aria-describedby="name" placeholder="ex: John Snow" required>
+      <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+      <span class="help-block">This is a required field.</span>
+    </div>
+
+    <!-- Email -->
+    <div class="form-group has-success has-feedback">
+      <label class="control-label" for="emailId">Email</label>
+      <input formControlName="email" type="text" id="emailId" class="form-control" aria-describedby="email" placeholder="ex: john.snow@email.com" required>
+      <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+      <span class="help-block">This is a required field.</span>
+      <span class="help-block">Email in invalid format.</span>
+    </div>
+
+    <!-- Address -->
+    <div class="form-group has-success has-feedback">
+      <label class="control-label" for="addressId">Address</label>
+      <input formControlName="address" type="text" id="addressId" class="form-control" aria-describedby="address" placeholder="ex: 1574 Avenue Peel, Montreal" required>
+      <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+      <span class="help-block">This is a required field.</span>
+    </div>
+
+    <!-- Phone -->
+    <div class="form-group has-success has-feedback">
+      <label class="control-label" for="phoneId">Phone</label>
+      <input formControlName="phone" type="text" id="phoneId" class="form-control" aria-describedby="phone" placeholder="ex: (514) 642-7541" required>
+      <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+      <span class="help-block">Phone in invalid format.</span>
+    </div>
+
+    <!-- Username TV da Sogra -->
+    <div class="form-group has-success has-feedback">
+      <label class="control-label" for="userSograId">Username TV da Sogra</label>
+      <input formControlName="userSogra" type="text" id="userSograId" class="form-control" aria-describedby="userSogra" placeholder="ex: jsnow" required>
+      <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+      <span class="help-block">This is a required field.</span>
+      <span class="help-block">This field may only contain letters and numbers.</span>
+    </div>
+
+    <!-- Password TV da Sogra -->
+    <div class="form-group has-success has-feedback">
+      <label class="control-label" for="passSograId">Password TV da Sogra</label>
+      <input formControlName="passSogra" type="password" id="passSograId" class="form-control" aria-describedby="passSogra" placeholder="********" required>
+      <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+      <span class="help-block">This is a required field.</span>
+      <span class="help-block">This field may only contain letters and numbers.</span>
+    </div>
+
+    <!-- Registration Date -->
+    <div class="form-group has-success has-feedback">
+      <label class="control-label" for="regDateId">Registration Date2</label>
+      <input formControlName="regDate" type="text" id="regDateId" class="form-control" aria-describedby="regDate" placeholder="ex: John Snow">
+      <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+      <span class="help-block">Date in invalid format.</span>
+    </div>
+
+  </form>
+
+</div>

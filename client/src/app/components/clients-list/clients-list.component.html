@@ -1,3 +1,42 @@
-<p>
-  clients-list works!
-</p>
+<div class="modal-demo">
+
+  <button type="button" class="btn btn-primary" routerLink="/clients/new"> New Client </button>
+
+	<!-- TO DELETE -->
+	<button type="button" class="btn btn-primary"> New User </button>
+
+	<br/> <br/>
+
+	<table class="table table-hover">
+		<tr class="header">
+			<th class="col-xs-3"> Name </th>
+			<th class="col-xs-2"> Username </th>
+			<th class="col-xs-3"> Email </th>
+			<th class="col-xs-2"> Services </th>
+			<th class="col-xs-1"> Expiration Date</th>
+			<th class="col-xs- center"> Actions </th>
+		</tr>
+		<tbody>
+			<tr *ngFor="let client of clients">
+				<td> {{client.name}} </td>
+				<td>my username teste</td>
+				<td>email</td>
+				<td> <ul> <li> my service </li> </ul> </td>
+				<td> my expiration date </td>
+				<td class="tools">
+					<span isolate-click>
+						<div class="row">
+							<div class="col-md-1"> <i class="material-icons" uib-tooltip="Edit">edit</i> </div>
+							<div class="col-md-1"> <i class="material-icons" uib-tooltip="Lock">lock</i> </div>
+							<div class="col-md-1"> <i class="material-icons" uib-tooltip="Delete">delete</i> </div>
+						</div>
+					</span>
+				</td>
+			</tr>
+
+		</tbody>
+	</table>
+
+</div>
+
+<br/>
