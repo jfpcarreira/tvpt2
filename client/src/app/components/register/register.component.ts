@@ -30,12 +30,10 @@ export class RegisterComponent implements OnInit {
   // Function to create registration form
   createForm() {
     this.form = this.formBuilder.group({
-      // Email Input
-      email: ['', Validators.compose([
+      // Name Input
+      name: ['', Validators.compose([
         Validators.required, // Field is required
-        Validators.minLength(5), // Minimum length is 5 characters
-        Validators.maxLength(30), // Maximum length is 30 characters
-        this.validateEmail // Custom validation
+        Validators.minLength(5) // Minimum length is 5 characters
       ])],
       // Username Input
       username: ['', Validators.compose([
@@ -43,6 +41,13 @@ export class RegisterComponent implements OnInit {
         Validators.minLength(3), // Minimum length is 3 characters
         Validators.maxLength(15), // Maximum length is 15 characters
         this.validateUsername // Custom validation
+      ])],
+      // Email Input
+      email: ['', Validators.compose([
+        Validators.required, // Field is required
+        Validators.minLength(5), // Minimum length is 5 characters
+        Validators.maxLength(30), // Maximum length is 30 characters
+        this.validateEmail // Custom validation
       ])],
       // Password Input
       password: ['', Validators.compose([
@@ -58,16 +63,18 @@ export class RegisterComponent implements OnInit {
 
   // Function to disable the registration form
   disableForm() {
-    this.form.controls['email'].disable();
+    this.form.controls['name'].disable();
     this.form.controls['username'].disable();
+    this.form.controls['email'].disable();
     this.form.controls['password'].disable();
     this.form.controls['confirm'].disable();
   }
 
   // Function to enable the registration form
   enableForm() {
-    this.form.controls['email'].enable();
+    this.form.controls['name'].enable();
     this.form.controls['username'].enable();
+    this.form.controls['email'].enable();
     this.form.controls['password'].enable();
     this.form.controls['confirm'].enable();
   }
@@ -120,13 +127,14 @@ export class RegisterComponent implements OnInit {
   }
 
   // Function to submit form
-  onRegisterSubmit() {
+  onSubmit() {
     this.processing = true;
     this.disableForm();
 
     const user = {
-      email: this.form.get('email').value,
+      name: this.form.get('name').value,
       username: this.form.get('username').value,
+      email: this.form.get('email').value,
       password: this.form.get('password').value
     }
 
@@ -136,7 +144,6 @@ export class RegisterComponent implements OnInit {
       error => console.log(error),
       () => console.log('Request complete!')
     );
-
   }
 
   handleSuccess(data) {

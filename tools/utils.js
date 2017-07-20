@@ -97,15 +97,20 @@ module.exports = {
         };
     },
 
-    getResponseStructure: function (isSuccess, msg) {
+    getResponseStructure: function (isSuccess, msg, obj) {
         return {
             success: isSuccess,
-            message: msg
+            message: msg,
+            result: obj
         };
     },
 
     getSuccessResponse: function (msg) {
         return this.getResponseStructure(true, msg);
+    },
+
+    getSuccessResponse: function (msg, obj) {
+        return this.getResponseStructure(true, msg, obj);
     },
 
     getInsuccessResponse: function (msg) {

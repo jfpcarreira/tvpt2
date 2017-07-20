@@ -87,7 +87,7 @@ module.exports = (router) => {
                     res.json( utils.getInsuccessResponse('Username is already taken!'));
                 }
                 else {
-                    res.json( utils.getInsuccessResponse('Username is available'));
+                    res.json( utils.getSuccessResponse('Username is available'));
                 }
             })
         }
