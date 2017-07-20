@@ -30,6 +30,7 @@ function generateExpirationDate() {
 
 // Befora saving we define a random user and password
 ClientSchema.pre('save', function (next) {
+    console.log('Entre no pre');
     this.user_tvpt = random.generate(10);
     this.pass_tvpt = random.generate(10);
     next();

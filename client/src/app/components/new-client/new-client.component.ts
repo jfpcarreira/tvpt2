@@ -58,7 +58,7 @@ export class NewClientComponent implements OnInit {
         Validators.minLength(3), // Minimum length is 3 characters
         Validators.maxLength(15) // Maximum length is 15 characters
       ])],
-      regDate: ['TESTE', Validators.compose([
+      regDate: ['', Validators.compose([
         Validators.required, // Field is required
         Validators.minLength(3), // Minimum length is 3 characters
         Validators.maxLength(15) // Maximum length is 15 characters
@@ -81,6 +81,8 @@ export class NewClientComponent implements OnInit {
       regDate: this.form.get('regDate').value
     }
 
+    console.log(client);
+
     // Function from authentication service to register user
     this.clientService.createClient(client).subscribe(
       data => this.handleSuccess(data),
@@ -90,6 +92,8 @@ export class NewClientComponent implements OnInit {
   }
 
   handleSuccess(data) {
+    console.log(data);
+    
     if (data.success) {
       this.toastr.success('You are awesome!', 'Success!');
       /*
@@ -100,7 +104,7 @@ export class NewClientComponent implements OnInit {
       }, 2000);*/
     }
     else {
-      this.toastr.error('Client was not created!', 'Error!');
+      this.toastr.error(data.message, 'Error!');
 /*
       this.messageClass = 'alert alert-danger';
       this.message = data.message;

@@ -45,26 +45,31 @@ module.exports = (router) => {
     else if (!req.body.email) {
       res.json(utils.getInsuccessResponse('You must provide an e-mail'));
     }
-    else if (!req.body.username) {
+    else if (!req.body.userSogra) {
       res.json(utils.getInsuccessResponse('You must provide an username'));
     }
-    else if (!req.body.password) {
+    else if (!req.body.passSogra) {
       res.json(utils.getInsuccessResponse('You must provide a password'));
     }
     else {
-      let user = new User({
-        name: req.body.name
-        , email: req.body.email.toLowerCase()
-        , username: req.body.username.toLowerCase()
-        , password: req.body.password
+      let client = new Client({
+          name: req.body.name
+        , email: req.body.email
+        , address: req.body.address
+        , phone: req.body.phone
+        , user_sogra: req.body.userSogra
+        , pass_sogra: req.body.passSogra
+        , registration_date: req.body.regDate
       });
 
-      user.save((err) => {
+      client.save((err) => {
         if (err) {
+          console.log(err);
           // Erro originado pelo unique: true
           if (err.code == 11000) {
             res.json(utils.getInsuccessResponse('Username or email already in use'));
           }
+          // TODO: Personalizar os erros do cliente
           // Erros especificos
           else if (err.errors) {
             if (err.errors.email) {
