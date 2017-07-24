@@ -17,12 +17,12 @@
 			<th class="col-xs- center"> Actions </th>
 		</tr>
 		<tbody>
-			<tr>
-				<td>name</td>
-				<td>my username teste</td>
-				<td>email</td>
+      <tr *ngFor="let client of clients" (click)="todo()">
+				<td> {{ client.getName() }} </td>
+				<td> {{ client.getUserTvpt() }} </td>
+				<td> {{ client.getEmail() }} </td>
 				<td> <ul> <li> my service </li> </ul> </td>
-				<td> my expiration date </td>
+				<td>  {{ client.getExpirationDate() | date: 'dd/MM/yyyy' }} </td>
 				<td class="tools">
 					<span isolate-click>
 						<div class="row">

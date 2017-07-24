@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { ClientService } from '../../services/client.service';
+import { Client } from '../../classes/client';
 
 @Component({
   selector: 'app-clients-list',
@@ -8,13 +10,18 @@ import { ClientService } from '../../services/client.service';
 })
 export class ClientsListComponent implements OnInit {
 
-  clients;
+  public clients: Client[];
 
-  constructor(
-    private clientService: ClientService
-  ) {
-    this.clients = this.clientService.getAllClients().subscribe(
-      data => (data) => {
+  constructor(private toast: ToastrService, private clientService: ClientService) {
+  }
+
+  todo() {
+    console.log('todo');
+  }
+
+  ngOnInit() {
+    this.clientService.getClients().subscribe(
+      data => {
         if (data.success) {
           this.clients = data.result;
         }
@@ -22,11 +29,11 @@ export class ClientsListComponent implements OnInit {
           console.log(data.message);
         }
       },
-      error => console.log(error)
+      err => {
+        console.error(err);
+        this.toast.error('Backend server is down. Please try again later.', 'Error!');
+      }
     )
-  }
-
-  ngOnInit() {
   }
 
 }

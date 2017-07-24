@@ -115,6 +115,11 @@ module.exports = {
 
     getInsuccessResponse: function (msg) {
         return this.getResponseStructure(false, msg);
+    },
+
+    getInsuccessResponse: function (msg, err) {
+        console.error(err);
+        return this.getResponseStructure(false, msg);
     }
 
 };

@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastModule} from 'ng2-toastr/ng2-toastr';
 
 import { AppRoutingModule } from './app.routing.module';
 
@@ -15,6 +14,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { ClientsListComponent } from './components/clients-list/clients-list.component';
 import { LoginComponent } from './components/login/login.component';
 import { NewClientComponent } from './components/new-client/new-client.component';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AuthService } from './services/auth.service';
 import { ClientService } from './services/client.service';
@@ -36,7 +36,7 @@ import { ClientService } from './services/client.service';
     , ReactiveFormsModule
     , AppRoutingModule
     , BrowserAnimationsModule
-    , ToastModule.forRoot()
+    , ToastrModule.forRoot()
   ],
   providers: [
       AuthService

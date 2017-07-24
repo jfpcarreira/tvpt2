@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { ClientService } from '../../services/client.service';
-import { ViewContainerRef } from '@angular/core';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { IClient } from '../../interfaces/client/iclient';
+import { Client } from '../../classes/client';
 
 @Component({
   selector: 'app-new-client',
@@ -15,16 +16,13 @@ export class NewClientComponent implements OnInit {
   processing: Boolean = false;
 
   constructor(
-      private toastr: ToastsManager
-    , private vcr: ViewContainerRef
+      private toast: ToastrService
     , private formBuilder: FormBuilder
     , private clientService: ClientService
   ) {
-    this.toastr.setRootViewContainerRef(vcr);
-    this.createForm(); // Create Form when component loads
+    this.createForm();
   }
 
-  // Function to create registration form
   createForm() {
     this.form = this.formBuilder.group({
       // Username Input
@@ -71,31 +69,25 @@ export class NewClientComponent implements OnInit {
     this.processing = true;
 //    this.disableForm();
 
-    const client = {
-      name: this.form.get('name').value,
-      email: this.form.get('email').value,
-      address: this.form.get('address').value,
-      phone: this.form.get('phone').value,
-      userSogra: this.form.get('userSogra').value,
-      passSogra: this.form.get('passSogra').value,
-      regDate: this.form.get('regDate').value
-    }
+    let client = new Client ();
+    client.setName(this.form.get('name').value);
+    client.setEmail(this.form.get('email').value);
+    client.setAddress(this.form.get('address').value);
+    client.setPhone(this.form.get('phone').value);
+    client.setUserSogra(this.form.get('userSogra').value);
+    client.setPassSogra(this.form.get('passSogra').value);
+    client.setRegistrationDate(this.form.get('regDate').value);
 
-    console.log(client);
-
-    // Function from authentication service to register user
     this.clientService.createClient(client).subscribe(
       data => this.handleSuccess(data),
-      error => console.log(error),
+      err => console.log(err),
       () => console.log('Request complete!')
     );
   }
 
   handleSuccess(data) {
-    console.log(data);
-    
     if (data.success) {
-      this.toastr.success('You are awesome!', 'Success!');
+      this.toast.success('You are awesome!', 'Success!');
       /*
       this.messageClass = 'alert alert-success';
       this.message = data.message;
@@ -104,7 +96,7 @@ export class NewClientComponent implements OnInit {
       }, 2000);*/
     }
     else {
-      this.toastr.error(data.message, 'Error!');
+      this.toast.error(data.message, 'Error!');
 /*
       this.messageClass = 'alert alert-danger';
       this.message = data.message;
