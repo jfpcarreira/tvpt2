@@ -1,16 +1,16 @@
 export interface IClient {
-  _id: string;
-  pass_tvpt: string;
-  user_tvpt: string;
+  _id: String;
+  pass_tvpt: String;
+  user_tvpt: String;
   updatedAt: Date;
   createdAt: Date;
-  name: string;
-  email: string;
-  address: string;
-  phone: string;
-  user_sogra: string;
-  pass_sogra: string;
-  is_active: boolean;
+  name: String;
+  email: String;
+  address: String;
+  phone: String;
+  user_sogra: String;
+  pass_sogra: String;
+  is_active: Boolean;
   expiration_date: Date;
   registration_date: Date;
   services: any[];

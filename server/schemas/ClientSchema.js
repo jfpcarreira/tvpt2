@@ -4,7 +4,7 @@ const random      = require("randomstring");
 const validators  = require('./Validators');
 
 // schema specification
-var ClientSchema = new mongoose.Schema({
+const ClientSchema = new mongoose.Schema({
       name              : { type: String, trim: true, required: true, validate: validators.nameValidator }
     , user_tvpt         : { type: String, unique: true }
     , pass_tvpt         : { type: String }

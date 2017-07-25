@@ -1,13 +1,13 @@
 // Dependencies
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 // schema specification
-var ServiceSchema = new mongoose.Schema({
-    code         : { type : String,  required : true,  trim : true, maxlength: 3, index: { unique : true } },
-    name         : { type : String,  required : true,  trim : true },
-    is_selected  : { type : Boolean, required : true },
-    is_disabled  : { type : Boolean, required : true },
-    price        : {
+const ServiceSchema = new mongoose.Schema({
+    code        : { type: String,  required: true,  trim: true, maxlength:3, unique: true },
+    name        : { type: String,  required: true,  trim: true },
+    is_selected : { type: Boolean, default: false },
+    is_disabled : { type: Boolean, default: false },
+    price       : {
                      amount: Number,
                      currency: String,
                      symbol: String 

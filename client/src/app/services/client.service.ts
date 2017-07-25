@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http'
+import { map } from "rxjs/operator/map";
 import { environment } from '../../environments/environment';
 import { IGenericResponse } from '../interfaces/igeneric-response';
 import { IClientsResponse } from '../interfaces/client/iclients-response';
 import { IClientResponse } from '../interfaces/client/iclient-response';
 import { IClient } from '../interfaces/client/iclient';
 import { Client } from '../classes/client';
-import { map } from "rxjs/operator/map";
 
 @Injectable()
 export class ClientService {
@@ -29,7 +29,7 @@ export class ClientService {
       let response: IClientsResponse = <IClientsResponse> res.json();
 
       response.result = <Client[]> res.json().result.map(client => {
-        return new Client(client);
+        return new Client(<IClient> client);
       });
 
       return response;
