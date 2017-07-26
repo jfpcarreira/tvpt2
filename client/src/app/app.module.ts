@@ -12,12 +12,15 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RegisterComponent } from './components/register/register.component';
-import { ClientsListComponent } from './components/clients-list/clients-list.component';
 import { LoginComponent } from './components/login/login.component';
-import { NewClientComponent } from './components/new-client/new-client.component';
+import { ClientListComponent } from './components/client/list/list.component';
+import { ClientNewComponent } from './components/client/new/new.component';
+import { ServiceListComponent } from './components/service//list/list.component';
+import { ServiceNewComponent } from './components/service//new/new.component';
 
 import { AuthService } from './services/auth.service';
 import { ClientService } from './services/client.service';
+import { ServiceService } from './services/service.service';
 
 @NgModule({
   declarations: [
@@ -26,9 +29,11 @@ import { ClientService } from './services/client.service';
     , HomeComponent
     , DashboardComponent
     , RegisterComponent
-    , ClientsListComponent
     , LoginComponent
-    , NewClientComponent
+    , ClientListComponent
+    , ClientNewComponent
+    , ServiceListComponent
+    , ServiceNewComponent
   ],
   imports: [
       BrowserModule
@@ -41,6 +46,7 @@ import { ClientService } from './services/client.service';
   providers: [
       AuthService
     , ClientService
+    , ServiceService
   ],
   bootstrap: [
       AppComponent

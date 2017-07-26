@@ -6,9 +6,11 @@ export class Price implements IPrice {
   public symbol: String;
 
   public constructor(price?: IPrice) {
-    this.setAmount(price.amount);
-    this.setCurrency(price.currency);
-    this.setSymbol(price.symbol);
+    if (price) {
+      this.setAmount(price.amount);
+      this.setCurrency(price.currency);
+      this.setSymbol(price.symbol);
+    }
   }
 
   public getAmount(): Number {

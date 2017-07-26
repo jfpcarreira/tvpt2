@@ -9,11 +9,13 @@ export class Service implements IService {
   public price: IPrice;
 
   public constructor(service?: IService) {
-    this.setCode(service.code);
-    this.setName(service.name);
-    this.setIsSelected(service.is_selected);
-    this.setIsDisabled(service.is_disabled);
-    this.setPrice(service.price);
+    if (service) {
+      this.setCode(service.code);
+      this.setName(service.name);
+      this.setIsSelected(service.is_selected);
+      this.setIsDisabled(service.is_disabled);
+      this.setPrice(service.price);
+    }
   }
 
   public getCode(): String {

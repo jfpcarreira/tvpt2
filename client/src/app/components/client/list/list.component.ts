@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { ClientService } from '../../services/client.service';
-import { Client } from '../../classes/client';
+import { ClientService } from '../../../services/client.service';
+import { Client } from '../../../classes/client';
 
 @Component({
-  selector: 'app-clients-list',
-  templateUrl: './clients-list.component.html',
-  styleUrls: ['./clients-list.component.css']
+  selector: 'client-list',
+  templateUrl: './list.component.html',
+  styleUrls: ['./list.component.css']
 })
-export class ClientsListComponent implements OnInit {
+export class ClientListComponent implements OnInit {
 
   public clients: Client[];
 
@@ -26,7 +26,7 @@ export class ClientsListComponent implements OnInit {
           this.clients = data.result;
         }
         else {
-          console.log(data.message);
+          this.toast.error(data.message, 'Error!');
         }
       },
       err => {

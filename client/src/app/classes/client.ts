@@ -2,55 +2,57 @@ import { IClient } from '../interfaces/client/iclient';
 
 export class Client implements IClient {
 
-  public _id: String;
-  public pass_tvpt: String;
-  public user_tvpt: String;
-  public updatedAt: Date;
-  public createdAt: Date;
-  public name: String;
-  public email: String;
-  public address: String;
-  public phone: String;
-  public user_sogra: String;
-  public pass_sogra: String;
-  public is_active: Boolean;
-  public expiration_date: Date;
-  public registration_date: Date;
-  public services: any[];
+	public _id: String;
+	public pass_tvpt: String;
+	public user_tvpt: String;
+	public updatedAt: Date;
+	public createdAt: Date;
+	public name: String;
+	public email: String;
+	public address: String;
+	public phone: String;
+	public user_sogra: String;
+	public pass_sogra: String;
+	public is_active: Boolean;
+	public expiration_date: Date;
+	public registration_date: Date;
+	public services: any[];
 
-  public constructor(client?: IClient) {
-    this.setId(client._id);
-    this.setPassTvpt(client.pass_tvpt);
-    this.setUserTvpt(client.user_tvpt);
-    this.setUpdatedAt(client.updatedAt);
-    this.setCreatedAt(client.createdAt);
-    this.setName(client.name);
-    this.setEmail(client.email);
-    this.setAddress(client.address);
-    this.setPhone(client.phone);
-    this.setUserSogra(client.user_sogra);
-    this.setPassSogra(client.pass_sogra);
-    this.setIsActive(client.is_active);
-    this.setExpirationDate(client.expiration_date);
-    this.setRegistrationDate(client.registration_date);
-    this.setServices(client.services);
-  }
+	public constructor(client?: IClient) {
+		if (client) {
+			this.setId(client._id);
+			this.setPassTvpt(client.pass_tvpt);
+			this.setUserTvpt(client.user_tvpt);
+			this.setUpdatedAt(client.updatedAt);
+			this.setCreatedAt(client.createdAt);
+			this.setName(client.name);
+			this.setEmail(client.email);
+			this.setAddress(client.address);
+			this.setPhone(client.phone);
+			this.setUserSogra(client.user_sogra);
+			this.setPassSogra(client.pass_sogra);
+			this.setIsActive(client.is_active);
+			this.setExpirationDate(client.expiration_date);
+			this.setRegistrationDate(client.registration_date);
+			this.setServices(client.services);
+		}
+	}
 
-  public getId (): String {
-    return this._id;
-  }
+	public getId(): String {
+		return this._id;
+	}
 
-  public setId (value: String) {
-    this._id = value;
-  }
+	public setId(value: String) {
+		this._id = value;
+	}
 
-  public getPassTvpt(): String {
-    return this.pass_tvpt;
-  }
+	public getPassTvpt(): String {
+		return this.pass_tvpt;
+	}
 
-  public setPassTvpt(value: String) {
-    this.pass_tvpt = value;
-  }
+	public setPassTvpt(value: String) {
+		this.pass_tvpt = value;
+	}
 
 	public getUserTvpt(): String {
 		return this.user_tvpt;

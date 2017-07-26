@@ -46,5 +46,9 @@ ClientSchema.pre('save', function (next) {
     next();
 });
 
+ClientSchema.statics.findByName = function(name, cb) {
+    return this.find({ _id: new RegExp(name, 'i') }, cb);
+};
+
 // Exports the schema to be reused on other schemas
 module.exports = ClientSchema;

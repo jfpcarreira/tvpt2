@@ -5,8 +5,10 @@ import { HomeComponent } from './components/home/home.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
-import { ClientsListComponent } from './components/clients-list/clients-list.component';
-import { NewClientComponent } from './components/new-client/new-client.component';
+import { ClientListComponent } from './components/client/list/list.component';
+import { ClientNewComponent } from './components/client/new/new.component';
+import { ServiceListComponent } from './components/service/list/list.component';
+import { ServiceNewComponent } from './components/service/new/new.component';
 
 const appRoutes: Routes = [{
       path: ''
@@ -22,10 +24,16 @@ const appRoutes: Routes = [{
     , component: LoginComponent
   }, {
       path: 'clients'
-    , component: ClientsListComponent
+    , component: ClientListComponent
   }, {
       path: 'clients/new'
-    , component: NewClientComponent
+    , component: ClientNewComponent
+  }, {
+      path: 'services'
+    , component: ServiceListComponent
+  }, {
+      path: 'services/new'
+    , component: ServiceNewComponent
   }, {
       path: '**'
     , component: HomeComponent

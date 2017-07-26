@@ -21,7 +21,7 @@ module.exports = (router) => {
 
   // Get client by ID
   router.get('/:id', (req, res) => {
-    Client.find({_id: req.params.id}, (err, client) => {
+    Client.findById(req.params.id, (err, client) => {
       if (err) {
         res.json(utils.getInsuccessResponse('Unexpected error. Please try again later.', err));
       }
@@ -43,21 +43,21 @@ module.exports = (router) => {
     else if (!req.body.email) {
       res.json(utils.getInsuccessResponse('You must provide an e-mail'));
     }
-    else if (!req.body.userSogra) {
+    else if (!req.body.user_sogra) {
       res.json(utils.getInsuccessResponse('You must provide an username'));
     }
-    else if (!req.body.passSogra) {
+    else if (!req.body.pass_sogra) {
       res.json(utils.getInsuccessResponse('You must provide a password'));
     }
     else {
       let client = new Client({
-          name: req.body.name
-        , email: req.body.email
-        , address: req.body.address
-        , phone: req.body.phone
-        , user_sogra: req.body.userSogra
-        , pass_sogra: req.body.passSogra
-        , registration_date: req.body.regDate
+          name:               req.body.name
+        , email:              req.body.email
+        , address:            req.body.address
+        , phone:              req.body.phone
+        , user_sogra:         req.body.user_sogra
+        , pass_sogra:         req.body.pass_sogra
+        , registration_date:  req.body.registration_date
       });
 
       client.save((err) => {

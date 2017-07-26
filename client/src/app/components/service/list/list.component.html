@@ -1,0 +1,37 @@
+<div class="modal-demo">
+
+  <button type="button" class="btn btn-primary" routerLink="/services/new"> New Service </button>
+
+	<br/> <br/>
+
+	<table class="table table-hover">
+		<tr class="header">
+			<th class="col-xs-2"> Code </th>
+			<th class="col-xs-3"> Name </th>
+			<th class="col-xs-3"> Disabled </th>
+			<th class="col-xs-2"> Price </th>
+			<th class="col-xs- center"> Actions </th>
+		</tr>
+		<tbody>
+      <tr *ngFor="let service of services" (click)="todo()">
+				<td> {{ service.getCode() }} </td>
+				<td> {{ service.getName() }} </td>
+				<td> {{ service.isDisabled() }} </td>
+				<td> {{ service.getPrice().getFormattedPrice() }} </td>
+				<td class="tools">
+					<span isolate-click>
+						<div class="row">
+							<div class="col-md-1"> <i class="material-icons" uib-tooltip="Edit">edit</i> </div>
+							<div class="col-md-1"> <i class="material-icons" uib-tooltip="Lock">lock</i> </div>
+							<div class="col-md-1"> <i class="material-icons" uib-tooltip="Delete">delete</i> </div>
+						</div>
+					</span>
+				</td>
+			</tr>
+
+		</tbody>
+	</table>
+
+</div>
+
+<br/>

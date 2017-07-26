@@ -30,6 +30,7 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + '/client/dist/'));
 app.use('/authentication', require('./server/routes/Authentication')(router));
 app.use('/api/client', require('./server/routes/ClientRoutes')(router));
+app.use('/api/service', require('./server/routes/ServiceRoutes')(router));
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname + '/client/dist/index.html'));

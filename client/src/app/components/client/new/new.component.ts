@@ -1,75 +1,75 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { ClientService } from '../../services/client.service';
-import { IClient } from '../../interfaces/client/iclient';
-import { Client } from '../../classes/client';
+import { ClientService } from '../../../services/client.service';
+import { IClient } from '../../../interfaces/client/iclient';
+import { Client } from '../../../classes/client';
 
 @Component({
-  selector: 'app-new-client',
-  templateUrl: './new-client.component.html',
-  styleUrls: ['./new-client.component.css']
+  selector: 'client-new',
+  templateUrl: './new.component.html',
+  styleUrls: ['./new.component.css']
 })
-export class NewClientComponent implements OnInit {
+export class ClientNewComponent implements OnInit {
 
   form: FormGroup;
   processing: Boolean = false;
 
   constructor(
-      private toast: ToastrService
-    , private formBuilder: FormBuilder
+    private toast: ToastrService
     , private clientService: ClientService
   ) {
     this.createForm();
   }
 
   createForm() {
-    this.form = this.formBuilder.group({
+    this.form = new FormGroup({
+
       // Username Input
-      name: ['', Validators.compose([
+      name: new FormControl('NOME TESTE', Validators.compose([
         Validators.required, // Field is required
         Validators.minLength(3), // Minimum length is 3 characters
         Validators.maxLength(15) // Maximum length is 15 characters
-      ])],
-      email: ['', Validators.compose([
+      ])),
+      email: new FormControl('sdhflsd@ksdgfgsd.com', Validators.compose([
         Validators.required, // Field is required
         Validators.minLength(3), // Minimum length is 3 characters
         Validators.maxLength(15) // Maximum length is 15 characters
-      ])],
-      address: ['', Validators.compose([
+      ])),
+      address: new FormControl('dhfgshfgskfg', Validators.compose([
         Validators.required, // Field is required
         Validators.minLength(3), // Minimum length is 3 characters
         Validators.maxLength(15) // Maximum length is 15 characters
-      ])],
-      phone: ['', Validators.compose([
+      ])),
+      phone: new FormControl('5146627788', Validators.compose([
         Validators.required, // Field is required
         Validators.minLength(3), // Minimum length is 3 characters
         Validators.maxLength(15) // Maximum length is 15 characters
-      ])],
-      userSogra: ['', Validators.compose([
+      ])),
+      userSogra: new FormControl('sfdgsfdg', Validators.compose([
         Validators.required, // Field is required
         Validators.minLength(3), // Minimum length is 3 characters
         Validators.maxLength(15) // Maximum length is 15 characters
-      ])],
-      passSogra: ['', Validators.compose([
+      ])),
+      passSogra: new FormControl('sfdgsdfg', Validators.compose([
         Validators.required, // Field is required
         Validators.minLength(3), // Minimum length is 3 characters
         Validators.maxLength(15) // Maximum length is 15 characters
-      ])],
-      regDate: ['', Validators.compose([
+      ])),
+      regDate: new FormControl('', Validators.compose([
         Validators.required, // Field is required
         Validators.minLength(3), // Minimum length is 3 characters
         Validators.maxLength(15) // Maximum length is 15 characters
-      ])]
+      ]))
     });
   }
 
   // Function to submit form
   onSubmit() {
     this.processing = true;
-//    this.disableForm();
+    //    this.disableForm();
 
-    let client = new Client ();
+    let client = new Client();
     client.setName(this.form.get('name').value);
     client.setEmail(this.form.get('email').value);
     client.setAddress(this.form.get('address').value);
