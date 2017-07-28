@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-const router = express.Router();
 const mongoose = require('mongoose');
 const env = require('dotenv').config();
 const utils = require('./tools/utils');
@@ -26,11 +25,10 @@ app.use(cors({
 }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.enable('strict routing');
 
 app.use(express.static(__dirname + '/client/dist/'));
-app.use('/authentication', require('./server/routes/Authentication')(router));
-app.use('/api/client', require('./server/routes/ClientRoutes')(router));
-app.use('/api/service', require('./server/routes/ServiceRoutes')(router));
+app.use('/api', require('./server/routes'));
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname + '/client/dist/index.html'));
