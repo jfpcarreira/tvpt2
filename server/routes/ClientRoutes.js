@@ -20,6 +20,7 @@ router.get('/', (req, res) => {
 
 // Get client by ID
 router.get('/:id', (req, res) => {
+  console.log(req.params);
   Client.findById(req.params.id, (err, client) => {
     if (err) {
       res.json(utils.getInsuccessResponse('Unexpected error. Please try again later.', err));

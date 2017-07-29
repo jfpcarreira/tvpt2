@@ -3,8 +3,7 @@ const Service = require('../models/ServiceModel');
 const utils = require('../../tools/utils');
 
 // Get all services
-router.get('/aqui', (req, res) => {
-  console.log('Entrei aqui');
+router.get('/', (req, res) => {
   Service.find({}, (err, services) => {
     if (err) {
       res.json(utils.getInsuccessResponse('Unexpected error. Please try again later.', err));
@@ -48,7 +47,7 @@ router.post('/', (req, res) => {
   }
   else {
     let service = new Service({
-      code: req.body.code
+        code: req.body.code
       , name: req.body.name
       , is_selected: req.body.is_selected
       , is_disabled: req.body.is_disabled

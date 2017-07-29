@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions } from '@angular/http'
+import { Http, Headers, RequestOptions } from '@angular/http';
 import { map } from "rxjs/operator/map";
 import { environment } from '../../environments/environment';
 import { IGenericResponse } from '../interfaces/igeneric-response';

@@ -8,4 +8,5 @@ export const environment = {
   , API_DOMAIN: 'http://localhost:3000'
   , CLIENT_API_URL: '/api/client/'
   , SERVICE_API_URL: '/api/service/'
+  , TRANSLATE_API_URL: '/api/translate'
 };
