@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate';
+import { MyTranslateStaticLoader } from './tools/MyTranslateStaticLoader';
 
 import { AppRoutingModule } from './app.routing.module';
 
@@ -47,9 +48,9 @@ import { environment } from '../environments/environment';
     , BrowserAnimationsModule
     , ToastrModule.forRoot()
     , TranslateModule.forRoot({
-        provide: TranslateLoader,
-        useFactory: (http: Http) => new TranslateStaticLoader(http, environment.API_DOMAIN + environment.TRANSLATE_API_URL, ''),
-        deps: [Http]
+          provide: TranslateLoader
+        , useFactory: MyTranslateStaticLoader
+        , deps: [Http]
       })
   ],
   providers: [
