@@ -15,10 +15,7 @@ export class ClientNewComponent implements OnInit {
   form: FormGroup;
   processing: Boolean = false;
 
-  constructor(
-    private toast: ToastrService
-    , private clientService: ClientService
-  ) {
+  constructor(private toast: ToastrService, private clientService: ClientService) {
     this.createForm();
   }
 
@@ -26,37 +23,17 @@ export class ClientNewComponent implements OnInit {
     this.form = new FormGroup({
 
       // Username Input
-      name: new FormControl('NOME TESTE', Validators.compose([
+      code: new FormControl('', Validators.compose([
         Validators.required, // Field is required
         Validators.minLength(3), // Minimum length is 3 characters
         Validators.maxLength(15) // Maximum length is 15 characters
       ])),
-      email: new FormControl('sdhflsd@ksdgfgsd.com', Validators.compose([
+      name: new FormControl('', Validators.compose([
         Validators.required, // Field is required
         Validators.minLength(3), // Minimum length is 3 characters
         Validators.maxLength(15) // Maximum length is 15 characters
       ])),
-      address: new FormControl('dhfgshfgskfg', Validators.compose([
-        Validators.required, // Field is required
-        Validators.minLength(3), // Minimum length is 3 characters
-        Validators.maxLength(15) // Maximum length is 15 characters
-      ])),
-      phone: new FormControl('5146627788', Validators.compose([
-        Validators.required, // Field is required
-        Validators.minLength(3), // Minimum length is 3 characters
-        Validators.maxLength(15) // Maximum length is 15 characters
-      ])),
-      userSogra: new FormControl('sfdgsfdg', Validators.compose([
-        Validators.required, // Field is required
-        Validators.minLength(3), // Minimum length is 3 characters
-        Validators.maxLength(15) // Maximum length is 15 characters
-      ])),
-      passSogra: new FormControl('sfdgsdfg', Validators.compose([
-        Validators.required, // Field is required
-        Validators.minLength(3), // Minimum length is 3 characters
-        Validators.maxLength(15) // Maximum length is 15 characters
-      ])),
-      regDate: new FormControl('', Validators.compose([
+      price: new FormControl('', Validators.compose([
         Validators.required, // Field is required
         Validators.minLength(3), // Minimum length is 3 characters
         Validators.maxLength(15) // Maximum length is 15 characters

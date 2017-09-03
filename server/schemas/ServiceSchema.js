@@ -5,13 +5,9 @@ const mongoose = require('mongoose');
 const ServiceSchema = new mongoose.Schema({
     code        : { type: String,  required: true,  trim: true, maxlength:3, unique: true },
     name        : { type: String,  required: true,  trim: true },
+    price       : { type: Number,  required: true },
     is_selected : { type: Boolean, default: false },
-    is_disabled : { type: Boolean, default: false },
-    price       : {
-                     amount: Number,
-                     currency: String,
-                     symbol: String 
-                   }
+    is_disabled : { type: Boolean, default: false }
 },
 // Options
 {

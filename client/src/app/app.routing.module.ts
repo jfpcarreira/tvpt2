@@ -9,36 +9,43 @@ import { ClientListComponent } from './components/client/list/list.component';
 import { ClientNewComponent } from './components/client/new/new.component';
 import { ServiceListComponent } from './components/service/list/list.component';
 import { ServiceNewComponent } from './components/service/new/new.component';
+import { CurrencyListComponent } from './components/currency/list/list.component';
+import { CurrencyNewComponent } from './components/currency/new/new.component';
 
 const appRoutes: Routes = [{
-      path: ''
-    , component: HomeComponent
+  path: ''
+  , component: HomeComponent
   }, {
-      path: 'dashboard'
+    path: 'dashboard'
     , component: DashboardComponent
   }, {
-      path: 'register'
+    path: 'register'
     , component: RegisterComponent
   }, {
-      path: 'login'
+    path: 'login'
     , component: LoginComponent
   }, {
-      path: 'clients'
+    path: 'clients'
     , component: ClientListComponent
   }, {
-      path: 'clients/new'
+    path: 'clients/new'
     , component: ClientNewComponent
   }, {
-      path: 'services'
+    path: 'services'
     , component: ServiceListComponent
   }, {
-      path: 'services/new'
+    path: 'services/new'
     , component: ServiceNewComponent
   }, {
-      path: '**'
+    path: 'currency'
+    , component: CurrencyListComponent
+  }, {
+    path: 'currency/new'
+    , component: ServiceNewComponent
+  }, {
+    path: '**'
     , component: HomeComponent
-  }
-]
+}];
 
 @NgModule({
   declarations: [],

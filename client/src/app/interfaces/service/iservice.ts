@@ -1,4 +1,4 @@
-import { IPrice } from './iprice';
+import { IPrice } from '../price/iprice';
 
 export interface IService {
     code: String

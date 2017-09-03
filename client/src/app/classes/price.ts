@@ -1,43 +1,34 @@
-import { IPrice } from '../interfaces/service/iprice';
+import { IPrice } from '../interfaces/price/iprice';
+import { ICurrency } from '../interfaces/price/icurrency';
 
 export class Price implements IPrice {
-  public amount: Number;
-  public currency: String;
-  public symbol: String;
+  public value: Number;
+  public currency: ICurrency;
 
   public constructor(price?: IPrice) {
     if (price) {
-      this.setAmount(price.amount);
+      this.setValue(price.value);
       this.setCurrency(price.currency);
-      this.setSymbol(price.symbol);
     }
   }
 
-  public getAmount(): Number {
-    return this.amount;
+  public getValue(): Number {
+    return this.value;
   }
 
-  public setAmount(value: Number) {
-    this.amount = value;
+  public setValue(value: Number) {
+    this.value = value;
   }
 
-  public getCurrency(): String {
+  public getCurrency(): ICurrency {
     return this.currency;
   }
 
-  public setCurrency(value: String) {
+  public setCurrency(value: ICurrency) {
     this.currency = value;
   }
 
-  public getSymbol(): String {
-    return this.symbol;
-  }
-
-  public setSymbol(value: String) {
-    this.symbol = value;
-  }
-
   public getFormattedPrice(): String {
-    return (this.amount + " " + this.symbol);
+    return (this.value + " " + this.currency.symbol);
   }
 }

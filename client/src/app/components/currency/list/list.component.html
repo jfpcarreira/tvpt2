@@ -1,0 +1,35 @@
+<div class="modal-demo">
+
+  <button type="button" class="btn btn-primary" routerLink="/currencies/new"> New Currency </button>
+
+	<br/> <br/>
+
+	<table class="table table-hover">
+		<tr class="header">
+			<th class="col-xs-2"> Code </th>
+			<th class="col-xs-3"> Name </th>
+			<th class="col-xs-3"> Symbol </th>
+			<th class="col-xs- center"> Actions </th>
+		</tr>
+		<tbody>
+      <tr *ngFor="let currency of currencies" (click)="todo()">
+				<td> {{ currency.getCode() }} </td>
+				<td> {{ currency.getName() }} </td>
+				<td> {{ currency.getSymbol() }} </td>
+				<td class="tools">
+					<span isolate-click>
+						<div class="row">
+							<div class="col-md-1"> <i class="material-icons" uib-tooltip="Edit">edit</i> </div>
+							<div class="col-md-1"> <i class="material-icons" uib-tooltip="Lock">lock</i> </div>
+							<div class="col-md-1"> <i class="material-icons" uib-tooltip="Delete">delete</i> </div>
+						</div>
+					</span>
+				</td>
+			</tr>
+
+		</tbody>
+	</table>
+
+</div>
+
+<br/>

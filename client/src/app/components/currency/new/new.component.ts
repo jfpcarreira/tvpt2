@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { ServiceService } from '../../../services/service.service';
-import { IService } from '../../../interfaces/service/iservice';
-import { Service } from '../../../classes/service';
+import { CurrencyService } from '../../../services/currency.service';
+import { ICurrency } from '../../../interfaces/price/icurrency';
+import { Currency } from '../../../classes/currency';
 
 @Component({
-  selector: 'service-new',
+  selector: 'currency-new',
   templateUrl: './new.component.html',
   styleUrls: ['./new.component.css']
 })
-export class ServiceNewComponent implements OnInit {
+export class CurrencyNewComponent implements OnInit {
 
   form: FormGroup;
   processing: Boolean = false;
 
-  constructor(private toast: ToastrService, private serviceService: ServiceService) {
+  constructor(private toast: ToastrService, private currencyService: CurrencyService) {
     this.createForm();
   }
 
@@ -30,11 +30,15 @@ export class ServiceNewComponent implements OnInit {
         Validators.required,
         Validators.minLength(5)
       ])),
-      price: new FormControl('', Validators.compose([
+      symbol: new FormControl('', Validators.compose([
         Validators.required,
-        Validators.min(0)
+        Validators.minLength(1),
+        Validators.maxLength(1)
       ]))
     });
+  }
+
+  ngOnInit() {
   }
 
   // Function to submit form
@@ -42,12 +46,12 @@ export class ServiceNewComponent implements OnInit {
     this.processing = true;
     //    this.disableForm();
 
-    let service = new Service();
-    service.setCode(this.form.get('code').value);
-    service.setName(this.form.get('name').value);
-    service.setPrice(this.form.get('price').value); // Mudar HTML para suportar currency e criar objectos Currency
+    let currency = new Currency();
+    currency.setCode(this.form.get('code').value);
+    currency.setName(this.form.get('name').value);
+    currency.setSymbol(this.form.get('symbol').value);
 
-    this.serviceService.createService(service).subscribe(
+    this.currencyService.create(currency).subscribe(
       data => this.handleSuccess(data),
       err => console.log(err),
       () => console.log('Request complete!')
@@ -56,14 +60,10 @@ export class ServiceNewComponent implements OnInit {
 
   handleSuccess(data) {
     if (data.success) {
-      this.toast.success('You are awesome!', 'Success!');
+      this.toast.success('Currency successfuly created!', 'Success!');
     }
     else {
       this.toast.error(data.message, 'Error!');
     }
   }
-
-  ngOnInit() {
-  }
-
 }

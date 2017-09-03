@@ -1,20 +1,20 @@
 import { IService } from '../interfaces/service/iservice';
-import { IPrice } from '../interfaces/service/iprice';
+import { IPrice } from '../interfaces/price/iprice';
 
 export class Service implements IService {
   public code: String;
   public name: String;
+  public price: IPrice;
   public is_selected: Boolean;
   public is_disabled: Boolean;
-  public price: IPrice;
 
   public constructor(service?: IService) {
     if (service) {
       this.setCode(service.code);
       this.setName(service.name);
+      this.setPrice(service.price);
       this.setIsSelected(service.is_selected);
       this.setIsDisabled(service.is_disabled);
-      this.setPrice(service.price);
     }
   }
 
@@ -34,6 +34,14 @@ export class Service implements IService {
     this.name = value;
   }
 
+  public getPrice(): IPrice {
+    return this.price;
+  }
+
+  public setPrice(value: IPrice) {
+    this.price = value;
+  }
+
   public isSelected(): Boolean {
     return this.is_selected;
   }
@@ -48,13 +56,5 @@ export class Service implements IService {
 
   public setIsDisabled(value: Boolean) {
     this.is_disabled = value;
-  }
-
-  public getPrice(): IPrice {
-    return this.price;
-  }
-
-  public setPrice(value: IPrice) {
-    this.price = value;
   }
 }

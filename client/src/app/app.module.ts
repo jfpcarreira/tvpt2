@@ -17,8 +17,10 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { ClientListComponent } from './components/client/list/list.component';
 import { ClientNewComponent } from './components/client/new/new.component';
-import { ServiceListComponent } from './components/service//list/list.component';
-import { ServiceNewComponent } from './components/service//new/new.component';
+import { ServiceListComponent } from './components/service/list/list.component';
+import { ServiceNewComponent } from './components/service/new/new.component';
+import { CurrencyNewComponent } from './components/currency/new/new.component';
+import { CurrencyListComponent } from './components/currency/list/list.component';
 import { Http } from '@angular/http';
 
 import { AuthService } from './services/auth.service';
@@ -39,6 +41,8 @@ import { environment } from '../environments/environment';
     , ClientNewComponent
     , ServiceListComponent
     , ServiceNewComponent
+    , CurrencyNewComponent
+    , CurrencyListComponent
   ],
   imports: [
       BrowserModule
