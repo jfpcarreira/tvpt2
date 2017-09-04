@@ -37,11 +37,11 @@ const appRoutes: Routes = [{
     path: 'services/new'
     , component: ServiceNewComponent
   }, {
-    path: 'currency'
+    path: 'currencies'
     , component: CurrencyListComponent
   }, {
-    path: 'currency/new'
-    , component: ServiceNewComponent
+    path: 'currencies/new'
+    , component: CurrencyNewComponent
   }, {
     path: '**'
     , component: HomeComponent
