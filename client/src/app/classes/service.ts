@@ -1,10 +1,11 @@
 import { IService } from '../interfaces/service/iservice';
-import { IPrice } from '../interfaces/price/iprice';
+import { ICurrency } from '../interfaces/price/icurrency';
 
 export class Service implements IService {
   public code: String;
   public name: String;
-  public price: IPrice;
+  public price: Number;
+  public currency: ICurrency;
   public is_selected: Boolean;
   public is_disabled: Boolean;
 
@@ -34,12 +35,20 @@ export class Service implements IService {
     this.name = value;
   }
 
-  public getPrice(): IPrice {
+  public getPrice(): Number {
     return this.price;
   }
 
-  public setPrice(value: IPrice) {
+  public setPrice(value: Number) {
     this.price = value;
+  }
+
+  public getCurrency(): ICurrency {
+    return this.currency;
+  }
+
+  public setCurrency(value: ICurrency) {
+    this.currency = value;
   }
 
   public isSelected(): Boolean {
