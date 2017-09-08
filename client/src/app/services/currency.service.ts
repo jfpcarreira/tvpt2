@@ -1,18 +1,17 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { environment, API_URLS } from '../../environments/environment';
-import { IGenericResponse } from '../interfaces/igeneric-response';
-import { ICurrencyResponse } from '../interfaces/currency/icurrency-response';
-import { ICurrenciesResponse } from '../interfaces/currency/icurrencies-response';
-import { ICurrency } from '../interfaces/currency/icurrency';
-import { Currency } from '../classes/currency';
-import { Observable } from 'rxjs/Observable';
+import { Injectable }             from '@angular/core';
+import { HttpClient }             from '@angular/common/http';
+import { Observable }             from 'rxjs/Observable';
+import { environment, API_URLS }  from '../../environments/environment';
+import { IGenericResponse }       from '../interfaces/igeneric-response';
+import { ICurrencyResponse }      from '../interfaces/currency/icurrency-response';
+import { ICurrenciesResponse }    from '../interfaces/currency/icurrencies-response';
+import { ICurrency }              from '../interfaces/currency/icurrency';
+import { Currency }               from '../classes/currency';
 
 @Injectable()
 export class CurrencyService {
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) { }
 
   get(id: String): Observable<ICurrencyResponse> {
     return this.http.get<ICurrencyResponse>(API_URLS.CURRENCY + id).map(res => {
@@ -28,15 +27,15 @@ export class CurrencyService {
     });
   }
 
-  create(currency: Currency): Promise<IGenericResponse> {
-    return this.http.post<IGenericResponse>(API_URLS.CURRENCY, currency).toPromise();
+  create(currency: Currency): Observable<IGenericResponse> {
+    return this.http.post<IGenericResponse>(API_URLS.CURRENCY, currency);
   }
 
-  update(currency: Currency): Promise<IGenericResponse> {
-    return this.http.put<IGenericResponse>(API_URLS.CURRENCY, currency).toPromise();
+  update(currency: Currency): Observable<IGenericResponse> {
+    return this.http.put<IGenericResponse>(API_URLS.CURRENCY, currency);
   }
 
-  delete(id: String): Promise<IGenericResponse> {
-    return this.http.delete<IGenericResponse>(API_URLS.CURRENCY + id).toPromise();
+  delete(id: String): Observable<IGenericResponse> {
+    return this.http.delete<IGenericResponse>(API_URLS.CURRENCY + id);
   }
 }

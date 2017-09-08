@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { CurrencyService } from '../../../services/currency.service';
-import { Currency } from '../../../classes/currency';
-import { ICurrenciesResponse } from '../../../interfaces/currency/icurrencies-response';
+import { Component, OnInit }    from '@angular/core';
+import { ToastrService }        from 'ngx-toastr';
+import { CurrencyService }      from '../../../services/currency.service';
+import { Currency }             from '../../../classes/currency';
+import { ICurrenciesResponse }  from '../../../interfaces/currency/icurrencies-response';
 
 @Component({
   selector: 'app-list',
@@ -30,7 +30,7 @@ export class CurrencyListComponent implements OnInit {
         console.error(err);
         this.toast.error('Backend server is down. Please try again later.', 'Error!');
       }
-    )
+    );
   }
 
   todo() {

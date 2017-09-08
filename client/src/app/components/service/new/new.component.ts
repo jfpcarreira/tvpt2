@@ -50,7 +50,7 @@ export class ServiceNewComponent implements OnInit {
     service.setName(this.form.get('name').value);
     service.setPrice(this.form.get('price').value); // Mudar HTML para suportar currency e criar objectos Currency
 
-    this.serviceService.createService(service).subscribe(
+    this.serviceService.create(service).subscribe(
       data => this.handleSuccess(data),
       err => console.log(err),
       () => console.log('Request complete!')

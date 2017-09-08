@@ -55,7 +55,7 @@ export class ClientNewComponent implements OnInit {
     client.setPassSogra(this.form.get('passSogra').value);
     client.setRegistrationDate(this.form.get('regDate').value);
 
-    this.clientService.createClient(client).subscribe(
+    this.clientService.create(client).subscribe(
       data => this.handleSuccess(data),
       err => console.log(err),
       () => console.log('Request complete!')

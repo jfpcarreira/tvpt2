@@ -106,7 +106,7 @@ module.exports = {
     },
 
     getSuccessResponse: function (msg) {
-        return this.getResponseStructure(true, msg);
+        return this.getResponseStructure(true, msg, null);
     },
 
     getSuccessResponse: function (msg, obj) {
@@ -114,12 +114,12 @@ module.exports = {
     },
 
     getInsuccessResponse: function (msg) {
-        return this.getResponseStructure(false, msg);
+        return this.getResponseStructure(false, msg, null);
     },
 
     getInsuccessResponse: function (msg, err) {
         console.error(err);
-        return this.getResponseStructure(false, msg);
+        return this.getResponseStructure(false, msg, null);
     }
 
 };

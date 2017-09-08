@@ -20,7 +20,7 @@ export class ClientListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.clientService.getClients().subscribe(
+    this.clientService.getAll().subscribe(
       data => {
         if (data.success) {
           this.clients = data.result;

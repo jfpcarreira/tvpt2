@@ -1,24 +1,24 @@
-import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions } from '@angular/http';
-import { environment } from '../../environments/environment';
-import 'rxjs/add/operator/map';
+import { Injectable }             from '@angular/core';
+import { HttpClient }             from '@angular/common/http';
+import { Observable }             from 'rxjs/Observable';
+import { environment, API_URLS }  from '../../environments/environment';
+import { IGenericResponse }       from '../interfaces/igeneric-response';
+import { User }                   from '../classes/user';
 
 @Injectable()
 export class AuthService {
 
-  constructor(
-    private http: Http
-  ) { }
+  constructor(private http: HttpClient) { }
 
-  registerUser(user) {
-    return this.http.post(environment.API_DOMAIN + '/authentication/register', user).map(res => res.json());
+  create(user: User): Observable<IGenericResponse> {
+    return this.http.post<IGenericResponse>(API_URLS.AUTH, user);
   }
 
-  checkUsername(username) {
-    return this.http.get(environment.API_DOMAIN + '/authentication/checkUsername/' + username).map(res => res.json());
+  checkUsername(username: String): Observable<IGenericResponse> {
+    return this.http.get<IGenericResponse>(API_URLS.AUTH + 'checkUsername/' + username);
   }
 
-  checkEmail(email) {
-    return this.http.get(environment.API_DOMAIN + '/authentication/checkEmail/' + email).map(res => res.json());
+  checkEmail(email: String) {
+    return this.http.get<IGenericResponse>(API_URLS.AUTH + 'checkEmail/' + email);
   }
 }

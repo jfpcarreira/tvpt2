@@ -1,50 +1,41 @@
-import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions } from '@angular/http';
-import { map } from "rxjs/operator/map";
-import { environment } from '../../environments/environment';
-import { IGenericResponse } from '../interfaces/igeneric-response';
-import { IClientsResponse } from '../interfaces/client/iclients-response';
-import { IClientResponse } from '../interfaces/client/iclient-response';
-import { IClient } from '../interfaces/client/iclient';
-import { Client } from '../classes/client';
+import { Injectable }             from '@angular/core';
+import { HttpClient }             from '@angular/common/http';
+import { Observable }             from 'rxjs/Observable';
+import { environment, API_URLS }  from '../../environments/environment';
+import { IGenericResponse }       from '../interfaces/igeneric-response';
+import { IClientsResponse }       from '../interfaces/client/iclients-response';
+import { IClientResponse }        from '../interfaces/client/iclient-response';
+import { IClient }                from '../interfaces/client/iclient';
+import { Client }                 from '../classes/client';
 
 @Injectable()
 export class ClientService {
 
-  constructor(private http: Http) {
-  }
+  constructor(private http: HttpClient) { }
 
-  getClient(id: String) {
-    return this.http.get(environment.API_DOMAIN + environment.CLIENT_API_URL + id).map(res => {
-      let response: IClientResponse = <IClientResponse> res.json();
-
-      response.result = new Client(<IClient> res.json().result);
-
-      return response;
+  get(id: String): Observable<IClientResponse> {
+    return this.http.get<IClientResponse>(API_URLS.CLIENT + id).map(res => {
+      res.result = new Client(<IClient> res.result);
+      return res;
     });
   }
 
-  getClients() {
-    return this.http.get(environment.API_DOMAIN + environment.CLIENT_API_URL).map(res => {
-      let response: IClientsResponse = <IClientsResponse> res.json();
-
-      response.result = <Client[]> res.json().result.map(client => {
-        return new Client(<IClient> client);
-      });
-
-      return response;
+  getAll(): Observable<IClientsResponse> {
+    return this.http.get<IClientsResponse>(API_URLS.CLIENT).map(res => {
+      res.result = <Client[]> res.result.map(client => new Client(<IClient> client));
+      return res;
     });
   }
 
-  createClient(client: Client) {
-    return this.http.post(environment.API_DOMAIN + environment.CLIENT_API_URL, client).map(res => <IGenericResponse> res.json());
+  create(client: Client): Observable<IGenericResponse> {
+    return this.http.post<IGenericResponse>(API_URLS.CLIENT, client);
   }
 
-  updateClient(client: Client) {
-    return this.http.put(environment.API_DOMAIN + environment.CLIENT_API_URL, client).map(res => <IGenericResponse> res.json());
+  update(client: Client) {
+    return this.http.put<IGenericResponse>(API_URLS.CLIENT, client);
   }
 
-  removeClient(id: String) {
-    return this.http.delete(environment.API_DOMAIN + environment.CLIENT_API_URL + id).map(res => <IGenericResponse> res.json());
+  delete(id: String) {
+    return this.http.delete<IGenericResponse>(API_URLS.CLIENT + id);
   }
 }

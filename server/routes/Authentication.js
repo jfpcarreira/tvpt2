@@ -2,7 +2,7 @@ const router = require('express').Router();
 const User = require('../models/UserModel');
 const utils = require('../../tools/utils');
 
-router.post('/register', (req, res) => {
+router.post('/', (req, res) => {
     if (!req.body.name) {
         res.json(utils.getInsuccessResponse('You must provide a name'));
     }

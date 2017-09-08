@@ -1,50 +1,41 @@
-import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import { map } from "rxjs/operator/map";
-import { environment } from '../../environments/environment';
-import { IGenericResponse } from '../interfaces/igeneric-response';
-import { IServiceResponse } from '../interfaces/service/iservice-response';
-import { IServicesResponse } from '../interfaces/service/iservices-response';
-import { IService } from '../interfaces/service/iservice';
-import { Service } from '../classes/service';
+import { Injectable }             from '@angular/core';
+import { HttpClient }             from '@angular/common/http';
+import { Observable }             from 'rxjs/Observable';
+import { environment, API_URLS }  from '../../environments/environment';
+import { IGenericResponse }       from '../interfaces/igeneric-response';
+import { IServiceResponse }       from '../interfaces/service/iservice-response';
+import { IServicesResponse }      from '../interfaces/service/iservices-response';
+import { IService }               from '../interfaces/service/iservice';
+import { Service }                from '../classes/service';
 
 @Injectable()
 export class ServiceService {
 
-  constructor(private http: Http) {
-  }
+  constructor(private http: HttpClient) { }
 
-  getService(id: String) {
-    return this.http.get(environment.API_DOMAIN + environment.SERVICE_API_URL + id).map(res => {
-      let response: IServiceResponse = <IServiceResponse> res.json();
-
-      response.result = new Service(<IService> res.json().result);
-
-      return response;
+  get(id: String): Observable<IServiceResponse> {
+    return this.http.get<IServiceResponse>(API_URLS.SERVICE + id).map(res => {
+      res.result = new Service(<IService> res.result);
+      return res;
     });
   }
 
-  getServices() {
-    return this.http.get(environment.API_DOMAIN + environment.SERVICE_API_URL).map(res => {
-      let response: IServicesResponse = <IServicesResponse> res.json();
-
-      response.result = <Service[]> res.json().result.map(service => {
-        return new Service(<IService> service);
-      });
-
-      return response;
+  getAll(): Observable<IServicesResponse> {
+    return this.http.get<IServicesResponse>(API_URLS.SERVICE).map(res => {
+      res.result = <Service[]> res.result.map(service => new Service(<IService> service));
+      return res;
     });
   }
 
-  createService(service: Service) {
-    return this.http.post(environment.API_DOMAIN + environment.SERVICE_API_URL, service).map(res => <IGenericResponse> res.json());
+  create(service: Service): Observable<IGenericResponse> {
+    return this.http.post<IGenericResponse>(API_URLS.SERVICE, service);
   }
 
-  updateService(service: Service) {
-    return this.http.put(environment.API_DOMAIN + environment.SERVICE_API_URL, service).map(res => <IGenericResponse> res.json());
+  update(service: Service): Observable<IServiceResponse> {
+    return this.http.put<IGenericResponse>(API_URLS.SERVICE, service);
   }
 
-  removeService(id: String) {
-    return this.http.delete(environment.API_DOMAIN + environment.SERVICE_API_URL + id).map(res => <IGenericResponse> res.json());
+  delete(id: String): Observable<IServiceResponse> {
+    return this.http.delete<IGenericResponse>(API_URLS.SERVICE + id);
   }
 }

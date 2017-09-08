@@ -21,7 +21,7 @@ export class ServiceListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.serviceService.getServices().subscribe(
+    this.serviceService.getAll().subscribe(
       data => {
         if (data.success) {
           this.services = data.result;

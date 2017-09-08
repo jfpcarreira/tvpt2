@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
-import { CurrencyService } from '../../../services/currency.service';
-import { ICurrency } from '../../../interfaces/currency/icurrency';
-import { Currency } from '../../../classes/currency';
-import { IGenericResponse } from '../../../interfaces/igeneric-response';
+import { Component, OnInit }                    from '@angular/core';
+import { FormGroup, FormControl, Validators }   from '@angular/forms';
+import { ToastrService }                        from 'ngx-toastr';
+import { CurrencyService }                      from '../../../services/currency.service';
+import { ICurrency }                            from '../../../interfaces/currency/icurrency';
+import { Currency }                             from '../../../classes/currency';
+import { IGenericResponse }                     from '../../../interfaces/igeneric-response';
 
 @Component({
   selector: 'currency-new',
@@ -52,21 +52,19 @@ export class CurrencyNewComponent implements OnInit {
     currency.setName(this.form.get('name').value);
     currency.setSymbol(this.form.get('symbol').value);
 
-    this.currencyService.create(currency)
-      .then ( (data: IGenericResponse) =>
-        this.handleSuccess(data)
-      )
-      .catch( (err) =>
-        console.error(err)
-      );
-  }
-
-  handleSuccess(data: IGenericResponse) {
-    if (data.success) {
-      this.toast.success('Currency successfuly created!', 'Success!');
-    }
-    else {
-      this.toast.error(data.message, 'Error!');
-    }
+    this.currencyService.create(currency).subscribe(
+      data => {
+        if (data.success) {
+          this.toast.success('Currency successfuly created!', 'Success!');
+        }
+        else {
+          this.toast.error(data.message, 'Error!');
+        }
+      },
+      err => {
+        console.error(err);
+        this.toast.error('Backend server is down. Please try again later.', 'Error!');
+      }
+    );
   }
 }

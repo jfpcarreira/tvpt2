@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { User } from '../../classes/user';
 
 @Component({
   selector: 'app-register',
@@ -131,15 +132,14 @@ export class RegisterComponent implements OnInit {
     this.processing = true;
     this.disableForm();
 
-    const user = {
-      name: this.form.get('name').value,
-      username: this.form.get('username').value,
-      email: this.form.get('email').value,
-      password: this.form.get('password').value
-    }
+    const user = new User();
+    user.setName( this.form.get('name').value);
+    user.setUsername( this.form.get('username').value );
+    user.setEmail( this.form.get('email').value );
+    user.setPassword( this.form.get('password').value );
 
     // Function from authentication service to register user
-    this.authService.registerUser(user).subscribe(
+    this.authService.create(user).subscribe(
       data => this.handleSuccess(data),
       error => console.log(error),
       () => console.log('Request complete!')
