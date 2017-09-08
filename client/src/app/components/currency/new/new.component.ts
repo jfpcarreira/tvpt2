@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { CurrencyService } from '../../../services/currency.service';
-import { ICurrency } from '../../../interfaces/price/icurrency';
+import { ICurrency } from '../../../interfaces/currency/icurrency';
 import { Currency } from '../../../classes/currency';
 import { IGenericResponse } from '../../../interfaces/igeneric-response';
 
@@ -59,13 +59,6 @@ export class CurrencyNewComponent implements OnInit {
       .catch( (err) =>
         console.error(err)
       );
-/*
-    this.currencyService.create(currency).subscribe(
-      data => this.handleSuccess(data),
-      err => console.log(err),
-      () => console.log('Request complete!')
-    );
-*/
   }
 
   handleSuccess(data: IGenericResponse) {

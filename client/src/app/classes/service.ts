@@ -1,5 +1,5 @@
 import { IService } from '../interfaces/service/iservice';
-import { ICurrency } from '../interfaces/price/icurrency';
+import { ICurrency } from '../interfaces/currency/icurrency';
 
 export class Service implements IService {
   public code: String;
@@ -14,6 +14,7 @@ export class Service implements IService {
       this.setCode(service.code);
       this.setName(service.name);
       this.setPrice(service.price);
+      this.setCurrency(service.currency);
       this.setIsSelected(service.is_selected);
       this.setIsDisabled(service.is_disabled);
     }

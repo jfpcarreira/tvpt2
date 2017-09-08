@@ -1,4 +1,4 @@
-import { ICurrency } from '../interfaces/price/icurrency';
+import { ICurrency } from '../interfaces/currency/icurrency';
 
 export class Currency implements ICurrency {
   public code: String;
