@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CurrencyService } from '../../../services/currency.service';
 import { ICurrency } from '../../../interfaces/price/icurrency';
 import { Currency } from '../../../classes/currency';
+import { IGenericResponse } from '../../../interfaces/igeneric-response';
 
 @Component({
   selector: 'currency-new',
@@ -51,14 +52,23 @@ export class CurrencyNewComponent implements OnInit {
     currency.setName(this.form.get('name').value);
     currency.setSymbol(this.form.get('symbol').value);
 
+    this.currencyService.create(currency)
+      .then ( (data: IGenericResponse) =>
+        this.handleSuccess(data)
+      )
+      .catch( (err) =>
+        console.error(err)
+      );
+/*
     this.currencyService.create(currency).subscribe(
       data => this.handleSuccess(data),
       err => console.log(err),
       () => console.log('Request complete!')
     );
+*/
   }
 
-  handleSuccess(data) {
+  handleSuccess(data: IGenericResponse) {
     if (data.success) {
       this.toast.success('Currency successfuly created!', 'Success!');
     }

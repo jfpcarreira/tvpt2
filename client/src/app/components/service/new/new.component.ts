@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { ServiceService } from '../../../services/service.service';
+import { CurrencyService } from '../../../services/currency.service';
 import { IService } from '../../../interfaces/service/iservice';
 import { Service } from '../../../classes/service';
+import { Currency } from '../../../classes/currency';
 
 @Component({
   selector: 'service-new',
@@ -14,8 +16,9 @@ export class ServiceNewComponent implements OnInit {
 
   form: FormGroup;
   processing: Boolean = false;
+  currencies: Currency[];
 
-  constructor(private toast: ToastrService, private serviceService: ServiceService) {
+  constructor(private toast: ToastrService, private serviceService: ServiceService, private currencyService: CurrencyService) {
     this.createForm();
   }
 
@@ -64,6 +67,11 @@ export class ServiceNewComponent implements OnInit {
   }
 
   ngOnInit() {
-  }
+/*     this.currencyService.getAll().subscribe (
+      data => this.currencies = data.result,
+      err => console.log(err),
+      () => console.log('Request complete!')
+    );
+ */  }
 
 }

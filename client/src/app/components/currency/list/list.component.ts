@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { CurrencyService } from '../../../services/currency.service';
 import { Currency } from '../../../classes/currency';
+import { ICurrenciesResponse } from '../../../interfaces/price/icurrencies-response';
 
 @Component({
   selector: 'app-list',
@@ -16,20 +17,20 @@ export class CurrencyListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.currencyService.getAll().subscribe(
-      data => {
+    this.currencyService.getAll()
+      .then( (data: ICurrenciesResponse) => {
         if (data.success) {
           this.currencies = data.result;
+          console.log(data.result);
         }
         else {
           this.toast.error(data.message, 'Error!');
         }
-      },
-      err => {
+      })
+      .catch((err) => {
         console.error(err);
         this.toast.error('Backend server is down. Please try again later.', 'Error!');
-      }
-    )
+      });
   }
 
   todo() {

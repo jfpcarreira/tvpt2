@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ServiceService } from '../../../services/service.service';
+import { CurrencyService } from '../../../services/currency.service';
 import { Service } from '../../../classes/service';
 
 @Component({
@@ -12,7 +13,7 @@ export class ServiceListComponent implements OnInit {
 
   public services: Service[];
 
-  constructor(private toast: ToastrService, private serviceService: ServiceService) {
+  constructor(private toast: ToastrService, private serviceService: ServiceService, private currencyService: CurrencyService) {
   }
 
   todo() {
@@ -33,7 +34,7 @@ export class ServiceListComponent implements OnInit {
         console.error(err);
         this.toast.error('Backend server is down. Please try again later.', 'Error!');
       }
-    )
+    );
   }
 
 }

@@ -29,6 +29,6 @@ export class Price implements IPrice {
   }
 
   public getFormattedPrice(): String {
-    return (this.value + " " + this.currency.symbol);
+    return (this.getValue() + " " + this.getCurrency().symbol);
   }
 }

@@ -19,8 +19,8 @@ router.get('/', (req, res) => {
 });
 
 // Get service by ID
-router.get('/:id', (req, res) => {
-  Service.find({ _id: req.params.id }, (err, currency) => {
+router.get('/:code', (req, res) => {
+  Service.find({ code: req.params.code }, (err, currency) => {
     if (err) {
       res.json(utils.getInsuccessResponse('Unexpected error. Please try again later.', err));
     }
