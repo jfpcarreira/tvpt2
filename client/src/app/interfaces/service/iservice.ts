@@ -5,5 +5,5 @@ export interface IService {
   , name: String
   , is_selected: Boolean
   , is_disabled: Boolean
-  , price: IPrice
+  , price: Number
 }
