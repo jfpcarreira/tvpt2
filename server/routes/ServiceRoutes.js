@@ -4,7 +4,7 @@ const utils = require('../../tools/utils');
 
 // Get all services
 router.get('/', (req, res) => {
-  Service.find({}, (err, services) => {
+  Service.find({}).populate('Currency').exec((err, services) => {
     if (err) {
       res.json(utils.getInsuccessResponse('Unexpected error. Please try again later.', err));
     }
@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
 
 // Get service by ID
 router.get('/:id', (req, res) => {
-  Service.find({ _id: req.params.id }, (err, service) => {
+  Service.find({ _id: req.params.id }).populate('Currency').exec( (err, service) => {
     if (err) {
       res.json(utils.getInsuccessResponse('Unexpected error. Please try again later.', err));
     }

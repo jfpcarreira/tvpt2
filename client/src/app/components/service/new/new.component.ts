@@ -36,6 +36,9 @@ export class ServiceNewComponent implements OnInit {
       price: new FormControl('', Validators.compose([
         Validators.required,
         Validators.min(0)
+      ])),
+      currency: new FormControl('', Validators.compose([
+        Validators.required
       ]))
     });
   }
@@ -48,7 +51,8 @@ export class ServiceNewComponent implements OnInit {
     let service = new Service();
     service.setCode(this.form.get('code').value);
     service.setName(this.form.get('name').value);
-    service.setPrice(this.form.get('price').value); // Mudar HTML para suportar currency e criar objectos Currency
+    service.setPrice(this.form.get('price').value);
+    service.setCurrency(this.form.get('currency').value);
 
     this.serviceService.create(service).subscribe(
       data => this.handleSuccess(data),
@@ -67,11 +71,11 @@ export class ServiceNewComponent implements OnInit {
   }
 
   ngOnInit() {
-/*     this.currencyService.getAll().subscribe (
+    this.currencyService.getAll().subscribe (
       data => this.currencies = data.result,
       err => console.log(err),
       () => console.log('Request complete!')
     );
- */  }
+  }
 
 }

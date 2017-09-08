@@ -30,7 +30,7 @@
     <div class="form-group has-success has-feedback">
       <label class="control-label" for="priceId">Currency</label>
       <select formControlName="currency" id="currencyId" class="form-control" required>
-        <option *ngFor="let currency of currencies">{{currency.getCode()}} ({{currency.getSymbol()}})</option>
+        <option *ngFor="let currency of currencies" value="{{currency.getId()}}">{{currency.getCode()}} ({{currency.getSymbol()}})</option>
       </select>
       <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
       <span class="help-block">This is a required field.</span>

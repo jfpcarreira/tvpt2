@@ -1,12 +1,14 @@
 import { ICurrency } from '../interfaces/currency/icurrency';
+import { GenericDbObj } from '../classes/generic-db-obj';
 
-export class Currency implements ICurrency {
+export class Currency extends GenericDbObj implements ICurrency {
   public code: String;
   public name: String;
   public symbol: String;
 
   public constructor(currency?: ICurrency) {
     if (currency) {
+      super(currency);
       this.setCode(currency.code);
       this.setName(currency.name);
       this.setSymbol(currency.symbol);

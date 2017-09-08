@@ -1,7 +1,8 @@
 import { IService } from '../interfaces/service/iservice';
 import { ICurrency } from '../interfaces/currency/icurrency';
+import { GenericDbObj } from '../classes/generic-db-obj';
 
-export class Service implements IService {
+export class Service extends GenericDbObj implements IService {
   public code: String;
   public name: String;
   public price: Number;
@@ -11,6 +12,7 @@ export class Service implements IService {
 
   public constructor(service?: IService) {
     if (service) {
+      super(service);
       this.setCode(service.code);
       this.setName(service.name);
       this.setPrice(service.price);
