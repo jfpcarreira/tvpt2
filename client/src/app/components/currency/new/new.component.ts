@@ -1,26 +1,27 @@
-import { Component, OnInit }                    from '@angular/core';
+import { Component, OnInit, OnDestroy }         from '@angular/core';
 import { FormGroup, FormControl, Validators }   from '@angular/forms';
 import { ToastrService }                        from 'ngx-toastr';
-import { CurrencyService }                      from '../../../services/currency.service';
-import { ICurrency }                            from '../../../interfaces/currency/icurrency';
-import { Currency }                             from '../../../classes/currency';
-import { IGenericResponse }                     from '../../../interfaces/igeneric-response';
+import { Subscription }                         from 'rxjs/Subscription';
+import { CurrencyService }                      from '../../../services';
+import { ICurrency, IGenericResponse }          from '../../../interfaces';
+import { Currency }                             from '../../../classes';
 
 @Component({
   selector: 'currency-new',
   templateUrl: './new.component.html',
   styleUrls: ['./new.component.css']
 })
-export class CurrencyNewComponent implements OnInit {
+export class CurrencyNewComponent implements OnInit, OnDestroy {
 
-  form: FormGroup;
-  processing: Boolean = false;
+  public form: FormGroup;
+  public processing: Boolean = false;
+  private subscription_create: Subscription;
 
   constructor(private toast: ToastrService, private currencyService: CurrencyService) {
     this.createForm();
   }
 
-  createForm() {
+  createForm(): void {
     this.form = new FormGroup({
       code: new FormControl('', Validators.compose([
         Validators.required,
@@ -39,11 +40,11 @@ export class CurrencyNewComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
   // Function to submit form
-  onSubmit() {
+  onSubmit(): void {
     this.processing = true;
     //    this.disableForm();
 
@@ -52,7 +53,7 @@ export class CurrencyNewComponent implements OnInit {
     currency.setName(this.form.get('name').value);
     currency.setSymbol(this.form.get('symbol').value);
 
-    this.currencyService.create(currency).subscribe(
+    this.subscription_create = this.currencyService.create(currency).subscribe(
       data => {
         if (data.success) {
           this.toast.success('Currency successfuly created!', 'Success!');
@@ -66,5 +67,9 @@ export class CurrencyNewComponent implements OnInit {
         this.toast.error('Backend server is down. Please try again later.', 'Error!');
       }
     );
+  }
+
+  ngOnDestroy(): void {
+    this.subscription_create.unsubscribe();
   }
 }

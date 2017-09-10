@@ -1,6 +1,5 @@
-import { IService } from '../interfaces/service/iservice';
-import { ICurrency } from '../interfaces/currency/icurrency';
-import { GenericDbObj } from '../classes/generic-db-obj';
+import { IService, ICurrency }  from '../interfaces';
+import { GenericDbObj }         from '../classes';
 
 export class Service extends GenericDbObj implements IService {
   public code: String;

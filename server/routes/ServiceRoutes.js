@@ -1,10 +1,11 @@
-const router = require('express').Router();
-const Service = require('../models/ServiceModel');
-const utils = require('../../tools/utils');
+const router    = require('express').Router();
+const Service   = require('../models/ServiceModel');
+const utils     = require('../../tools/utils');
+const mongoose  = require('mongoose');
 
 // Get all services
 router.get('/', (req, res) => {
-  Service.find({}).populate('Currency').exec((err, services) => {
+  Service.find({}).populate('currency').exec((err, services) => {
     if (err) {
       res.json(utils.getInsuccessResponse('Unexpected error. Please try again later.', err));
     }
@@ -20,7 +21,7 @@ router.get('/', (req, res) => {
 
 // Get service by ID
 router.get('/:id', (req, res) => {
-  Service.find({ _id: req.params.id }).populate('Currency').exec( (err, service) => {
+  Service.find({ _id: req.params.id }).populate('currency').exec( (err, service) => {
     if (err) {
       res.json(utils.getInsuccessResponse('Unexpected error. Please try again later.', err));
     }
@@ -49,9 +50,10 @@ router.post('/', (req, res) => {
     let service = new Service({
         code: req.body.code
       , name: req.body.name
+      , price: req.body.price
+      , currency: mongoose.Types.ObjectId(req.body.currency)
       , is_selected: req.body.is_selected
       , is_disabled: req.body.is_disabled
-      , price: req.body.price
     });
 
     service.save((err) => {

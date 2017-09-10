@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
     this.createForm();
   }
 
-  createForm() {
+  createForm(): void {
     this.form = this.formBuilder.group({
       // Username Input
       username: ['', Validators.compose([
@@ -33,11 +33,11 @@ export class LoginComponent implements OnInit {
   }
 
   // Function to submit form
-  onSubmit() {
+  onSubmit(): void {
     this.toast.success('You are awesome!', 'Success!');
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
 }

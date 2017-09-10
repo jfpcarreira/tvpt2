@@ -1,5 +1,5 @@
-import { IGenericResponse } from '../igeneric-response'
-import { Service } from '../../classes/service';
+import { IGenericResponse } from '../';
+import { Service }          from '../../classes';
 
 export interface IServicesResponse extends IGenericResponse {
   result?: Service[]

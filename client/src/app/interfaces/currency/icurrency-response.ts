@@ -1,5 +1,5 @@
-import { IGenericResponse } from '../igeneric-response'
-import { Currency } from '../../classes/currency';
+import { IGenericResponse } from '../'
+import { Currency }         from '../../classes';
 
 export interface ICurrencyResponse extends IGenericResponse {
   result?: Currency

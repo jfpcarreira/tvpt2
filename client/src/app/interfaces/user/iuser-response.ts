@@ -1,5 +1,5 @@
-import { IGenericResponse } from '../igeneric-response'
-import { User } from '../../classes/user';
+import { IGenericResponse } from '../';
+import { User }             from '../../classes';
 
 export interface IUserResponse extends IGenericResponse {
   result?: User

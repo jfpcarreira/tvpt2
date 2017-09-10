@@ -1,9 +1,9 @@
-export interface IClient {
-  _id: String;
+import { IGenericDbObj }  from '../';
+import { Service }        from '../../classes';
+
+export interface IClient extends IGenericDbObj {
   pass_tvpt: String;
   user_tvpt: String;
-  updatedAt: Date;
-  createdAt: Date;
   name: String;
   email: String;
   address: String;
@@ -13,5 +13,5 @@ export interface IClient {
   is_active: Boolean;
   expiration_date: Date;
   registration_date: Date;
-  services: any[];
+  services: Service[];
 }

@@ -8,21 +8,21 @@ import { TranslateService } from 'ng2-translate';
 })
 export class NavbarComponent implements OnInit {
 
-  currLang: String;
+  public currLang: String;
 
   constructor(private translate: TranslateService) {
     this.refreshCurrentLanguage();
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
-  changeLang(lang: string) {
+  changeLang(lang: string): void {
     this.translate.use(lang);
     this.refreshCurrentLanguage();
   }
 
-  refreshCurrentLanguage() {
+  refreshCurrentLanguage(): void {
     this.currLang = this.translate.currentLang || this.translate.getDefaultLang();
   }
 }

@@ -1,5 +1,4 @@
-import { ICurrency } from '../currency/icurrency';
-import { IGenericDbObj } from '../igeneric-db-obj';
+import { ICurrency, IGenericDbObj } from '../';
 
 export interface IService extends IGenericDbObj {
     code: String

@@ -1,5 +1,5 @@
-import { ICurrency } from '../interfaces/currency/icurrency';
-import { GenericDbObj } from '../classes/generic-db-obj';
+import { ICurrency }    from '../interfaces';
+import { GenericDbObj } from '../classes';
 
 export class Currency extends GenericDbObj implements ICurrency {
   public code: String;

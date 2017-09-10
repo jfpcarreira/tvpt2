@@ -1,24 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy }       from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
-import { User } from '../../classes/user';
+import { Router }                             from '@angular/router';
+import { Subscription }                       from 'rxjs/Subscription';
+import { AuthService }                        from '../../services';
+import { User }                               from '../../classes';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
 
-  form: FormGroup;
-  message;
-  messageClass;
-  processing = false;
-  emailValid;
-  emailMessage;
-  usernameValid;
-  usernameMessage;
+  public form: FormGroup;
+  public message;
+  public messageClass;
+  public processing = false;
+  public emailValid;
+  public emailMessage;
+  public usernameValid;
+  public usernameMessage;
+  private subscription_create: Subscription;
+  private subscription_checkEmail: Subscription;
+  private subscription_checkUser: Subscription;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -29,7 +33,7 @@ export class RegisterComponent implements OnInit {
   }
 
   // Function to create registration form
-  createForm() {
+  createForm(): void {
     this.form = this.formBuilder.group({
       // Name Input
       name: ['', Validators.compose([
@@ -63,7 +67,7 @@ export class RegisterComponent implements OnInit {
   }
 
   // Function to disable the registration form
-  disableForm() {
+  disableForm(): void {
     this.form.controls['name'].disable();
     this.form.controls['username'].disable();
     this.form.controls['email'].disable();
@@ -72,7 +76,7 @@ export class RegisterComponent implements OnInit {
   }
 
   // Function to enable the registration form
-  enableForm() {
+  enableForm(): void {
     this.form.controls['name'].enable();
     this.form.controls['username'].enable();
     this.form.controls['email'].enable();
@@ -128,7 +132,7 @@ export class RegisterComponent implements OnInit {
   }
 
   // Function to submit form
-  onSubmit() {
+  onSubmit(): void {
     this.processing = true;
     this.disableForm();
 
@@ -139,14 +143,14 @@ export class RegisterComponent implements OnInit {
     user.setPassword( this.form.get('password').value );
 
     // Function from authentication service to register user
-    this.authService.create(user).subscribe(
+    this.subscription_create = this.authService.create(user).subscribe(
       data => this.handleSuccess(data),
       error => console.log(error),
       () => console.log('Request complete!')
     );
   }
 
-  handleSuccess(data) {
+  handleSuccess(data): void {
     if (data.success) {
       this.messageClass = 'alert alert-success';
       this.message = data.message;
@@ -163,22 +167,27 @@ export class RegisterComponent implements OnInit {
   }
 
   // Function to check if e-mail is taken
-  checkEmail() {
-    this.authService.checkEmail(this.form.get('email').value).subscribe(data => {
+  checkEmail(): void {
+    this.subscription_checkEmail = this.authService.checkEmail(this.form.get('email').value).subscribe(data => {
       this.emailValid = data.success;
       this.emailMessage = data.message;
     });
   }
 
   // Function to check if username is available
-  checkUsername() {
-    this.authService.checkUsername(this.form.get('username').value).subscribe(data => {
+  checkUsername(): void {
+    this.subscription_checkUser = this.authService.checkUsername(this.form.get('username').value).subscribe(data => {
       this.usernameValid = data.success;
       this.usernameMessage = data.message;
     });
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
+  ngOnDestroy(): void {
+    this.subscription_create.unsubscribe();
+    this.subscription_checkEmail.unsubscribe();
+    this.subscription_checkUser.unsubscribe();
+  }
 }

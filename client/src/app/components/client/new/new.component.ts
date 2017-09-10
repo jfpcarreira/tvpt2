@@ -1,19 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy }       from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
-import { ClientService } from '../../../services/client.service';
-import { IClient } from '../../../interfaces/client/iclient';
-import { Client } from '../../../classes/client';
+import { ToastrService }                      from 'ngx-toastr';
+import { Subscription }                       from 'rxjs/Subscription';
+import { ClientService }                      from '../../../services';
+import { IClient }                            from '../../../interfaces';
+import { Client }                             from '../../../classes';
 
 @Component({
   selector: 'client-new',
   templateUrl: './new.component.html',
   styleUrls: ['./new.component.css']
 })
-export class ClientNewComponent implements OnInit {
+export class ClientNewComponent implements OnInit, OnDestroy {
 
-  form: FormGroup;
-  processing: Boolean = false;
+  public form: FormGroup;
+  public processing: Boolean = false;
+  private subscription_create: Subscription;
 
   constructor(private toast: ToastrService, private clientService: ClientService) {
     this.createForm();
@@ -55,7 +57,7 @@ export class ClientNewComponent implements OnInit {
     client.setPassSogra(this.form.get('passSogra').value);
     client.setRegistrationDate(this.form.get('regDate').value);
 
-    this.clientService.create(client).subscribe(
+    this.subscription_create = this.clientService.create(client).subscribe(
       data => this.handleSuccess(data),
       err => console.log(err),
       () => console.log('Request complete!')
@@ -84,6 +86,10 @@ export class ClientNewComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  ngOnDestroy(): void {
+    this.subscription_create.unsubscribe();
   }
 
 }

@@ -1,9 +1,9 @@
-import { Injectable }             from '@angular/core';
-import { HttpClient }             from '@angular/common/http';
-import { Observable }             from 'rxjs/Observable';
-import { environment, API_URLS }  from '../../environments/environment';
-import { IGenericResponse }       from '../interfaces/igeneric-response';
-import { User }                   from '../classes/user';
+import { Injectable }       from '@angular/core';
+import { HttpClient }       from '@angular/common/http';
+import { Observable }       from 'rxjs/Observable';
+import { API_URLS }         from '../../environments/environment';
+import { IGenericResponse } from '../interfaces';
+import { User }             from '../classes';
 
 @Injectable()
 export class AuthService {
@@ -18,7 +18,7 @@ export class AuthService {
     return this.http.get<IGenericResponse>(API_URLS.AUTH + 'checkUsername/' + username);
   }
 
-  checkEmail(email: String) {
+  checkEmail(email: String): Observable<IGenericResponse> {
     return this.http.get<IGenericResponse>(API_URLS.AUTH + 'checkEmail/' + email);
   }
 }

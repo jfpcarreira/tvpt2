@@ -1,7 +1,7 @@
-import { Http } from '@angular/http';
-import { TranslateStaticLoader } from 'ng2-translate';
-import { environment } from '../../environments/environment';
+import { Http }                   from '@angular/http';
+import { TranslateStaticLoader }  from 'ng2-translate';
+import { API_URLS }               from '../../environments/environment';
 
-export function MyTranslateStaticLoader(http: Http) {
-  return new TranslateStaticLoader(http, environment.API_DOMAIN + environment.TRANSLATE_API_URL, '');
+export function MyTranslateStaticLoader(http: Http): TranslateStaticLoader {
+  return new TranslateStaticLoader(http, API_URLS.TRANSLATE, '');
 }

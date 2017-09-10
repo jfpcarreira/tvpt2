@@ -1,80 +1,52 @@
-import { IUser } from '../interfaces/user/iuser';
+import { IUser }        from '../interfaces';
+import { GenericDbObj } from '../classes';
 
-export class User implements IUser {
+export class User extends GenericDbObj implements IUser {
 
-	public _id: String;
-	public name: String;
-    public email: String;	
-	public username: String;
-    public password: String;
-	public updatedAt: Date;
-    public createdAt: Date;
+  public name: String;
+  public email: String;
+  public username: String;
+  public password: String;
 
-    public constructor(user?: IUser) {
-		if (user) {
-			this.setId(user._id);
-			this.setName(user.name);
-			this.setEmail(user.email);
-			this.setUsername(user.username);
-			this.setPassword(user.password);
-			this.setUpdatedAt(user.updatedAt);
-			this.setCreatedAt(user.createdAt);
-        }
+  public constructor(user?: IUser) {
+    if (user) {
+      super(user);
+      this.setName(user.name);
+      this.setEmail(user.email);
+      this.setUsername(user.username);
+      this.setPassword(user.password);
     }
+  }
 
-	public getId(): String {
-		return this._id;
-	}
+  public getName(): String {
+    return this.name;
+  }
 
-	public setId(value: String) {
-		this._id = value;
-	}
+  public setName(value: String) {
+    this.name = value;
+  }
 
-	public getName(): String {
-		return this.name;
-	}
+  public getEmail(): String {
+    return this.email;
+  }
 
-	public setName(value: String) {
-		this.name = value;
-	}
+  public setEmail(value: String) {
+    this.email = value;
+  }
 
-	public getEmail(): String {
-		return this.email;
-	}
+  public getUsername(): String {
+    return this.username;
+  }
 
-	public setEmail(value: String) {
-		this.email = value;
-	}
+  public setUsername(value: String) {
+    this.username = value;
+  }
 
-	public getUsername(): String {
-		return this.username;
-	}
+  public getPassword(): String {
+    return this.password;
+  }
 
-	public setUsername(value: String) {
-		this.username = value;
-	}
-
-	public getPassword(): String {
-        return this.password;
-	}
-
-	public setPassword(value: String) {
-		this.password = value;
-	}
-
-	public getUpdatedAt(): Date {
-		return this.updatedAt;
-	}
-
-	public setUpdatedAt(value: Date) {
-		this.updatedAt = value;
-	}
-
-	public getCreatedAt(): Date {
-		return this.createdAt;
-	}
-
-	public setCreatedAt(value: Date) {
-		this.createdAt = value;
-	}
+  public setPassword(value: String) {
+    this.password = value;
+  }
 }

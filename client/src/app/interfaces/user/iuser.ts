@@ -1,9 +1,8 @@
-export interface IUser {
-  _id: String;
+import { IGenericDbObj } from '../';
+
+export interface IUser extends IGenericDbObj {
   name: String;
   email: String;
   username: String;
   password: String;
-  updatedAt: Date;
-  createdAt: Date;
 }

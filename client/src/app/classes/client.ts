@@ -1,34 +1,30 @@
-import { IClient } from '../interfaces/client/iclient';
+import { IClient }                from '../interfaces';
+import { Service, GenericDbObj }  from '../classes';
 
-export class Client implements IClient {
+export class Client extends GenericDbObj implements IClient {
 
-	public _id: String;
-	public pass_tvpt: String;
-	public user_tvpt: String;
-	public updatedAt: Date;
-	public createdAt: Date;
 	public name: String;
 	public email: String;
 	public address: String;
 	public phone: String;
+	public user_tvpt: String;
+  public pass_tvpt: String;
 	public user_sogra: String;
 	public pass_sogra: String;
 	public is_active: Boolean;
 	public expiration_date: Date;
 	public registration_date: Date;
-	public services: any[];
+	public services: Service[];
 
 	public constructor(client?: IClient) {
 		if (client) {
-			this.setId(client._id);
-			this.setPassTvpt(client.pass_tvpt);
-			this.setUserTvpt(client.user_tvpt);
-			this.setUpdatedAt(client.updatedAt);
-			this.setCreatedAt(client.createdAt);
+      super(client);
 			this.setName(client.name);
 			this.setEmail(client.email);
 			this.setAddress(client.address);
 			this.setPhone(client.phone);
+			this.setUserTvpt(client.user_tvpt);
+			this.setPassTvpt(client.pass_tvpt);
 			this.setUserSogra(client.user_sogra);
 			this.setPassSogra(client.pass_sogra);
 			this.setIsActive(client.is_active);
@@ -36,46 +32,6 @@ export class Client implements IClient {
 			this.setRegistrationDate(client.registration_date);
 			this.setServices(client.services);
 		}
-	}
-
-	public getId(): String {
-		return this._id;
-	}
-
-	public setId(value: String) {
-		this._id = value;
-	}
-
-	public getPassTvpt(): String {
-		return this.pass_tvpt;
-	}
-
-	public setPassTvpt(value: String) {
-		this.pass_tvpt = value;
-	}
-
-	public getUserTvpt(): String {
-		return this.user_tvpt;
-	}
-
-	public setUserTvpt(value: String) {
-		this.user_tvpt = value;
-	}
-
-	public getUpdatedAt(): Date {
-		return this.updatedAt;
-	}
-
-	public setUpdatedAt(value: Date) {
-		this.updatedAt = value;
-	}
-
-	public getCreatedAt(): Date {
-		return this.createdAt;
-	}
-
-	public setCreatedAt(value: Date) {
-		this.createdAt = value;
 	}
 
 	public getName(): String {
@@ -108,6 +64,22 @@ export class Client implements IClient {
 
 	public setPhone(value: String) {
 		this.phone = value;
+	}
+
+	public getUserTvpt(): String {
+		return this.user_tvpt;
+	}
+
+	public setUserTvpt(value: String) {
+		this.user_tvpt = value;
+	}
+
+	public getPassTvpt(): String {
+		return this.pass_tvpt;
+	}
+
+	public setPassTvpt(value: String) {
+		this.pass_tvpt = value;
 	}
 
 	public getUserSogra(): String {
@@ -150,11 +122,11 @@ export class Client implements IClient {
 		this.registration_date = value;
 	}
 
-	public getServices(): any[] {
+	public getServices(): Service[] {
 		return this.services;
 	}
 
-	public setServices(value: any[]) {
+	public setServices(value: Service[]) {
 		this.services = value;
 	}
 }

@@ -1,12 +1,9 @@
-import { Injectable }             from '@angular/core';
-import { HttpClient }             from '@angular/common/http';
-import { Observable }             from 'rxjs/Observable';
-import { environment, API_URLS }  from '../../environments/environment';
-import { IGenericResponse }       from '../interfaces/igeneric-response';
-import { IClientsResponse }       from '../interfaces/client/iclients-response';
-import { IClientResponse }        from '../interfaces/client/iclient-response';
-import { IClient }                from '../interfaces/client/iclient';
-import { Client }                 from '../classes/client';
+import { Injectable }       from '@angular/core';
+import { HttpClient }       from '@angular/common/http';
+import { Observable }       from 'rxjs/Observable';
+import { API_URLS }         from '../../environments/environment';
+import { IClient, IService, IClientResponse, IClientsResponse, IGenericResponse } from '../interfaces';
+import { Client, Service }  from '../classes';
 
 @Injectable()
 export class ClientService {
@@ -16,13 +13,22 @@ export class ClientService {
   get(id: String): Observable<IClientResponse> {
     return this.http.get<IClientResponse>(API_URLS.CLIENT + id).map(res => {
       res.result = new Client(<IClient> res.result);
+      res.result.services = <Service[]> res.result.services.map(service =>
+        new Service(<IService> service)
+      );
       return res;
     });
   }
 
   getAll(): Observable<IClientsResponse> {
     return this.http.get<IClientsResponse>(API_URLS.CLIENT).map(res => {
-      res.result = <Client[]> res.result.map(client => new Client(<IClient> client));
+      res.result = <Client[]> res.result.map(client => {
+        client = new Client(<IClient> client);
+        client.services = <Service[]> client.services.map(service => {
+          return new Service(<IService> service);
+        });
+        return client;
+      });
       return res;
     });
   }
@@ -31,11 +37,11 @@ export class ClientService {
     return this.http.post<IGenericResponse>(API_URLS.CLIENT, client);
   }
 
-  update(client: Client) {
+  update(client: Client): Observable<IGenericResponse> {
     return this.http.put<IGenericResponse>(API_URLS.CLIENT, client);
   }
 
-  delete(id: String) {
+  delete(id: String): Observable<IGenericResponse> {
     return this.http.delete<IGenericResponse>(API_URLS.CLIENT + id);
   }
 }
