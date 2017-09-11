@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ToastrService }                from 'ngx-toastr';
 import { Subscription }                 from 'rxjs/Subscription';
-import { CurrencyService }              from '../../../services';
-import { Currency }                     from '../../../classes';
-import { ICurrenciesResponse }          from '../../../interfaces';
+import { CurrencyService }              from '../../../services/currency.service';
+import { Currency }                     from '../../../classes/currency';
+import { ICurrenciesResponse }          from '../../../interfaces/currency/icurrencies-response';
 
 @Component({
   selector: 'app-list',

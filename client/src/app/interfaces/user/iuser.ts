@@ -1,4 +1,4 @@
-import { IGenericDbObj } from '../';
+import { IGenericDbObj } from '../igeneric-db-obj';
 
 export interface IUser extends IGenericDbObj {
   name: String;

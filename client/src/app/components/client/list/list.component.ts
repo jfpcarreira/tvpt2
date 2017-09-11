@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ToastrService }                from 'ngx-toastr';
 import { Subscription }                 from 'rxjs/Subscription';
-import { ClientService }                from '../../../services';
-import { Client }                       from '../../../classes';
+import { ClientService }                from '../../../services/client.service';
+import { Client }                       from '../../../classes/client';
 
 @Component({
   selector: 'client-list',
@@ -22,7 +22,7 @@ export class ClientListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    let subscription_getAll = this.clientService.getAll().subscribe(
+    this.subscription_getAll = this.clientService.getAll().subscribe(
       data => {
         if (data.success) {
           this.clients = data.result;

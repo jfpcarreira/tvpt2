@@ -2,8 +2,13 @@ import { Injectable }       from '@angular/core';
 import { HttpClient }       from '@angular/common/http';
 import { Observable }       from 'rxjs/Observable';
 import { API_URLS }         from '../../environments/environment';
-import { IClient, IService, IClientResponse, IClientsResponse, IGenericResponse } from '../interfaces';
-import { Client, Service }  from '../classes';
+import { IClient }          from '../interfaces/client/iclient';
+import { IService }         from '../interfaces/service/iservice';
+import { IClientResponse }  from '../interfaces/client/iclient-response';
+import { IClientsResponse } from '../interfaces/client/iclients-response';
+import { IGenericResponse } from '../interfaces/igeneric-response';
+import { Client }           from '../classes/client';
+import { Service }          from '../classes/service';
 
 @Injectable()
 export class ClientService {

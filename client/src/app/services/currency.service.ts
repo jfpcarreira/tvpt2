@@ -1,9 +1,12 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import { API_URLS }   from '../../environments/environment';
-import { ICurrency, ICurrencyResponse, ICurrenciesResponse, IGenericResponse } from '../interfaces';
-import { Currency }   from '../classes';
+import { Injectable }           from '@angular/core';
+import { HttpClient }           from '@angular/common/http';
+import { Observable }           from 'rxjs/Observable';
+import { API_URLS }             from '../../environments/environment';
+import { ICurrency }            from '../interfaces/currency/icurrency';
+import { ICurrencyResponse }    from '../interfaces/currency/icurrency-response';
+import { ICurrenciesResponse }  from '../interfaces/currency/icurrencies-response';
+import { IGenericResponse }     from '../interfaces/igeneric-response';
+import { Currency }             from '../classes/currency';
 
 @Injectable()
 export class CurrencyService {

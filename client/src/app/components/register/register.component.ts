@@ -2,8 +2,8 @@ import { Component, OnInit, OnDestroy }       from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router }                             from '@angular/router';
 import { Subscription }                       from 'rxjs/Subscription';
-import { AuthService }                        from '../../services';
-import { User }                               from '../../classes';
+import { AuthService }                        from '../../services/auth.service';
+import { User }                               from '../../classes/user';
 
 @Component({
   selector: 'app-register',
@@ -186,8 +186,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription_create.unsubscribe();
-    this.subscription_checkEmail.unsubscribe();
-    this.subscription_checkUser.unsubscribe();
+    if(typeof this.subscription_create != "undefined") this.subscription_create.unsubscribe();
+    if(typeof this.subscription_checkEmail != "undefined") this.subscription_checkEmail.unsubscribe();
+    if(typeof this.subscription_checkUser != "undefined") this.subscription_checkUser.unsubscribe();
   }
 }

@@ -1,5 +1,5 @@
-import { IGenericDbObj }  from '../';
-import { Service }        from '../../classes';
+import { IGenericDbObj }  from '../igeneric-db-obj';
+import { Service }        from '../../classes/service';
 
 export interface IClient extends IGenericDbObj {
   pass_tvpt: String;

@@ -2,9 +2,9 @@ import { Component, OnInit, OnDestroy }       from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastrService }                      from 'ngx-toastr';
 import { Subscription }                       from 'rxjs/Subscription';
-import { ClientService }                      from '../../../services';
-import { IClient }                            from '../../../interfaces';
-import { Client }                             from '../../../classes';
+import { ClientService }                      from '../../../services/client.service';
+import { IClient }                            from '../../../interfaces/client/iclient';
+import { Client }                             from '../../../classes/client';
 
 @Component({
   selector: 'client-new',

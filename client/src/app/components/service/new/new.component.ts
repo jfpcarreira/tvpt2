@@ -2,9 +2,11 @@ import { Component, OnInit, OnDestroy }       from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastrService }                      from 'ngx-toastr';
 import { Subscription }                       from 'rxjs/Subscription';
-import { ServiceService, CurrencyService }    from '../../../services';
-import { IService }                           from '../../../interfaces';
-import { Service, Currency }                  from '../../../classes';
+import { ServiceService }                     from '../../../services/service.service';
+import { CurrencyService }                    from '../../../services/currency.service';
+import { IService }                           from '../../../interfaces/service/iservice';
+import { Service }                            from '../../../classes/service';
+import { Currency }                           from '../../../classes/currency';
 
 @Component({
   selector: 'service-new',

@@ -1,7 +1,7 @@
 module.exports = {
 
   // Returns the URI connection for Mongo DB Atlas
-  getMongoUri: () => {
+  getMongoUri: function() {
     return process.env.DB_URL +
       process.env.DB_USERNAME + ":" +
       process.env.DB_PASSWORD + "@" +
@@ -16,7 +16,7 @@ module.exports = {
   },
 
   // Validates if the request comes from a valid source (only some devices allowed)
-  isValidSource: (req) => {
+  isValidSource: function(req) {
     // For devellopment propose
     if (process.env.SERVER_TYPE == "DEV") return true;
 
@@ -37,7 +37,7 @@ module.exports = {
   },
 
   // Returns an object with the user agent info 
-  getUserAgentInfo: (req) => {
+  getUserAgentInfo: function(req) {
     var ua = req.headers['user-agent'],
       $ = {};
 
@@ -71,7 +71,7 @@ module.exports = {
   },
 
   // Creates a new token and returns it
-  getNewToken: (user, res) => {
+  getNewToken: function(user, res) {
     // JWT PAYLOAD
     var payload = {
       sub: user.id
@@ -88,7 +88,7 @@ module.exports = {
   },
 
   // Creates a new token and returns it
-  getDecodedToken: (token, res) => {
+  getDecodedToken: function(token, res) {
     var decoded = jwt.decode(token, process.env.TOKEN_SECRET);
 
     // Response
@@ -97,7 +97,7 @@ module.exports = {
     };
   },
 
-  getResponseStructure: (isSuccess, msg, obj) => {
+  getResponseStructure: function(isSuccess, msg, obj) {
     return {
       success: isSuccess,
       message: msg,
@@ -105,19 +105,19 @@ module.exports = {
     };
   },
 
-  getSuccessResponse: (msg) => {
+  getSuccessResponse: function(msg) {
     return this.getResponseStructure(true, msg, null);
   },
 
-  getSuccessResponse: (msg, obj) => {
+  getSuccessResponse: function(msg, obj) {
     return this.getResponseStructure(true, msg, obj);
   },
 
-  getInsuccessResponse: (msg) => {
+  getInsuccessResponse: function(msg) {
     return this.getResponseStructure(false, msg, null);
   },
 
-  getInsuccessResponse: (msg, err) => {
+  getInsuccessResponse: function(msg, err) {
     return this.getResponseStructure(false, msg, err);
   }
 

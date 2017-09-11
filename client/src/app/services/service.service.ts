@@ -2,8 +2,13 @@ import { Injectable }         from '@angular/core';
 import { HttpClient }         from '@angular/common/http';
 import { Observable }         from 'rxjs/Observable';
 import { API_URLS }           from '../../environments/environment';
-import { IGenericResponse, IServiceResponse, IServicesResponse, IService, ICurrency } from '../interfaces';
-import { Service, Currency }  from '../classes';
+import { IGenericResponse }   from '../interfaces/igeneric-response';
+import { IServiceResponse }   from '../interfaces/service/iservice-response';
+import { IServicesResponse }  from '../interfaces/service/iservices-response';
+import { IService }           from '../interfaces/service/iservice';
+import { ICurrency }          from '../interfaces/currency/icurrency';
+import { Service }            from '../classes/service';
+import { Currency }           from '../classes/currency';
 
 @Injectable()
 export class ServiceService {

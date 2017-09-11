@@ -1,5 +1,6 @@
-import { IClient }                from '../interfaces';
-import { Service, GenericDbObj }  from '../classes';
+import { IClient }      from '../interfaces/client/iclient';
+import { Service }      from '../classes/service';
+import { GenericDbObj } from '../classes/generic-db-obj';
 
 export class Client extends GenericDbObj implements IClient {
 

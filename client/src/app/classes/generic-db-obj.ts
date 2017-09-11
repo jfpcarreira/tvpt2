@@ -1,4 +1,4 @@
-import { IGenericDbObj } from '../interfaces';
+import { IGenericDbObj } from '../interfaces/igeneric-db-obj';
 
 export class GenericDbObj implements IGenericDbObj {
   public _id: String;

@@ -2,9 +2,10 @@ import { Component, OnInit, OnDestroy }         from '@angular/core';
 import { FormGroup, FormControl, Validators }   from '@angular/forms';
 import { ToastrService }                        from 'ngx-toastr';
 import { Subscription }                         from 'rxjs/Subscription';
-import { CurrencyService }                      from '../../../services';
-import { ICurrency, IGenericResponse }          from '../../../interfaces';
-import { Currency }                             from '../../../classes';
+import { CurrencyService }                      from '../../../services/currency.service';
+import { ICurrency }                            from '../../../interfaces/currency/icurrency';
+import { IGenericResponse }                     from '../../../interfaces/igeneric-response';
+import { Currency }                             from '../../../classes/currency';
 
 @Component({
   selector: 'currency-new',

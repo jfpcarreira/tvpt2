@@ -1,5 +1,5 @@
-import { IUser }        from '../interfaces';
-import { GenericDbObj } from '../classes';
+import { IUser }        from '../interfaces/user/iuser';
+import { GenericDbObj } from '../classes/generic-db-obj';
 
 export class User extends GenericDbObj implements IUser {
 

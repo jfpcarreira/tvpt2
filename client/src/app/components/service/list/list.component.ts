@@ -1,8 +1,9 @@
-import { Component, OnInit, OnDestroy }     from '@angular/core';
-import { ToastrService }                    from 'ngx-toastr';
-import { Subscription }                     from 'rxjs/Subscription';
-import { ServiceService, CurrencyService }  from '../../../services';
-import { Service }                          from '../../../classes';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ToastrService }                from 'ngx-toastr';
+import { Subscription }                 from 'rxjs/Subscription';
+import { ServiceService }               from '../../../services/service.service';
+import { CurrencyService }              from '../../../services/currency.service';
+import { Service }                      from '../../../classes/service';
 
 @Component({
   selector: 'service-list',
