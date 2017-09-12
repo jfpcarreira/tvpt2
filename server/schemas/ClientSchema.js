@@ -1,7 +1,7 @@
 // Dependencies
-const mongoose = require('mongoose');
-const random = require("randomstring");
-const validators = require('./Validators');
+const mongoose    = require('mongoose');
+const random      = require("randomstring");
+const validators  = require('./Validators');
 
 // schema specification
 const ClientSchema = new mongoose.Schema({

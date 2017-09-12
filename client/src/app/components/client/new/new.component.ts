@@ -25,20 +25,28 @@ export class ClientNewComponent implements OnInit, OnDestroy {
     this.form = new FormGroup({
 
       // Username Input
-      code: new FormControl('', Validators.compose([
-        Validators.required, // Field is required
-        Validators.minLength(3), // Minimum length is 3 characters
-        Validators.maxLength(15) // Maximum length is 15 characters
-      ])),
       name: new FormControl('', Validators.compose([
+        Validators.required
+      ])),
+      email: new FormControl('', Validators.compose([
         Validators.required, // Field is required
         Validators.minLength(3), // Minimum length is 3 characters
         Validators.maxLength(15) // Maximum length is 15 characters
       ])),
-      price: new FormControl('', Validators.compose([
-        Validators.required, // Field is required
-        Validators.minLength(3), // Minimum length is 3 characters
-        Validators.maxLength(15) // Maximum length is 15 characters
+      address: new FormControl('', Validators.compose([
+        Validators.required
+      ])),
+      phone: new FormControl('', Validators.compose([
+        Validators.required
+      ])),
+      userSogra: new FormControl('', Validators.compose([
+        Validators.required
+      ])),
+      passSogra: new FormControl('', Validators.compose([
+        Validators.required
+      ])),
+      regDate: new FormControl('', Validators.compose([
+        Validators.required
       ]))
     });
   }
@@ -48,7 +56,7 @@ export class ClientNewComponent implements OnInit, OnDestroy {
     this.processing = true;
     //    this.disableForm();
 
-    let client = new Client();
+    const client = new Client();
     client.setName(this.form.get('name').value);
     client.setEmail(this.form.get('email').value);
     client.setAddress(this.form.get('address').value);
@@ -67,21 +75,8 @@ export class ClientNewComponent implements OnInit, OnDestroy {
   handleSuccess(data) {
     if (data.success) {
       this.toast.success('You are awesome!', 'Success!');
-      /*
-      this.messageClass = 'alert alert-success';
-      this.message = data.message;
-      setTimeout(() => {
-        this.router.navigate(['/login']); // Redirect to login view after 2 second timeout
-      }, 2000);*/
-    }
-    else {
+    } else {
       this.toast.error(data.message, 'Error!');
-/*
-      this.messageClass = 'alert alert-danger';
-      this.message = data.message;
-      this.processing = false;
-      this.enableForm();
-*/
     }
   }
 
@@ -89,7 +84,7 @@ export class ClientNewComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription_create.unsubscribe();
+    if(typeof this.subscription_create != "undefined") this.subscription_create.unsubscribe();
   }
 
 }

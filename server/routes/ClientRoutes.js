@@ -1,10 +1,10 @@
-const router = require('express').Router();
-const Client = require('../models/ClientModel');
-const utils = require('../../tools/utils');
+const router  = require('express').Router();
+const Client  = require('../models/ClientModel');
+const utils   = require('../../tools/utils');
 
 // Get all clients
 router.get('/', (req, res) => {
-  Client.find({}, (err, clients) => {
+  Client.find({}).populate('services').exec((err, clients) => {
     if (err) {
       res.json(utils.getInsuccessResponse('Unexpected error. Please try again later.', err));
     }
@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
 // Get client by ID
 router.get('/:id', (req, res) => {
   console.log(req.params);
-  Client.findById(req.params.id, (err, client) => {
+  Client.findById({ _id: req.params.id}).populate('services').exec((err, client) => {
     if (err) {
       res.json(utils.getInsuccessResponse('Unexpected error. Please try again later.', err));
     }

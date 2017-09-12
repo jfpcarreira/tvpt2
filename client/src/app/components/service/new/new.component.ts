@@ -51,7 +51,7 @@ export class ServiceNewComponent implements OnInit, OnDestroy {
     this.processing = true;
     //    this.disableForm();
 
-    let service = new Service();
+    const service = new Service();
     service.setCode(this.form.get('code').value);
     service.setName(this.form.get('name').value);
     service.setPrice(this.form.get('price').value);
@@ -69,8 +69,7 @@ export class ServiceNewComponent implements OnInit, OnDestroy {
   handleSuccess(data): void {
     if (data.success) {
       this.toast.success('You are awesome!', 'Success!');
-    }
-    else {
+    } else {
       this.toast.error(data.message, 'Error!');
     }
   }
@@ -84,7 +83,7 @@ export class ServiceNewComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription_create.unsubscribe();
-    this.subscription_getAll.unsubscribe();
+    if(typeof this.subscription_create != "undefined") this.subscription_create.unsubscribe();
+    if(typeof this.subscription_getAll != "undefined") this.subscription_getAll.unsubscribe();
   }
 }

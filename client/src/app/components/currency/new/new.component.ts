@@ -49,7 +49,7 @@ export class CurrencyNewComponent implements OnInit, OnDestroy {
     this.processing = true;
     //    this.disableForm();
 
-    let currency = new Currency();
+    const currency = new Currency();
     currency.setCode(this.form.get('code').value);
     currency.setName(this.form.get('name').value);
     currency.setSymbol(this.form.get('symbol').value);
@@ -58,8 +58,7 @@ export class CurrencyNewComponent implements OnInit, OnDestroy {
       data => {
         if (data.success) {
           this.toast.success('Currency successfuly created!', 'Success!');
-        }
-        else {
+        } else {
           this.toast.error(data.message, 'Error!');
         }
       },
@@ -71,6 +70,6 @@ export class CurrencyNewComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription_create.unsubscribe();
+    if(typeof this.subscription_create != "undefined") this.subscription_create.unsubscribe();
   }
 }

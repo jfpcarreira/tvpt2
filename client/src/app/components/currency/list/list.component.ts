@@ -23,8 +23,7 @@ export class CurrencyListComponent implements OnInit, OnDestroy {
       data => {
         if (data.success) {
           this.currencies = data.result;
-        }
-        else {
+        } else {
           this.toast.error(data.message, 'Error!');
         }
       },
@@ -40,6 +39,6 @@ export class CurrencyListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription_getAll.unsubscribe();
+    if(typeof this.subscription_getAll != "undefined") this.subscription_getAll.unsubscribe();
   }
 }

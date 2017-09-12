@@ -157,8 +157,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
       setTimeout(() => {
         this.router.navigate(['/login']); // Redirect to login view after 2 second timeout
       }, 2000);
-    }
-    else {
+    } else {
       this.messageClass = 'alert alert-danger';
       this.message = data.message;
       this.processing = false;
