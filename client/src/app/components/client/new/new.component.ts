@@ -3,8 +3,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastrService }                      from 'ngx-toastr';
 import { Subscription }                       from 'rxjs/Subscription';
 import { ClientService }                      from '../../../services/client.service';
-import { IClient }                            from '../../../interfaces/client/iclient';
+import { ServiceService }                     from '../../../services/service.service';
 import { Client }                             from '../../../classes/client';
+import { Service }                            from '../../../classes/service';
 
 @Component({
   selector: 'client-new',
@@ -15,9 +16,15 @@ export class ClientNewComponent implements OnInit, OnDestroy {
 
   public form: FormGroup;
   public processing: Boolean = false;
+  public services: Service[];
   private subscription_create: Subscription;
+  private subscription_getAll: Subscription;
 
-  constructor(private toast: ToastrService, private clientService: ClientService) {
+  constructor(
+      private toast: ToastrService
+    , private clientService: ClientService
+    , private serviceService: ServiceService
+  ) {
     this.createForm();
   }
 
@@ -64,6 +71,7 @@ export class ClientNewComponent implements OnInit, OnDestroy {
     client.setUserSogra(this.form.get('userSogra').value);
     client.setPassSogra(this.form.get('passSogra').value);
     client.setRegistrationDate(this.form.get('regDate').value);
+    client.setServices(this.services);
 
     this.subscription_create = this.clientService.create(client).subscribe(
       data => this.handleSuccess(data),
@@ -81,10 +89,16 @@ export class ClientNewComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.subscription_getAll = this.serviceService.getAll().subscribe(
+        data => this.services = data.result
+      , err => console.log(err)
+      , () => console.log('Request complete!')
+    );
   }
 
   ngOnDestroy(): void {
     if(typeof this.subscription_create != "undefined") this.subscription_create.unsubscribe();
+    if(typeof this.subscription_getAll != "undefined") this.subscription_getAll.unsubscribe();
   }
 
 }

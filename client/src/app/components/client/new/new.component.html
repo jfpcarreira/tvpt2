@@ -61,6 +61,19 @@
       <span class="help-block">Date in invalid format.</span>
     </div>
 
+    <!-- Services -->
+    <div class="form-group">
+      <label class="control-label">Subscribed Services</label>
+      <br/>
+      <div class="form-group">
+        <div *ngFor="let service of services">
+          <input type="checkbox" name="services-checkbox" id="checkbox-{{service.code}}" autocomplete="off" [disabled]="service.is_disabled" [checked]="service.is_selected">
+          {{service.name}}
+          {{service.is_selected}}
+        </div>
+      </div>
+    </div>
+
     <!-- Submit Input -->
     <input type="submit" class="btn btn-primary" value="Submit" /> <br/><br/>
 
