@@ -2,40 +2,44 @@
 
   <button type="button" class="btn btn-primary" routerLink="/clients/new"> {{ 'client.button.new' | translate }} </button>
 
-	<!-- TO DELETE -->
-	<button type="button" class="btn btn-primary"> New User </button>
+  <!-- TO DELETE -->
+  <button type="button" class="btn btn-primary"> New User </button>
 
-	<br/> <br/>
+  <br/> <br/>
 
-	<table class="table table-hover">
-		<tr class="header">
-			<th class="col-xs-3"> {{ 'client.table.headers.name' | translate }} </th>
-			<th class="col-xs-2"> {{ 'client.table.headers.user' | translate }} </th>
-			<th class="col-xs-3"> {{ 'client.table.headers.email' | translate }} </th>
-			<th class="col-xs-2"> {{ 'client.table.headers.services' | translate }} </th>
-			<th class="col-xs-1"> {{ 'client.table.headers.exp-date' | translate }} </th>
-			<th class="col-xs- center"> {{ 'client.table.headers.actions' | translate }} </th>
-		</tr>
-		<tbody>
+  <table class="table table-hover">
+    <tr class="header">
+      <th class="col-xs-3"> {{ 'client.table.headers.name' | translate }} </th>
+      <th class="col-xs-2"> {{ 'client.table.headers.user' | translate }} </th>
+      <th class="col-xs-3"> {{ 'client.table.headers.email' | translate }} </th>
+      <th class="col-xs-2"> {{ 'client.table.headers.services' | translate }} </th>
+      <th class="col-xs-1"> {{ 'client.table.headers.exp-date' | translate }} </th>
+      <th class="col-xs- center"> {{ 'client.table.headers.actions' | translate }} </th>
+    </tr>
+    <tbody>
       <tr *ngFor="let client of clients" (click)="todo()">
-				<td> {{ client.getName() }} </td>
-				<td> {{ client.getUserTvpt() }} </td>
-				<td> {{ client.getEmail() }} </td>
-				<td> <ul> <li> my service </li> </ul> </td>
-				<td>  {{ client.getExpirationDate() | date: 'dd/MM/yyyy' }} </td>
-				<td class="tools">
-					<span isolate-click>
+        <td> {{ client.getName() }} </td>
+        <td> {{ client.getUserTvpt() }} </td>
+        <td> {{ client.getEmail() }} </td>
+        <td>
+          <ul *ngFor="let service of client.services">
+            <li> {{service.name}} </li>
+          </ul>
+        </td>
+        <td> {{ client.getExpirationDate() | date: 'dd/MM/yyyy' }} </td>
+        <td class="tools">
+          <span isolate-click>
 						<div class="row">
 							<div class="col-md-1"> <i class="material-icons" uib-tooltip="Edit">edit</i> </div>
 							<div class="col-md-1"> <i class="material-icons" uib-tooltip="Lock">lock</i> </div>
 							<div class="col-md-1"> <i class="material-icons" uib-tooltip="Delete">delete</i> </div>
 						</div>
 					</span>
-				</td>
-			</tr>
+        </td>
+      </tr>
 
-		</tbody>
-	</table>
+    </tbody>
+  </table>
 
 </div>
 

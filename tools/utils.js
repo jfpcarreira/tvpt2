@@ -119,6 +119,17 @@ module.exports = {
 
   getInsuccessResponse: function(msg, err) {
     return this.getResponseStructure(false, msg, err);
-  }
+  },
 
+  getIdsFromDbObject: function(obj) {
+    var ids = [];
+
+    for(let i=0; i<obj.length; i++) {
+      if(obj[i].is_selected) {
+        ids.push(obj[i]._id);
+      }
+    }
+
+    return ids;
+  }
 };

@@ -54,6 +54,8 @@ export class ClientNewComponent implements OnInit, OnDestroy {
       ])),
       regDate: new FormControl('', Validators.compose([
         Validators.required
+      ])),
+      services: new FormControl('', Validators.compose([
       ]))
     });
   }
@@ -101,4 +103,7 @@ export class ClientNewComponent implements OnInit, OnDestroy {
     if(typeof this.subscription_getAll != "undefined") this.subscription_getAll.unsubscribe();
   }
 
+  bla() {
+    console.log(this.services);
+  }
 }

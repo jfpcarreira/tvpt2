@@ -51,13 +51,14 @@ router.post('/', (req, res) => {
   }
   else {
     let client = new Client({
-      name: req.body.name
-      , email: req.body.email
-      , address: req.body.address
-      , phone: req.body.phone
-      , user_sogra: req.body.user_sogra
-      , pass_sogra: req.body.pass_sogra
-      , registration_date: req.body.registration_date
+        name:               req.body.name
+      , email:              req.body.email
+      , address:            req.body.address
+      , phone:              req.body.phone
+      , user_sogra:         req.body.user_sogra
+      , pass_sogra:         req.body.pass_sogra
+      , registration_date:  req.body.registration_date
+      , services:           utils.getIdsFromDbObject(req.body.services)
     });
 
     client.save((err) => {

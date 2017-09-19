@@ -67,9 +67,8 @@
       <br/>
       <div class="form-group">
         <div *ngFor="let service of services">
-          <input type="checkbox" name="services-checkbox" id="checkbox-{{service.code}}" autocomplete="off" [disabled]="service.is_disabled" [checked]="service.is_selected">
+          <input type="checkbox" formControlName="services" id="checkbox-{{service.code}}" [(ngModel)]="service.is_selected">
           {{service.name}}
-          {{service.is_selected}}
         </div>
       </div>
     </div>
