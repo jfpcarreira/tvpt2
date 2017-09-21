@@ -3,27 +3,30 @@
   <form [formGroup]="form" (submit)="onSubmit()" novalidate>
 
     <!-- Code -->
-    <div class="form-group has-success has-feedback">
+    <div class="form-group" [ngClass]="{'has-feedback': form.controls.code.touched, 'has-success': (form.controls.code.valid && form.controls.code.touched), 'has-error': (form.controls.code.invalid && form.controls.code.touched)}">
       <label class="control-label" for="codeId">Code</label>
       <input formControlName="code" type="text" id="codeId" class="form-control" aria-describedby="code" placeholder="ex: ABC" required>
-      <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
-      <span class="help-block">This is a required field.</span>
+      <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" *ngIf="(form.controls.code.touched && form.controls.code.valid)"></span>
+      <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true" *ngIf="(form.controls.code.touched && form.controls.code.invalid)"></span>
+      <span class="help-block" *ngIf="(form.controls.code.touched && form.controls.code.errors?.required)">This is a required field.</span>
     </div>
 
     <!-- Name -->
-    <div class="form-group has-success has-feedback">
+    <div class="form-group" [ngClass]="{'has-feedback': form.controls.name.touched, 'has-success': (form.controls.name.valid && form.controls.name.touched), 'has-error': (form.controls.name.invalid && form.controls.name.touched)}">
       <label class="control-label" for="nameId">Name</label>
-      <input formControlName="name" type="text" id="nameId" class="form-control" aria-describedby="name" placeholder="ex: TV da sogra" required>
-      <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
-      <span class="help-block">This is a required field.</span>
+      <input formControlName="name" type="text" id="nameId" class="form-control" aria-describedby="name" placeholder="ex: SD Card" required>
+      <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" *ngIf="(form.controls.name.touched && form.controls.name.valid)"></span>
+      <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true" *ngIf="(form.controls.name.touched && form.controls.name.invalid)"></span>
+      <span class="help-block" *ngIf="(form.controls.name.touched && form.controls.name.errors?.required)">This is a required field.</span>
     </div>
 
     <!-- Symbol -->
-    <div class="form-group has-success has-feedback">
+    <div class="form-group" [ngClass]="{'has-feedback': form.controls.symbol.touched, 'has-success': (form.controls.symbol.valid && form.controls.symbol.touched), 'has-error': (form.controls.symbol.invalid && form.controls.symbol.touched)}">
       <label class="control-label" for="symbolId">Symbol</label>
-      <input formControlName="symbol" type="text" id="symbolId" class="form-control" aria-describedby="symbol" placeholder="123.45" required>
-      <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
-      <span class="help-block">This is a required field.</span>
+      <input formControlName="symbol" type="text" id="symbolId" class="form-control" aria-describedby="symbol" placeholder="Ex: €" required>
+      <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" *ngIf="(form.controls.symbol.touched && form.controls.symbol.valid)"></span>
+      <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true" *ngIf="(form.controls.symbol.touched && form.controls.symbol.invalid)"></span>
+      <span class="help-block" *ngIf="(form.controls.symbol.touched && form.controls.symbol.errors?.required)">This is a required field.</span>
     </div>
 
     <!-- Submit Input -->
