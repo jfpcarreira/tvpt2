@@ -3,37 +3,46 @@
   <form [formGroup]="form" (submit)="onSubmit()" novalidate>
 
     <!-- Code -->
-    <div class="form-group has-success has-feedback">
+    <div class="form-group" [ngClass]="{'has-feedback': form.controls.code.touched, 'has-success': (form.controls.code.valid && form.controls.code.touched), 'has-error': (form.controls.code.invalid && form.controls.code.touched)}">
       <label class="control-label" for="codeId">Code</label>
       <input formControlName="code" type="text" id="codeId" class="form-control" aria-describedby="code" placeholder="ex: ABC" required>
-      <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
-      <span class="help-block">This is a required field.</span>
+      <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" *ngIf="(form.controls.code.touched && form.controls.code.valid)"></span>
+      <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true" *ngIf="(form.controls.code.touched && form.controls.code.invalid)"></span>
+      <span class="help-block" *ngIf="(form.controls.code.touched && form.controls.code.errors?.required)">This is a required field.</span>
+      <span class="help-block" *ngIf="(form.controls.code.touched && form.controls.code.errors?.minlength)">The code must be composed by 3 characters.</span>
+      <span class="help-block" *ngIf="(form.controls.code.touched && form.controls.code.errors?.maxlength)">The code must be composed by 3 characters.</span>
     </div>
 
     <!-- Name -->
-    <div class="form-group has-success has-feedback">
+    <div class="form-group" [ngClass]="{'has-feedback': form.controls.name.touched, 'has-success': (form.controls.name.valid && form.controls.name.touched), 'has-error': (form.controls.name.invalid && form.controls.name.touched)}">
       <label class="control-label" for="nameId">Name</label>
-      <input formControlName="name" type="text" id="nameId" class="form-control" aria-describedby="name" placeholder="ex: TV da sogra" required>
-      <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
-      <span class="help-block">This is a required field.</span>
+      <input formControlName="name" type="text" id="nameId" class="form-control" aria-describedby="name" placeholder="ex: SD Card" required>
+      <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" *ngIf="(form.controls.name.touched && form.controls.name.valid)"></span>
+      <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true" *ngIf="(form.controls.name.touched && form.controls.name.invalid)"></span>
+      <span class="help-block" *ngIf="(form.controls.name.touched && form.controls.name.errors?.required)">This is a required field.</span>
+      <span class="help-block" *ngIf="(form.controls.name.touched && form.controls.name.errors?.minlength)">The name must be at least 5 characters.</span>
     </div>
 
     <!-- Price -->
-    <div class="form-group has-success has-feedback">
+    <div class="form-group" [ngClass]="{'has-feedback': form.controls.price.touched, 'has-success': (form.controls.price.valid && form.controls.price.touched), 'has-error': (form.controls.price.invalid && form.controls.price.touched)}">
       <label class="control-label" for="priceId">Price</label>
       <input formControlName="price" type="text" id="priceId" class="form-control" aria-describedby="price" placeholder="123.45" required>
-      <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
-      <span class="help-block">This is a required field.</span>
+      <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" *ngIf="(form.controls.price.touched && form.controls.price.valid)"></span>
+      <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true" *ngIf="(form.controls.price.touched && form.controls.price.invalid)"></span>
+      <span class="help-block" *ngIf="(form.controls.price.touched && form.controls.price.errors?.required)">This is a required field.</span>
+      <span class="help-block" *ngIf="(form.controls.price.touched && form.controls.price.errors?.validateDecimalNumber)">You must enter a valid amount.</span>
     </div>
 
     <!-- Currency -->
-    <div class="form-group has-success has-feedback">
+    <div class="form-group" [ngClass]="{'has-feedback': form.controls.currency.touched, 'has-success': (form.controls.currency.valid && form.controls.currency.touched), 'has-error': (form.controls.currency.invalid && form.controls.currency.touched)}">
       <label class="control-label" for="priceId">Currency</label>
       <select formControlName="currency" id="currencyId" class="form-control" required>
+        <option value="">Choose a currency</option>
         <option *ngFor="let currency of currencies" value="{{currency.getId()}}">{{currency.getCode()}} ({{currency.getSymbol()}})</option>
       </select>
-      <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
-      <span class="help-block">This is a required field.</span>
+      <span class="glyphicon glyphicon-ok form-control-feedback glyphicon-for-combobox" aria-hidden="true" *ngIf="(form.controls.currency.touched && form.controls.currency.valid)"></span>
+      <span class="glyphicon glyphicon-remove form-control-feedback glyphicon-for-combobox" aria-hidden="true" *ngIf="(form.controls.currency.touched && form.controls.currency.invalid)"></span>
+      <span class="help-block" *ngIf="(form.controls.currency.touched && (form.controls.currency.errors?.required || form.controls.currency.errors?.validateCurrency))">This is a required field.</span>
     </div>
 
     <!-- Submit Input -->

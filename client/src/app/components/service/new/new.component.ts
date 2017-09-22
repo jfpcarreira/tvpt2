@@ -1,12 +1,13 @@
-import { Component, OnInit, OnDestroy }       from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ToastrService }                      from 'ngx-toastr';
-import { Subscription }                       from 'rxjs/Subscription';
-import { ServiceService }                     from '../../../services/service.service';
-import { CurrencyService }                    from '../../../services/currency.service';
-import { IService }                           from '../../../interfaces/service/iservice';
-import { Service }                            from '../../../classes/service';
-import { Currency }                           from '../../../classes/currency';
+import { Component, OnInit, OnDestroy }                   from '@angular/core';
+import { FormGroup, FormControl, Validators }             from '@angular/forms';
+import { ToastrService }                                  from 'ngx-toastr';
+import { Subscription }                                   from 'rxjs/Subscription';
+import { validateCombocSelected, validateDecimalNumber }  from '../../../tools/FormValidators';
+import { ServiceService }                                 from '../../../services/service.service';
+import { CurrencyService }                                from '../../../services/currency.service';
+import { IService }                                       from '../../../interfaces/service/iservice';
+import { Service }                                        from '../../../classes/service';
+import { Currency }                                       from '../../../classes/currency';
 
 @Component({
   selector: 'service-new',
@@ -38,10 +39,11 @@ export class ServiceNewComponent implements OnInit, OnDestroy {
       ])),
       price: new FormControl('', Validators.compose([
         Validators.required,
-        Validators.min(0)
+        validateDecimalNumber
       ])),
       currency: new FormControl('', Validators.compose([
-        Validators.required
+        Validators.required,
+        validateCombocSelected
       ]))
     });
   }
