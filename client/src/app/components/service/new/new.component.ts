@@ -59,8 +59,6 @@ export class ServiceNewComponent implements OnInit, OnDestroy {
     service.setPrice(this.form.get('price').value);
     service.setCurrency(this.form.get('currency').value);
 
-    console.log(service);
-
     this.subscription_create = this.serviceService.create(service).subscribe(
       data => this.handleSuccess(data),
       err => console.log(err),

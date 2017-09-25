@@ -42,11 +42,13 @@
       </select>
       <span class="glyphicon glyphicon-ok form-control-feedback glyphicon-for-combobox" aria-hidden="true" *ngIf="(form.controls.currency.touched && form.controls.currency.valid)"></span>
       <span class="glyphicon glyphicon-remove form-control-feedback glyphicon-for-combobox" aria-hidden="true" *ngIf="(form.controls.currency.touched && form.controls.currency.invalid)"></span>
-      <span class="help-block" *ngIf="(form.controls.currency.touched && (form.controls.currency.errors?.required || form.controls.currency.errors?.validateCurrency))">This is a required field.</span>
+      <span class="help-block" *ngIf="(form.controls.currency.touched && (form.controls.currency.errors?.required || form.controls.currency.errors?.validateComboSelected))">This is a required field.</span>
     </div>
 
     <!-- Submit Input -->
     <input type="submit" class="btn btn-primary" value="Submit" /> <br/><br/>
+
+    <input type="button" class="btn btn-primary" value="TESTE" (click)="teste()" /> <br/><br/>
 
   </form>
 

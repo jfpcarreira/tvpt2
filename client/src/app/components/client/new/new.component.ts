@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy }       from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastrService }                      from 'ngx-toastr';
 import { Subscription }                       from 'rxjs/Subscription';
+import { validateEmail, validatePhone, validateUsername, validatePassword, validateDate } from '../../../tools/FormValidators';
 import { ClientService }                      from '../../../services/client.service';
 import { ServiceService }                     from '../../../services/service.service';
 import { Client }                             from '../../../classes/client';
@@ -33,27 +34,31 @@ export class ClientNewComponent implements OnInit, OnDestroy {
 
       // Username Input
       name: new FormControl('', Validators.compose([
-        Validators.required
+        Validators.required,
+        Validators.minLength(5)
       ])),
       email: new FormControl('', Validators.compose([
-        Validators.required, // Field is required
-        Validators.minLength(3), // Minimum length is 3 characters
-        Validators.maxLength(15) // Maximum length is 15 characters
+        Validators.required,
+        Validators.minLength(6),
+        validateEmail
       ])),
       address: new FormControl('', Validators.compose([
         Validators.required
       ])),
       phone: new FormControl('', Validators.compose([
-        Validators.required
+        Validators.required,
+        validatePhone
       ])),
       userSogra: new FormControl('', Validators.compose([
-        Validators.required
+        Validators.required,
+        validateUsername
       ])),
       passSogra: new FormControl('', Validators.compose([
-        Validators.required
+        Validators.required,
+        validatePassword
       ])),
       regDate: new FormControl('', Validators.compose([
-        Validators.required
+        validateDate
       ])),
       services: new FormControl('', Validators.compose([
       ]))
