@@ -14,6 +14,7 @@ export class ClientListComponent implements OnInit, OnDestroy {
 
   public clients: Client[];
   private subscription_getAll: Subscription;
+  private subscription_delete: Subscription;
 
   constructor(
       private toast: ToastrService
@@ -25,11 +26,8 @@ export class ClientListComponent implements OnInit, OnDestroy {
     console.log('todo');
   }
 
-  teste(): void {
-    this.spinnerService.show();
-  }
-
   ngOnInit(): void {
+    this.spinnerService.show();
     this.subscription_getAll = this.clientService.getAll().subscribe(
       data => {
         if (data.success) {
@@ -37,15 +35,38 @@ export class ClientListComponent implements OnInit, OnDestroy {
         } else {
           this.toast.error(data.message, 'Error!');
         }
+        this.spinnerService.hide();
       },
       err => {
         console.error(err);
         this.toast.error('Backend server is down. Please try again later.', 'Error!');
+        this.spinnerService.hide();
       }
-    )
+    );
+  }
+
+  delete(client: Client): void {
+    this.spinnerService.show();
+    this.subscription_delete = this.clientService.delete(client.getId()).subscribe(
+      data => {
+        if (data.success) {
+          this.clients.splice( this.clients.indexOf(client), 1 );
+          this.toast.success(data.message, 'Success!');
+        } else {
+          this.toast.error(data.message, 'Error!');
+        }
+        this.spinnerService.hide();
+      },
+      err => {
+        console.error(err);
+        this.toast.error('Backend server is down. Please try again later.', 'Error!');
+        this.spinnerService.hide();
+      }
+    );
   }
 
   ngOnDestroy(): void {
     if(typeof this.subscription_getAll != "undefined") this.subscription_getAll.unsubscribe();
+    if(typeof this.subscription_delete != "undefined") this.subscription_delete.unsubscribe();
   }
 }

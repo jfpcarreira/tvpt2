@@ -1,7 +1,9 @@
 import { Component, OnInit, OnDestroy }         from '@angular/core';
 import { FormGroup, FormControl, Validators }   from '@angular/forms';
+import { Router }                               from '@angular/router';
 import { ToastrService }                        from 'ngx-toastr';
 import { Subscription }                         from 'rxjs/Subscription';
+import { Ng4LoadingSpinnerService }             from 'ng4-loading-spinner';
 import { CurrencyService }                      from '../../../services/currency.service';
 import { ICurrency }                            from '../../../interfaces/currency/icurrency';
 import { IGenericResponse }                     from '../../../interfaces/igeneric-response';
@@ -18,7 +20,11 @@ export class CurrencyNewComponent implements OnInit, OnDestroy {
   public processing: Boolean = false;
   private subscription_create: Subscription;
 
-  constructor(private toast: ToastrService, private currencyService: CurrencyService) {
+  constructor(
+      private toast: ToastrService
+    , private currencyService: CurrencyService
+    , private router: Router
+    , private spinnerService: Ng4LoadingSpinnerService) {
     this.createForm();
   }
 
@@ -57,7 +63,11 @@ export class CurrencyNewComponent implements OnInit, OnDestroy {
     this.subscription_create = this.currencyService.create(currency).subscribe(
       data => {
         if (data.success) {
-          this.toast.success('Currency successfuly created!', 'Success!');
+          this.spinnerService.show();
+          setTimeout(() => {
+            this.spinnerService.hide();
+            this.router.navigate(['/currencies']); // Redirect to login view after 2 second timeout
+          }, 2500);
         } else {
           this.toast.error(data.message, 'Error!');
         }

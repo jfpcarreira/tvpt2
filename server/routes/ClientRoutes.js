@@ -20,7 +20,6 @@ router.get('/', (req, res) => {
 
 // Get client by ID
 router.get('/:id', (req, res) => {
-  console.log(req.params);
   Client.findById({ _id: req.params.id}).populate('services').exec((err, client) => {
     if (err) {
       res.json(utils.getInsuccessResponse('Unexpected error. Please try again later.', err));
@@ -34,7 +33,7 @@ router.get('/:id', (req, res) => {
     }
   });
 });
-
+ 
 // Create a new client
 router.post('/', (req, res) => {
   if (!req.body.name) {
@@ -91,6 +90,18 @@ router.post('/', (req, res) => {
       }
     });
   }
+});
+
+// Delete client by ID
+router.delete('/:id', (req, res) => {
+  Client.findByIdAndRemove({ _id: req.params.id}).exec((err, client) => {
+    if (err) {
+      res.json(utils.getInsuccessResponse('Unexpected error, client was not removed. Please try again later.', err));
+    }
+    else {
+      res.json(utils.getSuccessResponse("Client successfuly removed!"));
+    }
+  });
 });
 
 module.exports = router;
