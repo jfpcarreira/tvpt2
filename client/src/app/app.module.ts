@@ -5,6 +5,7 @@ import { Http }                         from '@angular/http';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { BrowserAnimationsModule }      from '@angular/platform-browser/animations';
 import { ToastrModule }                 from 'ngx-toastr';
+import { Ng4LoadingSpinnerModule }      from 'ng4-loading-spinner';
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate';
 
 import { MyTranslateStaticLoader }      from './tools/MyTranslateStaticLoader';
@@ -50,6 +51,7 @@ import { CurrencyService }              from './services/currency.service';
     , ReactiveFormsModule
     , AppRoutingModule
     , BrowserAnimationsModule
+    , Ng4LoadingSpinnerModule
     , ToastrModule.forRoot()
     , TranslateModule.forRoot({
           provide: TranslateLoader

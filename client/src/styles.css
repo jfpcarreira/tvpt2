@@ -2,3 +2,9 @@
 span.glyphicon-for-combobox {
   padding-right: 30px;
 }
+
+.testered {
+  background-color: red;
+  height: 50px;
+  width: 100px;
+}
