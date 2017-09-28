@@ -1,9 +1,6 @@
 <div class="modal-demo">
 
-  <button type="button" class="btn btn-primary" routerLink="/clients/new"> {{ 'client.button.new' | translate }} </button>
-
-  <!-- TO DELETE -->
-  <button type="button" class="btn btn-primary" (click)="teste()">TESTE </button>
+  <button type="button" class="btn btn-success" routerLink="/clients/new"> {{ 'client.button.new' | translate }} </button>
 
   <br/> <br/>
 
@@ -14,7 +11,7 @@
       <th class="col-xs-3"> {{ 'client.table.headers.email' | translate }} </th>
       <th class="col-xs-2"> {{ 'client.table.headers.services' | translate }} </th>
       <th class="col-xs-1"> {{ 'client.table.headers.exp-date' | translate }} </th>
-      <th class="col-xs- center"> {{ 'client.table.headers.actions' | translate }} </th>
+      <th class="col-xs-1"> </th>
     </tr>
     <tbody>
       <tr *ngFor="let client of clients" (click)="todo()">
@@ -27,15 +24,7 @@
           </ul>
         </td>
         <td> {{ client.getExpirationDate() | date: 'dd/MM/yyyy' }} </td>
-        <td class="tools">
-          <span isolate-click>
-						<div class="row">
-							<div class="col-md-1"> <i class="material-icons" uib-tooltip="Edit">edit</i> </div>
-							<div class="col-md-1"> <i class="material-icons" uib-tooltip="Lock">lock</i> </div>
-							<div class="col-md-1"> <i class="material-icons" uib-tooltip="Delete" (click)="delete(client)">delete</i> </div>
-						</div>
-					</span>
-        </td>
+        <td class="align-left"> <img data-toggle="tooltip" data-placement="top" title="Tooltip on top" src="assets/images/delete-24.png" (click)="delete(client)"/> </td>
       </tr>
 
     </tbody>

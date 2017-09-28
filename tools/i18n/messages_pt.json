@@ -1,7 +1,7 @@
 {
   "client": {
     "button": {
-      "new": "Novo Cliente"
+      "new": "Novo"
     },
     "table": {
       "headers": {
@@ -9,8 +9,7 @@
         "user": "Utilizador",
         "email": "Email",
         "services": "Serviços",
-        "exp-date": "Data expiração",
-        "actions": "Acções"
+        "exp-date": "Data expiração"
       }
     }
   }
