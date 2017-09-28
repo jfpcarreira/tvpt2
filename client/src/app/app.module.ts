@@ -1,7 +1,6 @@
 import { BrowserModule }                from '@angular/platform-browser';
 import { NgModule }                     from '@angular/core';
 import { ReactiveFormsModule }          from '@angular/forms';
-import { Http }                         from '@angular/http';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { BrowserAnimationsModule }      from '@angular/platform-browser/animations';
 import { ToastrModule }                 from 'ngx-toastr';
@@ -56,7 +55,7 @@ import { CurrencyService }              from './services/currency.service';
     , TranslateModule.forRoot({
           provide: TranslateLoader
         , useFactory: MyTranslateStaticLoader
-        , deps: [Http]
+        , deps: [HttpClient]
       })
   ],
   providers: [

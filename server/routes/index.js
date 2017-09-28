@@ -1,8 +1,6 @@
 const router  = require('express').Router();
 const utils   = require('../../tools/utils')
 
-router.use('/translate',      require('./TranslateRoutes'));
-
 router.use('/authentication', require('./Authentication'));
 router.use('/currency',       require('./CurrencyRoutes'));
 router.use('/service',        require('./ServiceRoutes'));

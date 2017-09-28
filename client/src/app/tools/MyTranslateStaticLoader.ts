@@ -1,7 +1,6 @@
-import { Http }                   from '@angular/http';
-import { TranslateStaticLoader }  from 'ng2-translate';
-import { API_URLS }               from '../../environments/environment';
+import { HttpClient }           from '@angular/common/http';
+import { TranslateHttpLoader }  from '@ngx-translate/http-loader';
 
-export function MyTranslateStaticLoader(http: Http): TranslateStaticLoader {
-  return new TranslateStaticLoader(http, API_URLS.TRANSLATE, '');
+export function MyTranslateStaticLoader(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http);
 }
