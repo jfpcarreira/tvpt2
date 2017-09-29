@@ -3,6 +3,7 @@ import { NgModule }                     from '@angular/core';
 import { ReactiveFormsModule }          from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { BrowserAnimationsModule }      from '@angular/platform-browser/animations';
+import { NgbModule }                    from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule }                 from 'ngx-toastr';
 import { Ng4LoadingSpinnerModule }      from 'ng4-loading-spinner';
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate';
@@ -51,6 +52,7 @@ import { CurrencyService }              from './services/currency.service';
     , AppRoutingModule
     , BrowserAnimationsModule
     , Ng4LoadingSpinnerModule
+    , NgbModule.forRoot()
     , ToastrModule.forRoot()
     , TranslateModule.forRoot({
           provide: TranslateLoader
