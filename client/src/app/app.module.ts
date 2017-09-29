@@ -1,33 +1,33 @@
-import { BrowserModule }                from '@angular/platform-browser';
-import { NgModule }                     from '@angular/core';
-import { ReactiveFormsModule }          from '@angular/forms';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { BrowserAnimationsModule }      from '@angular/platform-browser/animations';
-import { ToastrModule }                 from 'ngx-toastr';
-import { Ng4LoadingSpinnerModule }      from 'ng4-loading-spinner';
-import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate';
+import { BrowserModule }                    from '@angular/platform-browser';
+import { NgModule }                         from '@angular/core';
+import { ReactiveFormsModule }              from '@angular/forms';
+import { HttpClientModule, HttpClient }     from '@angular/common/http';
+import { BrowserAnimationsModule }          from '@angular/platform-browser/animations';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { ToastrModule }                     from 'ngx-toastr';
+import { Ng4LoadingSpinnerModule }          from 'ng4-loading-spinner';
 
-import { MyTranslateStaticLoader }      from './tools/MyTranslateStaticLoader';
-import { AppRoutingModule }             from './app.routing.module';
-import { environment }                  from '../environments/environment';
+import { MyTranslateStaticLoader }          from './tools/MyTranslateStaticLoader';
+import { AppRoutingModule }                 from './app.routing.module';
+import { environment }                      from '../environments/environment';
 
-import { AppComponent }                 from './app.component';
-import { NavbarComponent }              from './components/navbar/navbar.component';
-import { HomeComponent }                from './components/home/home.component';
-import { DashboardComponent }           from './components/dashboard/dashboard.component';
-import { RegisterComponent }            from './components/register/register.component';
-import { LoginComponent }               from './components/login/login.component';
-import { ClientListComponent }          from './components/client/list/list.component';
-import { ClientNewComponent }           from './components/client/new/new.component';
-import { ServiceListComponent }         from './components/service/list/list.component';
-import { ServiceNewComponent }          from './components/service/new/new.component';
-import { CurrencyListComponent }        from './components/currency/list/list.component';
-import { CurrencyNewComponent }         from './components/currency/new/new.component';
+import { AppComponent }                     from './app.component';
+import { NavbarComponent }                  from './components/navbar/navbar.component';
+import { HomeComponent }                    from './components/home/home.component';
+import { DashboardComponent }               from './components/dashboard/dashboard.component';
+import { RegisterComponent }                from './components/register/register.component';
+import { LoginComponent }                   from './components/login/login.component';
+import { ClientListComponent }              from './components/client/list/list.component';
+import { ClientNewComponent }               from './components/client/new/new.component';
+import { ServiceListComponent }             from './components/service/list/list.component';
+import { ServiceNewComponent }              from './components/service/new/new.component';
+import { CurrencyListComponent }            from './components/currency/list/list.component';
+import { CurrencyNewComponent }             from './components/currency/new/new.component';
 
-import { AuthService }                  from './services/auth.service';
-import { ClientService }                from './services/client.service';
-import { ServiceService }               from './services/service.service';
-import { CurrencyService }              from './services/currency.service';
+import { AuthService }                      from './services/auth.service';
+import { ClientService }                    from './services/client.service';
+import { ServiceService }                   from './services/service.service';
+import { CurrencyService }                  from './services/currency.service';
 
 @NgModule({
   declarations: [
@@ -53,9 +53,11 @@ import { CurrencyService }              from './services/currency.service';
     , Ng4LoadingSpinnerModule
     , ToastrModule.forRoot()
     , TranslateModule.forRoot({
-          provide: TranslateLoader
-        , useFactory: MyTranslateStaticLoader
-        , deps: [HttpClient]
+        loader: {
+            provide: TranslateLoader
+          , useFactory: MyTranslateStaticLoader
+          , deps: [HttpClient]
+        }
       })
   ],
   providers: [
