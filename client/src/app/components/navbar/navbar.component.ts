@@ -1,20 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { TranslateService } from 'ng2-translate';
+import { TranslateService }  from '@ngx-translate/core';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
 
   public currLang: String;
 
   constructor(private translate: TranslateService) {
     this.refreshCurrentLanguage();
-  }
-
-  ngOnInit(): void {
   }
 
   changeLang(lang: string): void {

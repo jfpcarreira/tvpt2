@@ -1,34 +1,27 @@
 <div class="modal-demo">
 
-  <button type="button" class="btn btn-primary" routerLink="/services/new"> New Service </button>
+  <button type="button" class="btn btn-outline-success" routerLink="/services/new"> New </button>
 
 	<br/> <br/>
 
 	<table class="table table-hover">
-		<tr class="header">
-			<th class="col-xs-2"> Code </th>
-			<th class="col-xs-3"> Name </th>
-			<th class="col-xs-2"> Price </th>
-			<th class="col-xs-3"> Disabled </th>
-			<th class="col-xs- center"> Actions </th>
-		</tr>
+    <thead>
+      <tr class="header">
+        <th> Code </th>
+        <th> Name </th>
+        <th> Price </th>
+        <th> Disabled </th>
+        <th> </th>
+      </tr>
+    </thead>
 		<tbody>
       <tr *ngFor="let service of services" (click)="todo()">
 				<td> {{ service.getCode() }} </td>
 				<td> {{ service.getName() }} </td>
 				<td> {{ service.getPrice() }} {{ service.getCurrency().getSymbol() }} </td>
 				<td> {{ service.isDisabled() }} </td>
-				<td class="tools">
-					<span isolate-click>
-						<div class="row">
-							<div class="col-md-1"> <i class="material-icons" uib-tooltip="Edit">edit</i> </div>
-							<div class="col-md-1"> <i class="material-icons" uib-tooltip="Lock">lock</i> </div>
-							<div class="col-md-1"> <i class="material-icons" uib-tooltip="Delete">delete</i> </div>
-						</div>
-					</span>
-				</td>
+        <td class="align-left"> <img data-toggle="tooltip" data-placement="top" title="Tooltip on top" src="assets/images/delete-24.png" (click)="delete(service)"/> </td>
 			</tr>
-
 		</tbody>
 	</table>
 
