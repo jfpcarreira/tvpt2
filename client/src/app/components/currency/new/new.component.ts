@@ -4,6 +4,7 @@ import { Router }                               from '@angular/router';
 import { ToastrService }                        from 'ngx-toastr';
 import { Subscription }                         from 'rxjs/Subscription';
 import { Ng4LoadingSpinnerService }             from 'ng4-loading-spinner';
+import { HandleHttpCall }                       from '../../../classes/abstract/handleHttpCall';
 import { CurrencyService }                      from '../../../services/currency.service';
 import { ICurrency }                            from '../../../interfaces/currency/icurrency';
 import { IGenericResponse }                     from '../../../interfaces/igeneric-response';
@@ -14,18 +15,25 @@ import { Currency }                             from '../../../classes/currency'
   templateUrl: './new.component.html',
   styleUrls: ['./new.component.css']
 })
-export class CurrencyNewComponent implements OnInit, OnDestroy {
+export class CurrencyNewComponent extends HandleHttpCall implements OnInit, OnDestroy {
 
   public form: FormGroup;
-  public processing: Boolean = false;
   private subscription_create: Subscription;
 
   constructor(
       private toast: ToastrService
     , private currencyService: CurrencyService
     , private router: Router
-    , private spinnerService: Ng4LoadingSpinnerService) {
+    , private spinner: Ng4LoadingSpinnerService) {
+      super(router, toast, spinner);
+  }
+
+  ngOnInit(): void {
     this.createForm();
+  }
+
+  ngOnDestroy(): void {
+    if(typeof this.subscription_create != "undefined") this.subscription_create.unsubscribe();
   }
 
   createForm(): void {
@@ -47,12 +55,9 @@ export class CurrencyNewComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit(): void {
-  }
-
   // Function to submit form
   onSubmit(): void {
-    this.processing = true;
+    this.spinner.show();
     //    this.disableForm();
 
     const currency = new Currency();
@@ -61,25 +66,11 @@ export class CurrencyNewComponent implements OnInit, OnDestroy {
     currency.setSymbol(this.form.get('symbol').value);
 
     this.subscription_create = this.currencyService.create(currency).subscribe(
-      data => {
-        if (data.success) {
-          this.spinnerService.show();
-          setTimeout(() => {
-            this.spinnerService.hide();
-            this.router.navigate(['/currencies']); // Redirect to login view after 2 second timeout
-          }, 2500);
-        } else {
-          this.toast.error(data.message, 'Error!');
+        data => super.handleDataResponse(data, null, '/currencies')
+      , err => {
+          console.error(err);
+          this.toast.error('Backend server is down. Please try again later.', 'Error!');
         }
-      },
-      err => {
-        console.error(err);
-        this.toast.error('Backend server is down. Please try again later.', 'Error!');
-      }
     );
-  }
-
-  ngOnDestroy(): void {
-    if(typeof this.subscription_create != "undefined") this.subscription_create.unsubscribe();
   }
 }

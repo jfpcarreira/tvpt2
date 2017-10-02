@@ -16,7 +16,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let client of clients" (click)="todo()">
+      <tr *ngFor="let client of clients">
         <td> {{ client.getName() }} </td>
         <td> {{ client.getUserTvpt() }} </td>
         <td> {{ client.getEmail() }} </td>

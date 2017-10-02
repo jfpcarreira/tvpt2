@@ -88,4 +88,16 @@ router.post('/', (req, res) => {
   }
 });
 
+// Delete client by ID
+router.delete('/:id', (req, res) => {
+  Service.findByIdAndRemove({ _id: req.params.id}).exec((err, client) => {
+    if (err) {
+      res.json(utils.getInsuccessResponse('Unexpected error, service was not removed. Please try again later.', err));
+    }
+    else {
+      res.json(utils.getSuccessResponse("Service successfuly removed!"));
+    }
+  });
+});
+
 module.exports = router;

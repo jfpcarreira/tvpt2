@@ -15,7 +15,7 @@
       </tr>
     </thead>
 		<tbody>
-      <tr *ngFor="let service of services" (click)="todo()">
+      <tr *ngFor="let service of services">
 				<td> {{ service.getCode() }} </td>
 				<td> {{ service.getName() }} </td>
 				<td> {{ service.getPrice() }} {{ service.getCurrency().getSymbol() }} </td>

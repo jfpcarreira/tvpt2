@@ -22,10 +22,6 @@ export class ClientListComponent implements OnInit, OnDestroy {
     , private spinnerService: Ng4LoadingSpinnerService) {
   }
 
-  todo(): void {
-    console.log('todo');
-  }
-
   ngOnInit(): void {
     this.spinnerService.show();
     this.subscription_getAll = this.clientService.getAll().subscribe(

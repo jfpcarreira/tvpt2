@@ -125,9 +125,7 @@ module.exports = {
     var ids = [];
 
     for(let i=0; i<obj.length; i++) {
-      if(obj[i].is_selected) {
-        ids.push(obj[i]._id);
-      }
+      ids.push(obj[i]._id);
     }
 
     return ids;

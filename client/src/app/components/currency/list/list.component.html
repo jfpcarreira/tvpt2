@@ -14,7 +14,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let currency of currencies" (click)="todo()">
+      <tr *ngFor="let currency of currencies">
         <td> {{ currency.getCode() }} </td>
         <td> {{ currency.getName() }} </td>
         <td> {{ currency.getSymbol() }} </td>
