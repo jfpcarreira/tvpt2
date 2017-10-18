@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ToastrService }                from 'ngx-toastr';
 import { Subscription }                 from 'rxjs/Subscription';
-import { Ng4LoadingSpinnerService }     from 'ng4-loading-spinner';
 import { ServiceService }               from '../../../services/service.service';
 import { CurrencyService }              from '../../../services/currency.service';
+import { UtilsService }                 from '../../../services/utils.service';
 import { Service }                      from '../../../classes/service';
 
 @Component({
@@ -21,8 +21,8 @@ export class ServiceListComponent implements OnInit, OnDestroy {
       private toast: ToastrService
     , private serviceService: ServiceService
     , private currencyService: CurrencyService
-    , private spinnerService: Ng4LoadingSpinnerService
-  ) { }
+    , private utils: UtilsService) {
+  }
 
   ngOnInit(): void {
     this.subscription_getAll = this.serviceService.getAll().subscribe(
@@ -33,15 +33,12 @@ export class ServiceListComponent implements OnInit, OnDestroy {
           this.toast.error(data.message, 'Error!');
         }
       },
-      err => {
-        console.error(err);
-        this.toast.error('Backend server is down. Please try again later.', 'Error!');
-      }
+      err => this.utils.handleError(err),
+      () => this.utils.handleOnComplete()
     );
   }
 
   delete(service: Service): void {
-    this.spinnerService.show();
     this.subscription_delete = this.currencyService.delete(service.getId()).subscribe(
       data => {
         if (data.success) {
@@ -50,13 +47,9 @@ export class ServiceListComponent implements OnInit, OnDestroy {
         } else {
           this.toast.error(data.message, 'Error!');
         }
-        this.spinnerService.hide();
       },
-      err => {
-        console.error(err);
-        this.toast.error('Backend server is down. Please try again later.', 'Error!');
-        this.spinnerService.hide();
-      }
+      err => this.utils.handleError(err),
+      () => this.utils.handleOnComplete()
     );
   }
 

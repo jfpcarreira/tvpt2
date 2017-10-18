@@ -42,7 +42,7 @@ router.get('/:code', (req, res) => {
   });
 });
 
-// Create a new service
+// Create a new currency
 router.post('/', (req, res) => {
   if (!req.body.code) {
     res.json(utils.getInsuccessResponse('You must provide a code'));
@@ -94,7 +94,7 @@ router.post('/', (req, res) => {
 
 // Delete client by ID
 router.delete('/:id', (req, res) => {
-  Currency.findByIdAndRemove({ _id: req.params.id}).exec((err, client) => {
+  Currency.findByIdAndRemove({ _id: req.params.id}).exec((err, currency) => {
     if (err) {
       res.json(utils.getInsuccessResponse('Unexpected error, currency was not removed. Please try again later.', err));
     }

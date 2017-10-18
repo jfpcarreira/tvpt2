@@ -3,9 +3,8 @@ import { FormGroup, FormControl, Validators }   from '@angular/forms';
 import { Router }                               from '@angular/router';
 import { ToastrService }                        from 'ngx-toastr';
 import { Subscription }                         from 'rxjs/Subscription';
-import { Ng4LoadingSpinnerService }             from 'ng4-loading-spinner';
-import { HandleHttpCall }                       from '../../../classes/abstract/handleHttpCall';
 import { CurrencyService }                      from '../../../services/currency.service';
+import { UtilsService }                         from '../../../services/utils.service';
 import { ICurrency }                            from '../../../interfaces/currency/icurrency';
 import { IGenericResponse }                     from '../../../interfaces/igeneric-response';
 import { Currency }                             from '../../../classes/currency';
@@ -15,17 +14,16 @@ import { Currency }                             from '../../../classes/currency'
   templateUrl: './new.component.html',
   styleUrls: ['./new.component.css']
 })
-export class CurrencyNewComponent extends HandleHttpCall implements OnInit, OnDestroy {
+export class CurrencyNewComponent implements OnInit, OnDestroy {
 
   public form: FormGroup;
   private subscription_create: Subscription;
 
   constructor(
       private toast: ToastrService
-    , private currencyService: CurrencyService
     , private router: Router
-    , private spinner: Ng4LoadingSpinnerService) {
-      super(router, toast, spinner);
+    , private currencyService: CurrencyService
+    , private utils: UtilsService) {
   }
 
   ngOnInit(): void {
@@ -57,7 +55,6 @@ export class CurrencyNewComponent extends HandleHttpCall implements OnInit, OnDe
 
   // Function to submit form
   onSubmit(): void {
-    this.spinner.show();
     //    this.disableForm();
 
     const currency = new Currency();
@@ -66,11 +63,22 @@ export class CurrencyNewComponent extends HandleHttpCall implements OnInit, OnDe
     currency.setSymbol(this.form.get('symbol').value);
 
     this.subscription_create = this.currencyService.create(currency).subscribe(
-        data => super.handleDataResponse(data, null, '/currencies')
-      , err => {
-          console.error(err);
-          this.toast.error('Backend server is down. Please try again later.', 'Error!');
-        }
+        data  => this.handleData(data)
+      , err   => this.utils.handleError(err)
+      , ()    => this.utils.handleOnComplete()
     );
   }
+
+  handleData(data: IGenericResponse) {
+    // SUCCESS
+    if(data.success) {
+      this.toast.success(data.message, 'Success!');
+      this.router.navigate(['/currencies']);
+    }
+    // ERROR
+    else {
+      this.toast.error(data.message, 'Error!');
+    }
+  }
+
 }

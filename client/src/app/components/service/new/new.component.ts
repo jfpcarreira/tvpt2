@@ -1,10 +1,12 @@
 import { Component, OnInit, OnDestroy }                   from '@angular/core';
 import { FormGroup, FormControl, Validators }             from '@angular/forms';
+import { Router }                                         from '@angular/router';
 import { ToastrService }                                  from 'ngx-toastr';
 import { Subscription }                                   from 'rxjs/Subscription';
 import { validateCombocSelected, validateDecimalNumber }  from '../../../tools/FormValidators';
 import { ServiceService }                                 from '../../../services/service.service';
 import { CurrencyService }                                from '../../../services/currency.service';
+import { UtilsService }                                   from '../../../services/utils.service';
 import { IService }                                       from '../../../interfaces/service/iservice';
 import { Service }                                        from '../../../classes/service';
 import { Currency }                                       from '../../../classes/currency';
@@ -22,7 +24,12 @@ export class ServiceNewComponent implements OnInit, OnDestroy {
   private subscription_create: Subscription;
   private subscription_getAll: Subscription;
 
-  constructor(private toast: ToastrService, private serviceService: ServiceService, private currencyService: CurrencyService) {
+  constructor(
+      private toast: ToastrService
+    , private router: Router
+    , private serviceService: ServiceService
+    , private utils: UtilsService
+    , private currencyService: CurrencyService) {
     this.createForm();
   }
 
@@ -61,14 +68,15 @@ export class ServiceNewComponent implements OnInit, OnDestroy {
 
     this.subscription_create = this.serviceService.create(service).subscribe(
       data => this.handleSuccess(data),
-      err => console.log(err),
-      () => console.log('Request complete!')
+      err => this.utils.handleError(err),
+      () => this.utils.handleOnComplete()
     );
   }
 
   handleSuccess(data): void {
     if (data.success) {
-      this.toast.success('You are awesome!', 'Success!');
+      this.toast.success(data.message, 'Success!');
+      this.router.navigate(['/services']);
     } else {
       this.toast.error(data.message, 'Error!');
     }
@@ -77,8 +85,8 @@ export class ServiceNewComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription_getAll = this.currencyService.getAll().subscribe (
       data => this.currencies = data.result,
-      err => console.log(err),
-      () => console.log('Request complete!')
+      err => this.utils.handleError(err),
+      () => this.utils.handleOnComplete()
     );
   }
 

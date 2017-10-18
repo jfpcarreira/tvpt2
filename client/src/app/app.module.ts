@@ -26,6 +26,7 @@ import { CurrencyListComponent }            from './components/currency/list/lis
 import { CurrencyNewComponent }             from './components/currency/new/new.component';
 
 import { AuthService }                      from './services/auth.service';
+import { UtilsService }                     from './services/utils.service';
 import { ClientService }                    from './services/client.service';
 import { ServiceService }                   from './services/service.service';
 import { CurrencyService }                  from './services/currency.service';
@@ -64,6 +65,7 @@ import { CurrencyService }                  from './services/currency.service';
   ],
   providers: [
       AuthService
+    , UtilsService
     , ClientService
     , ServiceService
     , CurrencyService

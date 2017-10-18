@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ToastrService }                from 'ngx-toastr';
 import { Subscription }                 from 'rxjs/Subscription';
-import { Ng4LoadingSpinnerService }     from 'ng4-loading-spinner';
 import { ClientService }                from '../../../services/client.service';
+import { UtilsService }                 from '../../../services/utils.service';
 import { Client }                       from '../../../classes/client';
 
 @Component({
@@ -18,12 +18,11 @@ export class ClientListComponent implements OnInit, OnDestroy {
 
   constructor(
       private toast: ToastrService
-    , private clientService: ClientService
-    , private spinnerService: Ng4LoadingSpinnerService) {
+      , private clientService: ClientService
+      , private utils: UtilsService) {
   }
 
   ngOnInit(): void {
-    this.spinnerService.show();
     this.subscription_getAll = this.clientService.getAll().subscribe(
       data => {
         if (data.success) {
@@ -31,18 +30,13 @@ export class ClientListComponent implements OnInit, OnDestroy {
         } else {
           this.toast.error(data.message, 'Error!');
         }
-        this.spinnerService.hide();
       },
-      err => {
-        console.error(err);
-        this.toast.error('Backend server is down. Please try again later.', 'Error!');
-        this.spinnerService.hide();
-      }
+      err => this.utils.handleError(err),
+      () => this.utils.handleOnComplete()
     );
   }
 
   delete(client: Client): void {
-    this.spinnerService.show();
     this.subscription_delete = this.clientService.delete(client.getId()).subscribe(
       data => {
         if (data.success) {
@@ -51,13 +45,9 @@ export class ClientListComponent implements OnInit, OnDestroy {
         } else {
           this.toast.error(data.message, 'Error!');
         }
-        this.spinnerService.hide();
       },
-      err => {
-        console.error(err);
-        this.toast.error('Backend server is down. Please try again later.', 'Error!');
-        this.spinnerService.hide();
-      }
+      err => this.utils.handleError(err),
+      () => this.utils.handleOnComplete()
     );
   }
 
