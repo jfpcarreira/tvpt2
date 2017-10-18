@@ -1,12 +1,15 @@
-import { Component, OnInit, OnDestroy }       from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ToastrService }                      from 'ngx-toastr';
-import { Subscription }                       from 'rxjs/Subscription';
+import { Component, OnInit, OnDestroy }                   from '@angular/core';
+import { FormGroup, FormControl, FormArray, Validators }  from '@angular/forms';
+import { Router }                                         from '@angular/router';
+import { ToastrService }                                  from 'ngx-toastr';
+import { Subscription }                                   from 'rxjs/Subscription';
 import { validateEmail, validatePhone, validateUsername, validatePassword, validateDate } from '../../../tools/FormValidators';
-import { ClientService }                      from '../../../services/client.service';
-import { ServiceService }                     from '../../../services/service.service';
-import { Client }                             from '../../../classes/client';
-import { Service }                            from '../../../classes/service';
+import { UtilsService }                                   from '../../../services/utils.service';
+import { ClientService }                                  from '../../../services/client.service';
+import { ServiceService }                                 from '../../../services/service.service';
+import { Client }                                         from '../../../classes/client';
+import { Service }                                        from '../../../classes/service';
+import { IGenericResponse }                               from '../../../interfaces/igeneric-response';
 
 @Component({
   selector: 'client-new',
@@ -22,17 +25,30 @@ export class ClientNewComponent implements OnInit, OnDestroy {
   private subscription_getAll: Subscription;
 
   constructor(
-      private toast: ToastrService
+      private router: Router
+    , private toast: ToastrService
+    , private utils: UtilsService
     , private clientService: ClientService
-    , private serviceService: ServiceService
-  ) {
-    this.createForm();
+    , private serviceService: ServiceService) {
   }
 
-  createForm() {
-    this.form = new FormGroup({
+  ngOnInit(): void {
+    this.createForm();
 
-      // Username Input
+    this.subscription_getAll = this.serviceService.getAll().subscribe(
+        data  => this.services = data.result
+      , err   => this.utils.handleError(err)
+      , ()    => this.utils.handleOnComplete
+    );
+  }
+
+  ngOnDestroy(): void {
+    if(typeof this.subscription_create != "undefined") this.subscription_create.unsubscribe();
+    if(typeof this.subscription_getAll != "undefined") this.subscription_getAll.unsubscribe();
+  }
+
+  createForm(): void {
+    this.form = new FormGroup({
       name: new FormControl('', Validators.compose([
         Validators.required,
         Validators.minLength(5)
@@ -60,14 +76,11 @@ export class ClientNewComponent implements OnInit, OnDestroy {
       regDate: new FormControl('', Validators.compose([
         validateDate
       ])),
-      services: new FormControl('', Validators.compose([
-      ]))
+      services: new FormArray([])
     });
   }
 
-  // Function to submit form
-  onSubmit() {
-    this.processing = true;
+  onSubmit(): void {
     //    this.disableForm();
 
     const client = new Client();
@@ -78,37 +91,36 @@ export class ClientNewComponent implements OnInit, OnDestroy {
     client.setUserSogra(this.form.get('userSogra').value);
     client.setPassSogra(this.form.get('passSogra').value);
     client.setRegistrationDate(this.form.get('regDate').value);
-    client.setServices(this.services);
+    client.setServices( this.form.get('services').value );
 
     this.subscription_create = this.clientService.create(client).subscribe(
-      data => this.handleSuccess(data),
-      err => console.log(err),
-      () => console.log('Request complete!')
+      data  => this.handleData(data),
+      err   => this.utils.handleError(err),
+      ()    => this.utils.handleOnComplete()
     );
   }
 
-  handleSuccess(data) {
-    if (data.success) {
-      this.toast.success('You are awesome!', 'Success!');
-    } else {
+  handleData(data: IGenericResponse) {
+    // SUCCESS
+    if(data.success) {
+      this.toast.success(data.message, 'Success!');
+      this.router.navigate(['/clients']);
+    }
+    // ERROR
+    else {
       this.toast.error(data.message, 'Error!');
     }
   }
 
-  ngOnInit() {
-    this.subscription_getAll = this.serviceService.getAll().subscribe(
-        data => this.services = data.result
-      , err => console.log(err)
-      , () => console.log('Request complete!')
-    );
-  }
+  onChange(service:Service, isChecked: boolean): void {
+    const servicesFormArray = <FormArray> this.form.controls.services;
 
-  ngOnDestroy(): void {
-    if(typeof this.subscription_create != "undefined") this.subscription_create.unsubscribe();
-    if(typeof this.subscription_getAll != "undefined") this.subscription_getAll.unsubscribe();
-  }
-
-  bla() {
-    console.log(this.services);
+    if(isChecked) {
+      servicesFormArray.push(new FormControl(service));
+    }
+    else {
+      let index = servicesFormArray.controls.findIndex(x => x.value == service)
+      servicesFormArray.removeAt(index);
+    }
   }
 }

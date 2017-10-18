@@ -1,55 +1,49 @@
-<div class="row">
+<form [formGroup]="form" (submit)="onSubmit()" novalidate>
 
-  <form [formGroup]="form" (submit)="onSubmit()" novalidate>
-
-    <!-- Code -->
-    <div class="form-group" [ngClass]="{'has-feedback': form.controls.code.touched, 'has-success': (form.controls.code.valid && form.controls.code.touched), 'has-error': (form.controls.code.invalid && form.controls.code.touched)}">
-      <label class="control-label" for="codeId">Code</label>
-      <input formControlName="code" type="text" id="codeId" class="form-control" aria-describedby="code" placeholder="ex: ABC" required>
-      <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" *ngIf="(form.controls.code.touched && form.controls.code.valid)"></span>
-      <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true" *ngIf="(form.controls.code.touched && form.controls.code.invalid)"></span>
-      <span class="help-block" *ngIf="(form.controls.code.touched && form.controls.code.errors?.required)">This is a required field.</span>
-      <span class="help-block" *ngIf="(form.controls.code.touched && form.controls.code.errors?.minlength)">The code must be composed by 3 characters.</span>
-      <span class="help-block" *ngIf="(form.controls.code.touched && form.controls.code.errors?.maxlength)">The code must be composed by 3 characters.</span>
+  <!-- Code -->
+  <div class="row">
+    <div class="col-md-12 mb-3">
+      <label for="codeId">Code</label>
+      <input formControlName="code" type="text" class="form-control" [ngClass]="{'is-valid': (form.controls.code.valid && form.controls.code.touched), 'is-invalid': (form.controls.code.invalid && form.controls.code.touched)}" id="codeId" placeholder="ex: TVM" required>
+      <div *ngIf="(form.controls.code.touched && form.controls.code.errors?.required)" class="invalid-feedback">This is a required field.</div>
+      <div *ngIf="(form.controls.code.touched && form.controls.code.errors?.minlength)" class="invalid-feedback">The code must be composed by 3 characters.</div>
+      <div *ngIf="(form.controls.code.touched && form.controls.code.errors?.maxlength)" class="invalid-feedback">The code must be composed by 3 characters.</div>
     </div>
+  </div>
 
-    <!-- Name -->
-    <div class="form-group" [ngClass]="{'has-feedback': form.controls.name.touched, 'has-success': (form.controls.name.valid && form.controls.name.touched), 'has-error': (form.controls.name.invalid && form.controls.name.touched)}">
-      <label class="control-label" for="nameId">Name</label>
-      <input formControlName="name" type="text" id="nameId" class="form-control" aria-describedby="name" placeholder="ex: SD Card" required>
-      <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" *ngIf="(form.controls.name.touched && form.controls.name.valid)"></span>
-      <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true" *ngIf="(form.controls.name.touched && form.controls.name.invalid)"></span>
-      <span class="help-block" *ngIf="(form.controls.name.touched && form.controls.name.errors?.required)">This is a required field.</span>
-      <span class="help-block" *ngIf="(form.controls.name.touched && form.controls.name.errors?.minlength)">The name must be at least 5 characters.</span>
+  <!-- Name -->
+  <div class="row">
+    <div class="col-md-12 mb-3">
+      <label for="nameId">Name</label>
+      <input formControlName="name" type="text" class="form-control" [ngClass]="{'is-valid': (form.controls.name.valid && form.controls.name.touched), 'is-invalid': (form.controls.name.invalid && form.controls.name.touched)}" id="nameId" placeholder="ex: TV do mel" required>
+      <div *ngIf="(form.controls.name.touched && form.controls.name.errors?.required)" class="invalid-feedback">This is a required field.</div>
+      <div *ngIf="(form.controls.name.touched && form.controls.name.errors?.minlength)" class="invalid-feedback">The name must be at least 5 characters.</div>
     </div>
+  </div>
 
-    <!-- Price -->
-    <div class="form-group" [ngClass]="{'has-feedback': form.controls.price.touched, 'has-success': (form.controls.price.valid && form.controls.price.touched), 'has-error': (form.controls.price.invalid && form.controls.price.touched)}">
-      <label class="control-label" for="priceId">Price</label>
-      <input formControlName="price" type="text" id="priceId" class="form-control" aria-describedby="price" placeholder="123.45" required>
-      <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" *ngIf="(form.controls.price.touched && form.controls.price.valid)"></span>
-      <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true" *ngIf="(form.controls.price.touched && form.controls.price.invalid)"></span>
-      <span class="help-block" *ngIf="(form.controls.price.touched && form.controls.price.errors?.required)">This is a required field.</span>
-      <span class="help-block" *ngIf="(form.controls.price.touched && form.controls.price.errors?.validateDecimalNumber)">You must enter a valid amount.</span>
+  <!-- Price -->
+  <div class="row">
+    <div class="col-md-12 mb-3">
+      <label for="priceId">Price</label>
+      <input formControlName="price" type="text" class="form-control" [ngClass]="{'is-valid': (form.controls.price.valid && form.controls.price.touched), 'is-invalid': (form.controls.price.invalid && form.controls.price.touched)}" id="priceId" placeholder="ex: Euro" required>
+      <div *ngIf="(form.controls.price.touched && form.controls.price.errors?.required)" class="invalid-feedback">This is a required field.</div>
+      <div *ngIf="(form.controls.price.touched && !form.controls.price.errors?.required && form.controls.price.errors?.validateDecimalNumber)" class="invalid-feedback">You must enter a valid amount.</div>
     </div>
+  </div>
 
-    <!-- Currency -->
-    <div class="form-group" [ngClass]="{'has-feedback': form.controls.currency.touched, 'has-success': (form.controls.currency.valid && form.controls.currency.touched), 'has-error': (form.controls.currency.invalid && form.controls.currency.touched)}">
-      <label class="control-label" for="priceId">Currency</label>
+  <!-- Currency -->
+  <div class="row">
+    <div class="col-md-12 mb-3">
+      <label for="currencyId">Currency</label>
       <select formControlName="currency" id="currencyId" class="form-control" required>
         <option value="">Choose a currency</option>
         <option *ngFor="let currency of currencies" value="{{currency.getId()}}">{{currency.getCode()}} ({{currency.getSymbol()}})</option>
       </select>
-      <span class="glyphicon glyphicon-ok form-control-feedback glyphicon-for-combobox" aria-hidden="true" *ngIf="(form.controls.currency.touched && form.controls.currency.valid)"></span>
-      <span class="glyphicon glyphicon-remove form-control-feedback glyphicon-for-combobox" aria-hidden="true" *ngIf="(form.controls.currency.touched && form.controls.currency.invalid)"></span>
-      <span class="help-block" *ngIf="(form.controls.currency.touched && (form.controls.currency.errors?.required || form.controls.currency.errors?.validateComboSelected))">This is a required field.</span>
+      <div *ngIf="(form.controls.currency.touched && !form.controls.currency.valid)" class="invalid-feedback">This is a required field.</div>
     </div>
+  </div>
 
-    <!-- Submit Input -->
-    <input type="submit" class="btn btn-primary" value="Submit" /> <br/><br/>
+  <!-- Submit Input -->
+  <input type="submit" class="btn btn-primary" value="Submit" /> <br/><br/>
 
-    <input type="button" class="btn btn-primary" value="TESTE" (click)="teste()" /> <br/><br/>
-
-  </form>
-
-</div>
+</form>

@@ -2,6 +2,14 @@ const router    = require('express').Router();
 const Currency  = require('../models/CurrencyModel');
 const utils     = require('../../tools/utils');
 
+// TODO: REMOVER ESTE MIDDLEWARE
+router.use(function (req, res, next) {
+  setTimeout(() => {
+    console.log("Sleep de 3 segundos para questões de teste. Remover este método quando terminarem os testes");
+    next();
+  }, 3000);
+});
+
 // Get all services
 router.get('/', (req, res) => {
   Currency.find({}, (err, currencies) => {
@@ -34,7 +42,7 @@ router.get('/:code', (req, res) => {
   });
 });
 
-// Create a new service
+// Create a new currency
 router.post('/', (req, res) => {
   if (!req.body.code) {
     res.json(utils.getInsuccessResponse('You must provide a code'));
@@ -82,6 +90,18 @@ router.post('/', (req, res) => {
       }
     });
   }
+});
+
+// Delete client by ID
+router.delete('/:id', (req, res) => {
+  Currency.findByIdAndRemove({ _id: req.params.id}).exec((err, currency) => {
+    if (err) {
+      res.json(utils.getInsuccessResponse('Unexpected error, currency was not removed. Please try again later.', err));
+    }
+    else {
+      res.json(utils.getSuccessResponse("Currency successfuly removed!"));
+    }
+  });
 });
 
 module.exports = router;

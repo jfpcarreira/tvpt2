@@ -5,3 +5,7 @@
 .align-left img {
   cursor: pointer;
 }
+
+ul li {
+  height: 5px;
+}

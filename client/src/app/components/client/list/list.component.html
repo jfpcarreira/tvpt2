@@ -1,20 +1,22 @@
 <div class="modal-demo">
 
-  <button type="button" class="btn btn-success" routerLink="/clients/new"> {{ 'client.button.new' | translate }} </button>
+  <button type="button" class="btn btn-outline-success" routerLink="/clients/new"> {{ 'client.button.new' | translate }} </button>
 
   <br/> <br/>
 
   <table class="table table-hover">
-    <tr class="header">
-      <th class="col-xs-3"> {{ 'client.table.headers.name' | translate }} </th>
-      <th class="col-xs-2"> {{ 'client.table.headers.user' | translate }} </th>
-      <th class="col-xs-3"> {{ 'client.table.headers.email' | translate }} </th>
-      <th class="col-xs-2"> {{ 'client.table.headers.services' | translate }} </th>
-      <th class="col-xs-1"> {{ 'client.table.headers.exp-date' | translate }} </th>
-      <th class="col-xs-1"> </th>
-    </tr>
+    <thead>
+      <tr>
+        <th> {{ 'client.table.headers.name' | translate }} </th>
+        <th> {{ 'client.table.headers.user' | translate }} </th>
+        <th> {{ 'client.table.headers.email' | translate }} </th>
+        <th> {{ 'client.table.headers.services' | translate }} </th>
+        <th> {{ 'client.table.headers.exp-date' | translate }} </th>
+        <th> </th>
+      </tr>
+    </thead>
     <tbody>
-      <tr *ngFor="let client of clients" (click)="todo()">
+      <tr *ngFor="let client of clients">
         <td> {{ client.getName() }} </td>
         <td> {{ client.getUserTvpt() }} </td>
         <td> {{ client.getEmail() }} </td>

@@ -1,4 +1,4 @@
-ul.dropdown-menu li {
+li a.dropdown-toggle, li div button.dropdown-item {
 	cursor: pointer;
 }
 

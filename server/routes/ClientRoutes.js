@@ -60,6 +60,8 @@ router.post('/', (req, res) => {
       , services:           utils.getIdsFromDbObject(req.body.services)
     });
 
+    console.log(client);
+
     client.save((err) => {
       if (err) {
         // Erro originado pelo unique: true
@@ -69,6 +71,7 @@ router.post('/', (req, res) => {
         // TODO: Personalizar os erros do cliente
         // Erros especificos
         else if (err.errors) {
+          console.log(err.errors);
           if (err.errors.email) {
             res.json(utils.getInsuccessResponse(err.errors.email.message));
           }

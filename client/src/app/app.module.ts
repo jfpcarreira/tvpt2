@@ -3,6 +3,7 @@ import { NgModule }                         from '@angular/core';
 import { ReactiveFormsModule }              from '@angular/forms';
 import { HttpClientModule, HttpClient }     from '@angular/common/http';
 import { BrowserAnimationsModule }          from '@angular/platform-browser/animations';
+import { NgbModule }                        from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { ToastrModule }                     from 'ngx-toastr';
 import { Ng4LoadingSpinnerModule }          from 'ng4-loading-spinner';
@@ -25,6 +26,7 @@ import { CurrencyListComponent }            from './components/currency/list/lis
 import { CurrencyNewComponent }             from './components/currency/new/new.component';
 
 import { AuthService }                      from './services/auth.service';
+import { UtilsService }                     from './services/utils.service';
 import { ClientService }                    from './services/client.service';
 import { ServiceService }                   from './services/service.service';
 import { CurrencyService }                  from './services/currency.service';
@@ -51,6 +53,7 @@ import { CurrencyService }                  from './services/currency.service';
     , AppRoutingModule
     , BrowserAnimationsModule
     , Ng4LoadingSpinnerModule
+    , NgbModule.forRoot()
     , ToastrModule.forRoot()
     , TranslateModule.forRoot({
         loader: {
@@ -62,6 +65,7 @@ import { CurrencyService }                  from './services/currency.service';
   ],
   providers: [
       AuthService
+    , UtilsService
     , ClientService
     , ServiceService
     , CurrencyService

@@ -6,15 +6,12 @@ import { TranslateService }  from '@ngx-translate/core';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
 
   public currLang: String;
 
   constructor(private translate: TranslateService) {
     this.refreshCurrentLanguage();
-  }
-
-  ngOnInit(): void {
   }
 
   changeLang(lang: string): void {

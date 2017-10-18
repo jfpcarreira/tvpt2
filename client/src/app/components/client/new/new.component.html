@@ -1,90 +1,94 @@
-<div class="row">
+<form [formGroup]="form" (submit)="onSubmit()" novalidate>
 
-  <form [formGroup]="form" (submit)="onSubmit()" novalidate>
-
-    <!-- Name -->
-    <div class="form-group" [ngClass]="{'has-feedback': form.controls.name.touched, 'has-success': (form.controls.name.valid && form.controls.name.touched), 'has-error': (form.controls.name.invalid && form.controls.name.touched)}">
-      <label class="control-label" for="nameId">Name</label>
-      <input formControlName="name" type="text" id="nameId" class="form-control" aria-describedby="name" placeholder="ex: SD Card" required>
-      <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" *ngIf="(form.controls.name.touched && form.controls.name.valid)"></span>
-      <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true" *ngIf="(form.controls.name.touched && form.controls.name.invalid)"></span>
-      <span class="help-block" *ngIf="(form.controls.name.touched && form.controls.name.errors?.required)">This is a required field.</span>
-      <span class="help-block" *ngIf="(form.controls.name.touched && form.controls.name.errors?.minlength)">The name must be at least 5 characters.</span>
+  <!-- Name -->
+  <div class="row">
+    <div class="col-md-12 mb-3">
+      <label for="nameId">Name</label>
+      <input formControlName="name" type="text" class="form-control" [ngClass]="{'is-valid': (form.controls.name.valid && form.controls.name.touched), 'is-invalid': (form.controls.name.invalid && form.controls.name.touched)}"
+        id="nameId" placeholder="ex: John Snow" required>
+      <div *ngIf="(form.controls.name.touched && form.controls.name.errors?.required)" class="invalid-feedback">This is a required field.</div>
+      <div *ngIf="(form.controls.name.touched && form.controls.name.errors?.minlength)" class="invalid-feedback">The name must be at least 5 characters.</div>
     </div>
+  </div>
 
-    <!-- Email -->
-    <div class="form-group" [ngClass]="{'has-feedback': form.controls.email.touched, 'has-success': (form.controls.email.valid && form.controls.email.touched), 'has-error': (form.controls.email.invalid && form.controls.email.touched)}">
-      <label class="control-label" for="emailId">Email</label>
-      <input formControlName="email" type="text" id="emailId" class="form-control" aria-describedby="email" placeholder="ex: john.snow@email.com" required>
-      <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" *ngIf="(form.controls.name.touched && form.controls.name.valid)"></span>
-      <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true" *ngIf="(form.controls.name.touched && form.controls.name.invalid)"></span>
-      <span class="help-block" *ngIf="(form.controls.email.touched && form.controls.email.errors?.required)">This is a required field.</span>
-      <span class="help-block" *ngIf="!form.controls.email.errors?.required && (form.controls.email.touched && form.controls.email.errors?.validateEmail)">The inserted email is not valid.</span>
+  <!-- Email -->
+  <div class="row">
+    <div class="col-md-12 mb-3">
+      <label for="emailId">Email</label>
+      <input formControlName="email" type="text" class="form-control" [ngClass]="{'is-valid': (form.controls.email.valid && form.controls.email.touched), 'is-invalid': (form.controls.email.invalid && form.controls.email.touched)}"
+        id="emailId" placeholder="ex: john.snow@gmail.com" required>
+      <div *ngIf="(form.controls.email.touched && form.controls.email.errors?.required)" class="invalid-feedback">This is a required field.</div>
+      <div *ngIf="!form.controls.email.errors?.required && (form.controls.email.touched && form.controls.email.errors?.validateEmail)"
+        class="invalid-feedback">The inserted email is not valid.</div>
     </div>
+  </div>
 
-    <!-- Address -->
-    <div class="form-group" [ngClass]="{'has-feedback': form.controls.address.touched, 'has-success': (form.controls.address.valid && form.controls.address.touched), 'has-error': (form.controls.address.invalid && form.controls.address.touched)}">
-      <label class="control-label" for="addressId">Address</label>
-      <input formControlName="address" type="text" id="addressId" class="form-control" aria-describedby="address" placeholder="ex: 1574 Avenue Peel, Montreal" required>
-      <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" *ngIf="(form.controls.address.touched && form.controls.address.valid)"></span>
-      <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true" *ngIf="(form.controls.address.touched && form.controls.address.invalid)"></span>
-      <span class="help-block" *ngIf="(form.controls.address.touched && form.controls.address.errors?.required)">This is a required field.</span>
+  <!-- Address -->
+  <div class="row">
+    <div class="col-md-12 mb-3">
+      <label for="addressId">Address</label>
+      <input formControlName="address" type="text" class="form-control" [ngClass]="{'is-valid': (form.controls.address.valid && form.controls.address.touched), 'is-invalid': (form.controls.address.invalid && form.controls.address.touched)}"
+        id="addressId" placeholder="ex: 1574 Avenue Peel, Montreal" required>
+      <div *ngIf="(form.controls.address.touched && form.controls.address.errors?.required)" class="invalid-feedback">This is a required field.</div>
     </div>
+  </div>
 
-    <!-- Phone -->
-    <div class="form-group" [ngClass]="{'has-feedback': form.controls.phone.touched, 'has-success': (form.controls.phone.valid && form.controls.phone.touched), 'has-error': (form.controls.phone.invalid && form.controls.phone.touched)}">
-      <label class="control-label" for="phoneId">Phone</label>
-      <input formControlName="phone" type="text" id="phoneId" class="form-control" aria-describedby="phone" placeholder="ex: (514) 642-7541" required>
-      <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" *ngIf="(form.controls.passSogra.touched && form.controls.passSogra.valid)"></span>
-      <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true" *ngIf="(form.controls.passSogra.touched && form.controls.passSogra.invalid)"></span>
-      <span class="help-block" *ngIf="(form.controls.phone.touched && form.controls.phone.errors?.required)">This is a required field.</span>
-      <span class="help-block" *ngIf="(form.controls.phone.touched && form.controls.phone.errors?.validatePhone)">Phone in invalid format.</span>
+  <!-- Phone -->
+  <div class="row">
+    <div class="col-md-12 mb-3">
+      <label for="phoneId">Phone</label>
+      <input formControlName="phone" type="text" class="form-control" [ngClass]="{'is-valid': (form.controls.phone.valid && form.controls.phone.touched), 'is-invalid': (form.controls.phone.invalid && form.controls.phone.touched)}"
+        id="phoneId" placeholder="ex: 514 854 8975" required>
+      <div *ngIf="(form.controls.phone.touched && form.controls.phone.errors?.required)" class="invalid-feedback">This is a required field.</div>
+      <div *ngIf="(form.controls.phone.touched && form.controls.phone.errors?.validatePhone)" class="invalid-feedback">Phone in invalid format.</div>
     </div>
+  </div>
 
-    <!-- Username TV da Sogra -->
-    <div class="form-group" [ngClass]="{'has-feedback': form.controls.userSogra.touched, 'has-success': (form.controls.userSogra.valid && form.controls.userSogra.touched), 'has-error': (form.controls.userSogra.invalid && form.controls.userSogra.touched)}">
-      <label class="control-label" for="userSograId">Username TV da Sogra</label>
-      <input formControlName="userSogra" type="text" id="userSograId" class="form-control" aria-describedby="userSogra" placeholder="ex: jsnow" required>
-      <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" *ngIf="(form.controls.passSogra.touched && form.controls.passSogra.valid)"></span>
-      <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true" *ngIf="(form.controls.passSogra.touched && form.controls.passSogra.invalid)"></span>
-      <span class="help-block" *ngIf="(form.controls.userSogra.touched && form.controls.userSogra.errors?.required)">This is a required field.</span>
-      <span class="help-block" *ngIf="(form.controls.userSogra.touched && form.controls.userSogra.errors?.validateUsername)">Username invalid, only letters and numbers are allowed.</span>
+  <!-- Username TV da Sogra -->
+  <div class="row">
+    <div class="col-md-12 mb-3">
+      <label for="userSograId">Username TV da Sogra</label>
+      <input formControlName="userSogra" type="text" class="form-control" [ngClass]="{'is-valid': (form.controls.userSogra.valid && form.controls.userSogra.touched), 'is-invalid': (form.controls.userSogra.invalid && form.controls.userSogra.touched)}"
+        id="userSograId" placeholder="ex: jsnow" required>
+      <div *ngIf="(form.controls.userSogra.touched && form.controls.userSogra.errors?.required)" class="invalid-feedback">This is a required field.</div>
+      <div *ngIf="(form.controls.userSogra.touched && form.controls.userSogra.errors?.validateUsername)" class="invalid-feedback">Username invalid, only letters and numbers are allowed.</div>
     </div>
+  </div>
 
-    <!-- Password TV da Sogra -->
-    <div class="form-group" [ngClass]="{'has-feedback': form.controls.passSogra.touched, 'has-success': (form.controls.passSogra.valid && form.controls.passSogra.touched), 'has-error': (form.controls.passSogra.invalid && form.controls.passSogra.touched)}">
-      <label class="control-label" for="passSograId">Password TV da Sogra</label>
-      <input formControlName="passSogra" type="password" id="passSograId" class="form-control" aria-describedby="passSogra" placeholder="********" required>
-      <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" *ngIf="(form.controls.passSogra.touched && form.controls.passSogra.valid)"></span>
-      <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true" *ngIf="(form.controls.passSogra.touched && form.controls.passSogra.invalid)"></span>
-      <span class="help-block" *ngIf="(form.controls.passSogra.touched && form.controls.passSogra.errors?.required)">This is a required field.</span>
-      <span class="help-block" *ngIf="(form.controls.passSogra.touched && form.controls.passSogra.errors?.validatePassword)">Password invalid.</span>
+  <!-- Password TV da Sogra -->
+  <div class="row">
+    <div class="col-md-12 mb-3">
+      <label for="passSograId">Password TV da Sogra</label>
+      <input formControlName="passSogra" type="password" class="form-control" [ngClass]="{'is-valid': (form.controls.passSogra.valid && form.controls.passSogra.touched), 'is-invalid': (form.controls.passSogra.invalid && form.controls.passSogra.touched)}"
+        id="passSograId" placeholder="ex: *******" required>
+      <div *ngIf="(form.controls.passSogra.touched && form.controls.passSogra.errors?.required)" class="invalid-feedback">This is a required field.</div>
+      <div *ngIf="(form.controls.passSogra.touched && form.controls.passSogra.errors?.validatePassword)" class="invalid-feedback">Password invalid.</div>
     </div>
+  </div>
 
-    <!-- Registration Date -->
-    <div class="form-group" [ngClass]="{'has-feedback': form.controls.regDate.touched, 'has-success': (form.controls.regDate.valid && form.controls.regDate.touched), 'has-error': (form.controls.regDate.invalid && form.controls.regDate.touched)}">
-      <label class="control-label" for="regDateId">Registration Date</label>
-      <input formControlName="regDate" type="text" id="regDateId" class="form-control" aria-describedby="regDate" placeholder="ex: John Snow">
-      <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" *ngIf="(form.controls.regDate.touched && form.controls.regDate.valid)"></span>
-      <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true" *ngIf="(form.controls.regDate.touched && form.controls.regDate.invalid)"></span>
-      <span class="help-block" *ngIf="(form.controls.regDate.touched && form.controls.regDate.errors?.validateDate)">Date in invalid format. Please format with DD/MM/YYYY.</span>
+  <!-- Registration Date -->
+  <div class="row">
+    <div class="col-md-12 mb-3">
+      <label for="regDateId">Registration Date</label>
+      <input formControlName="regDate" type="text" class="form-control" [ngClass]="{'is-valid': (form.controls.regDate.valid && form.controls.regDate.touched), 'is-invalid': (form.controls.regDate.invalid && form.controls.regDate.touched)}"
+        id="regDateId" placeholder="ex: 15/05/2017" required>
+      <div *ngIf="(form.controls.regDate.touched && form.controls.regDate.errors?.validateDate)" class="invalid-feedback">Date in invalid format. Please format with DD/MM/YYYY.</div>
     </div>
+  </div>
 
-    <!-- Services -->
-    <div class="form-group">
-      <label class="control-label">Subscribed Services</label>
-      <br/>
-      <div class="form-group">
-        <div *ngFor="let service of services">
-          <input type="checkbox" formControlName="services" id="checkbox-{{service.code}}" [(ngModel)]="service.is_selected">
-          {{service.name}}
-        </div>
-      </div>
+  <!-- Services -->
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label for="servicesId">Services</label>
+      <ul id="servicesId" *ngFor="let service of services" class="list-group">
+        <li class="list-group-item">
+          <input type="checkbox" (change)="onChange(service, $event.target.checked)"> {{service.name}}
+        </li>
+      </ul>
     </div>
+  </div>
 
-    <!-- Submit Input -->
-    <input type="submit" class="btn btn-primary" value="Submit" /> <br/><br/>
+  <!-- Submit Input -->
+  <input type="submit" class="btn btn-primary" value="Submit" /> <br/><br/>
 
-  </form>
-
-</div>
+</form>
