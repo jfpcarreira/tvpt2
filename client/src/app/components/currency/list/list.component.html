@@ -1,0 +1,28 @@
+<div class="modal-demo">
+
+  <button type="button" class="btn btn-outline-success" routerLink="/currencies/new"> New </button>
+
+  <br/> <br/>
+
+  <table class="table table-hover">
+    <thead>
+      <tr class="header">
+        <th> Code </th>
+        <th> Name </th>
+        <th> Symbol </th>
+        <th> </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let currency of currencies">
+        <td> {{ currency.getCode() }} </td>
+        <td> {{ currency.getName() }} </td>
+        <td> {{ currency.getSymbol() }} </td>
+        <td class="align-left"> <img data-toggle="tooltip" data-placement="top" title="Tooltip on top" src="assets/images/delete-24.png" (click)="delete(currency)"/> </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<br/>

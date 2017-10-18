@@ -1,0 +1,37 @@
+<div class="modal-demo">
+
+  <button type="button" class="btn btn-outline-success" routerLink="/clients/new"> {{ 'client.button.new' | translate }} </button>
+
+  <br/> <br/>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th> {{ 'client.table.headers.name' | translate }} </th>
+        <th> {{ 'client.table.headers.user' | translate }} </th>
+        <th> {{ 'client.table.headers.email' | translate }} </th>
+        <th> {{ 'client.table.headers.services' | translate }} </th>
+        <th> {{ 'client.table.headers.exp-date' | translate }} </th>
+        <th> </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let client of clients">
+        <td> {{ client.getName() }} </td>
+        <td> {{ client.getUserTvpt() }} </td>
+        <td> {{ client.getEmail() }} </td>
+        <td>
+          <ul *ngFor="let service of client.services">
+            <li> {{service.name}} </li>
+          </ul>
+        </td>
+        <td> {{ client.getExpirationDate() | date: 'dd/MM/yyyy' }} </td>
+        <td class="align-left"> <img data-toggle="tooltip" data-placement="top" title="Tooltip on top" src="assets/images/delete-24.png" (click)="delete(client)"/> </td>
+      </tr>
+
+    </tbody>
+  </table>
+
+</div>
+
+<br/>

@@ -1,0 +1,16 @@
+{
+  "client": {
+    "button": {
+      "new": "Novo"
+    },
+    "table": {
+      "headers": {
+        "name": "Nome",
+        "user": "Utilizador",
+        "email": "Email",
+        "services": "Serviços",
+        "exp-date": "Data expiração"
+      }
+    }
+  }
+}

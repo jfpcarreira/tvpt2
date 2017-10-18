@@ -1,0 +1,33 @@
+<form [formGroup]="form" (submit)="onSubmit()" novalidate>
+
+    <!-- Code -->
+    <div class="row">
+      <div class="col-md-12 mb-3">
+        <label for="codeId">Code</label>
+        <input formControlName="code" type="text" class="form-control" [ngClass]="{'is-valid': (form.controls.code.valid && form.controls.code.touched), 'is-invalid': (form.controls.code.invalid && form.controls.code.touched)}" id="codeId" placeholder="ex: ABC" required>
+        <div *ngIf="(form.controls.code.touched && form.controls.code.errors?.required)" class="invalid-feedback">This is a required field.</div>
+      </div>
+    </div>
+
+    <!-- Name -->
+    <div class="row">
+      <div class="col-md-12 mb-3">
+        <label for="nameId">Name</label>
+        <input formControlName="name" type="text" class="form-control" [ngClass]="{'is-valid': (form.controls.name.valid && form.controls.name.touched), 'is-invalid': (form.controls.name.invalid && form.controls.name.touched)}" id="nameId" placeholder="ex: Euro" required>
+        <div *ngIf="(form.controls.name.touched && form.controls.name.errors?.required)" class="invalid-feedback">This is a required field.</div>
+      </div>
+    </div>
+
+    <!-- Symbol -->
+    <div class="row">
+      <div class="col-md-12 mb-3">
+        <label for="symbolId">Symbol</label>
+        <input formControlName="symbol" type="text" class="form-control" [ngClass]="{'is-valid': (form.controls.symbol.valid && form.controls.symbol.touched), 'is-invalid': (form.controls.symbol.invalid && form.controls.symbol.touched)}" id="symbolId" placeholder="ex: €" required>
+        <div *ngIf="(form.controls.symbol.touched && form.controls.symbol.errors?.required)" class="invalid-feedback">This is a required field.</div>
+      </div>
+    </div>
+
+    <!-- Submit Input -->
+    <input type="submit" class="btn btn-primary" value="Submit" /> <br/><br/>
+
+  </form>

@@ -1,0 +1,11 @@
+.align-left {
+  text-align: center;
+}
+
+.align-left img {
+  cursor: pointer;
+}
+
+ul li {
+  height: 5px;
+}
