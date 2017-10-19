@@ -99,9 +99,9 @@ module.exports = {
 
   getResponseStructure: function(isSuccess, msg, obj) {
     return {
-      success: isSuccess,
-      message: msg,
-      result: obj
+        success: isSuccess
+      , message: msg
+      , result: obj
     };
   },
 

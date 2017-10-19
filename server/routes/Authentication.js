@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const jwt = require('jsonwebtoken');
 const User = require('../models/UserModel');
 const utils = require('../../tools/utils');
 
@@ -17,7 +18,7 @@ router.post('/', (req, res) => {
     }
     else {
         let user = new User({
-            name: req.body.name
+              name: req.body.name
             , email: req.body.email.toLowerCase()
             , username: req.body.username.toLowerCase()
             , password: req.body.password
@@ -49,6 +50,39 @@ router.post('/', (req, res) => {
             // Sucesso
             else {
                 res.json(utils.getSuccessResponse('User successfully registered!'));
+            }
+        });
+    }
+});
+
+router.post('/login', (req, res) => {
+    if (!req.body.username) {
+        res.json(utils.getInsuccessResponse('You must provide a username'));
+    }
+    else if (!req.body.password) {
+        res.json(utils.getInsuccessResponse('You must provide a password'));
+    }
+    else {
+        User.findOne({ username: req.body.username.toLowerCase() }, (err, user) => {
+            if (err) {
+                res.json(utils.getInsuccessResponse(err));
+            }
+            else if (!user) {
+                res.json(utils.getInsuccessResponse('Username not found!'));
+            }
+            else {
+                if(!user.comparePassword(req.body.password)) {
+                    res.json(utils.getInsuccessResponse('Password is incorrect'));
+                }
+                else {
+                    const token = jwt.sign({userId: user._id}, process.env.JWT_SECRET, {expiresIn: '24h'});
+
+                    let jwtUserObj = {};
+                    jwtUserObj.token = token;
+                    jwtUserObj.username = user.username;
+
+                    res.json(utils.getSuccessResponse('Login is successfull', jwtUserObj));
+                }
             }
         });
     }
