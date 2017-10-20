@@ -1,7 +1,7 @@
 import { BrowserModule }                    from '@angular/platform-browser';
 import { NgModule }                         from '@angular/core';
 import { ReactiveFormsModule }              from '@angular/forms';
-import { HttpClientModule, HttpClient }     from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS }     from '@angular/common/http';
 import { BrowserAnimationsModule }          from '@angular/platform-browser/animations';
 import { NgbModule }                        from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -30,6 +30,8 @@ import { UtilsService }                     from './services/utils.service';
 import { ClientService }                    from './services/client.service';
 import { ServiceService }                   from './services/service.service';
 import { CurrencyService }                  from './services/currency.service';
+
+import { AuthenticationInterceptor }        from './interceptors/AuthenticationInterceptor';
 
 @NgModule({
   declarations: [
@@ -69,6 +71,11 @@ import { CurrencyService }                  from './services/currency.service';
     , ClientService
     , ServiceService
     , CurrencyService
+    , {
+        provide: HTTP_INTERCEPTORS
+      , useClass: AuthenticationInterceptor
+      , multi: true
+    }
   ],
   bootstrap: [
       AppComponent

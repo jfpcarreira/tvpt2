@@ -8,6 +8,9 @@ import { User }             from '../classes/user';
 @Injectable()
 export class AuthService {
 
+  private authToken;
+  private user;
+
   constructor(private http: HttpClient) { }
 
   create(user: User): Observable<IGenericResponse> {
@@ -20,5 +23,16 @@ export class AuthService {
 
   checkEmail(email: String): Observable<IGenericResponse> {
     return this.http.get<IGenericResponse>(API_URLS.AUTH + 'checkEmail/' + email);
+  }
+
+  login(user) {
+    return this.http.post<IGenericResponse>(API_URLS.AUTH + 'login', user);
+  }
+
+  storeUserData(token, user) {
+    localStorage.setItem('token', token);
+    localStorage.setItem('user', JSON.stringify(user));
+    this.authToken = token;
+    this.user = user;
   }
 }
