@@ -10,7 +10,6 @@ import { Ng4LoadingSpinnerModule }          from 'ng4-loading-spinner';
 
 import { MyTranslateStaticLoader }          from './tools/MyTranslateStaticLoader';
 import { AppRoutingModule }                 from './app.routing.module';
-import { environment }                      from '../environments/environment';
 
 import { AppComponent }                     from './app.component';
 import { NavbarComponent }                  from './components/navbar/navbar.component';
