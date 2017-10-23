@@ -18,13 +18,18 @@ export class UtilsService {
     let errorTitle = 'Error!';
     let errorMessage = 'An unexpected error occurred. Please try again later.';
 
+    // ERROR ON CLIENT SIDE
     if (err.error instanceof Error) {
       console.error("Client-side error occured. Error: ");
       console.error(err);
-    } else {
+    }
+    // ERROR ON SERVER SIDE
+    else {
+      // 401 - UNAUTHORIZED
       if (err.status == 401) {
-        errorTitle = err.statusText;
-        errorMessage = err.error;
+        errorTitle = 'UNAUTHORIZED';
+        errorMessage = 'You are not authorized to view this content. Please login to proceed.';
+        localStorage.clear();
         setTimeout(() => {
           this.router.navigate(['/login']);
         }, 1000);
@@ -40,7 +45,6 @@ export class UtilsService {
   }
 
   handleOnComplete() {
-    // Hide the loading spinner
     this.spinner.hide();
   }
 }

@@ -10,17 +10,16 @@ router.use((req, res, next) => {
   const token = req.headers['authorization'];
 
   if(!token) {
-    // if there is no token return an error (Unauthorized)
-    return res.status(401).send('No token provided');
+    res.status(401).send('No token provided');
   }
   else {
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
       if(err) {
         if(err.name == 'TokenExpiredError') {
-          res.json(utils.getInsuccessResponse('Token is expired', err));
+          res.status(401).send('Token is expired');
         }
         else {
-          res.json(utils.getInsuccessResponse('Token is invalid', err));
+          res.status(401).send('Token is invalid');
         }
       }
       else {

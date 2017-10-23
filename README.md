@@ -11,6 +11,7 @@ Pequeno projecto básico com funcionalidades de CRUD usado como prova de conceit
 | Node.js | Servidor | [nodejs](https://nodejs.org) |
 | Express | Framework para desenvolvimento web | [expressjs](https://expressjs.com/) |
 | MongoDB Atlas | Base de dados mongo DB na cloud | [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) |
+| JWT | Json Web Token | [node-jsonwebtoken](https://github.com/auth0/node-jsonwebtoken) |
   
 ### Ferramentas usadas em Backend
 | Nome | Detalhe | Link |

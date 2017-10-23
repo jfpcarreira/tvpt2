@@ -1,4 +1,12 @@
 {
+  "navbar": {
+    "clients": "Clientes",
+    "services": "Serviços",
+    "currencies": "Moedas",
+    "register": "Registar",
+    "login": "Iniciar sessão",
+    "logout": "Terminar sessão"
+  },
   "client": {
     "button": {
       "new": "Novo"
