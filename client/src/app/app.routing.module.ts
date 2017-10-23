@@ -1,16 +1,16 @@
-import { RouterModule, Routes } from '@angular/router';
-import { NgModule } from '@angular/core';
+import { RouterModule, Routes }   from '@angular/router';
+import { NgModule }               from '@angular/core';
 
-import { HomeComponent } from './components/home/home.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { RegisterComponent } from './components/register/register.component';
-import { LoginComponent } from './components/login/login.component';
-import { ClientListComponent } from './components/client/list/list.component';
-import { ClientNewComponent } from './components/client/new/new.component';
-import { ServiceListComponent } from './components/service/list/list.component';
-import { ServiceNewComponent } from './components/service/new/new.component';
-import { CurrencyListComponent } from './components/currency/list/list.component';
-import { CurrencyNewComponent } from './components/currency/new/new.component';
+import { HomeComponent }          from './components/home/home.component';
+import { DashboardComponent }     from './components/dashboard/dashboard.component';
+import { RegisterComponent }      from './components/register/register.component';
+import { LoginComponent }         from './components/login/login.component';
+import { ClientListComponent }    from './components/client/list/list.component';
+import { ClientNewComponent }     from './components/client/new/new.component';
+import { ServiceListComponent }   from './components/service/list/list.component';
+import { ServiceNewComponent }    from './components/service/new/new.component';
+import { CurrencyListComponent }  from './components/currency/list/list.component';
+import { CurrencyNewComponent }   from './components/currency/new/new.component';
 
 const appRoutes: Routes = [{
   path: ''

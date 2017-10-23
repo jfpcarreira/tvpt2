@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit }                  from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router }                                         from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { AuthService } from '../../services/auth.service';
-import { User } from '../../classes/user';
+import { Router }                             from '@angular/router';
+import { ToastrService }                      from 'ngx-toastr';
+import { AuthService }                        from '../../services/auth.service';
+import { User }                               from '../../classes/user';
 
 @Component({
   selector: 'app-login',
@@ -45,8 +45,6 @@ export class LoginComponent implements OnInit {
     user.setUsername( this.form.get('username').value );
     user.setPassword( this.form.get('password').value );
 
-    console.log(user);
-
     this.auth.login(user).subscribe(
       data => {
         if(!data.success) {
@@ -55,7 +53,9 @@ export class LoginComponent implements OnInit {
         else {
           this.toast.success(data.message, 'Success!');
           this.auth.storeUserData(data.result.token, data.result.username);
-          this.router.navigate(['/clients']);
+          setTimeout(() => {
+            this.router.navigate(['/clients']);
+          }, 1000);
         }
       }
     );

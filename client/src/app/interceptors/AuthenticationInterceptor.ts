@@ -8,14 +8,11 @@ export class AuthenticationInterceptor implements HttpInterceptor {
 
     if(localStorage.length > 0) {
       const authReq = req.clone({
-        headers: req.headers.set('Authorization', localStorage.getItem('token'))
+        headers: req.headers.set('authorization', localStorage.getItem('token'))
       });
-
       return next.handle(authReq);
     }
-    else {
-      return next.handle(req);
-    }
 
+    return next.handle(req);
   }
 }

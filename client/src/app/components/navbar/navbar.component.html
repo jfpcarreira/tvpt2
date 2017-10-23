@@ -6,12 +6,12 @@
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-      <li  class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a class="nav-link" routerLink="/clients">Clients</a></li>
-      <li  class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a class="nav-link" routerLink="/services">Services</a></li>
-      <li  class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a class="nav-link" routerLink="/currencies">Currency</a></li>
-      <li  class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a class="nav-link" routerLink="/register">Register</a></li>
-      <li  class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a class="nav-link" routerLink="/login">Login</a></li>
-      <li  class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a class="nav-link" routerLink="/logout">Logout</a></li>
+      <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a class="nav-link" routerLink="/clients">Clients</a></li>
+      <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a class="nav-link" routerLink="/services">Services</a></li>
+      <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a class="nav-link" routerLink="/currencies">Currency</a></li>
+      <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a class="nav-link" routerLink="/register">Register</a></li>
+      <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a class="nav-link" routerLink="/login">Login</a></li>
+      <li *ngIf="auth.isLoggedIn()" class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a class="nav-link" (click)="onLogoutClick()">Logout</a></li>
       <li class="nav-item" ngbDropdown placement="bottom-right">
         <a class="nav-link" id="dropdownBasic1" ngbDropdownToggle> <span class="flag-icon flag-icon-{{ currLang }}"></span> </a>
         <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
