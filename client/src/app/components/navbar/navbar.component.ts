@@ -12,7 +12,6 @@ import { AuthService }          from '../../services/auth.service';
 export class NavbarComponent {
 
   private currLang: String;
-  private isTeste: boolean = false;
 
   constructor(
       private router: Router
@@ -27,10 +26,8 @@ export class NavbarComponent {
     this.refreshCurrentLanguage();
   }
 
-  teste() {
-    this.auth.isLoggedIn().subscribe(
-      data => this.isTeste = data
-    );
+  isLoggedIn() {
+    return localStorage.getItem('user') != null;
   }
 
   refreshCurrentLanguage(): void {
