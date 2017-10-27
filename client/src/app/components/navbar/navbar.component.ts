@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { TranslateService }  from '@ngx-translate/core';
+import { Component }            from '@angular/core';
+import { Router }               from '@angular/router';
+import { TranslateService }     from '@ngx-translate/core';
+import { ToastrService }        from 'ngx-toastr';
+import { AuthService }          from '../../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -8,9 +11,13 @@ import { TranslateService }  from '@ngx-translate/core';
 })
 export class NavbarComponent {
 
-  public currLang: String;
+  private currLang: String;
 
-  constructor(private translate: TranslateService) {
+  constructor(
+      private router: Router
+    , private auth: AuthService
+    , private toast: ToastrService
+    , private translate: TranslateService) {
     this.refreshCurrentLanguage();
   }
 
@@ -19,7 +26,17 @@ export class NavbarComponent {
     this.refreshCurrentLanguage();
   }
 
+  isLoggedIn() {
+    return localStorage.getItem('user') != null;
+  }
+
   refreshCurrentLanguage(): void {
     this.currLang = this.translate.currentLang || this.translate.getDefaultLang();
+  }
+
+  onLogoutClick(): void {
+    this.auth.logout();
+    this.toast.success('Logged out successfuly', 'Success!');
+    this.router.navigate(['/']);
   }
 }

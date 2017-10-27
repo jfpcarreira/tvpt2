@@ -9,7 +9,7 @@ import { ICurrenciesResponse }          from '../../../interfaces/currency/icurr
 import { IGenericResponse }             from '../../../interfaces/igeneric-response';
 
 @Component({
-  selector: 'app-list',
+  selector: 'currency-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css']
 })

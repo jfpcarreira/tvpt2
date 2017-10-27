@@ -1,9 +1,8 @@
-TODO antes de implementar JWT
------------------------------
+TODO 
 
 1 - Botão de editar
-2 - Botão de eliminar
-3 - Fazer modal para edição
+2 - Fazer modal para edição
+
 
 
 NEXT STEPS
@@ -11,25 +10,7 @@ NEXT STEPS
 1 - Implementar JWT
 
 
+
 QUALQUER DIA
 
 1 - Componente para datas
-
-
-
-Implementar tratamento erro
-
-this.http.get<UserResponse>('https://api.github.com/users/seeschweiler').subscribe(
-      data => {
-        console.log("User Login: " + data.login);
-        console.log("Bio: " + data.bio);
-        console.log("Company: " + data.company);
-      },
-      (err: HttpErrorResponse) => {
-        if (err.error instanceof Error) {
-          console.log("Client-side error occured.");
-        } else {
-          console.log("Server-side error occured.");
-        }
-      }
-    );

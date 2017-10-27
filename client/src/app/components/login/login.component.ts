@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit }                  from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
+import { Router }                             from '@angular/router';
+import { ToastrService }                      from 'ngx-toastr';
+import { AuthService }                        from '../../services/auth.service';
+import { User }                               from '../../classes/user';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +14,11 @@ export class LoginComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(private toast: ToastrService, private formBuilder: FormBuilder) {
+  constructor(
+      private toast: ToastrService
+    , private router: Router
+    , private formBuilder: FormBuilder
+    , private auth: AuthService) {
     this.createForm();
   }
 
@@ -34,7 +41,24 @@ export class LoginComponent implements OnInit {
 
   // Function to submit form
   onSubmit(): void {
-    this.toast.success('You are awesome!', 'Success!');
+    let user = new User();
+    user.setUsername( this.form.get('username').value );
+    user.setPassword( this.form.get('password').value );
+
+    this.auth.login(user).subscribe(
+      data => {
+        if(!data.success) {
+          this.toast.error(data.message, 'Error!');
+        }
+        else {
+          this.toast.success(data.message, 'Success!');
+          this.auth.storeUserData(data.result.token, data.result.username);
+          setTimeout(() => {
+            this.router.navigate(['/clients']);
+          }, 1000);
+        }
+      }
+    );
   }
 
   ngOnInit(): void {

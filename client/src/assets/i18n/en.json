@@ -1,4 +1,12 @@
 {
+  "navbar": {
+    "clients": "Clients",
+    "services": "Services",
+    "currencies": "Currencies",
+    "register": "Register",
+    "login": "Login",
+    "logout": "Logout"
+  },
   "client": {
     "button": {
       "new": "New"
